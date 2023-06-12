@@ -16,7 +16,9 @@ if __name__ == '__main__':
 
     # it's required to save a reference to MainWindow.
     # if it goes out of scope, it will be destroyed.
-
+    
+    
     mw = mw.MainWindow(my_screen)
    
     sys.exit(app.exec())
+

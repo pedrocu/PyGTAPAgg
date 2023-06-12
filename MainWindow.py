@@ -8,12 +8,16 @@ from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc 
 from PyQt6 import QtGui as qtg
 
+import DatabaseWidget as dbwidget
+
+
 class MainWindow(qtw.QMainWindow):
     def __init__(self, my_screen):
         super().__init__()
         self.initilizeUI(my_screen)
 
     def initilizeUI(self, my_screen):
+                
         # Main UI code goes here
         self.setWindowTitle('GTAP Aggregation Program')
             ##Adjust the mainscren to take up fixed percent of desktop
@@ -26,10 +30,40 @@ class MainWindow(qtw.QMainWindow):
         edit_menu = menubar.addMenu('Edit')
         help_menu = menubar.addMenu('Help')
 
+        ##Central Window
+        self.iesc_central_widget = GTAPAggTabs()
+        self.setCentralWidget(self.iesc_central_widget)
 
+    
+
+
+        
 
         self.show()
 
 
+class GTAPAggTabs(qtw.QTabWidget):
+    '''subclass of tab widget customized for GTAPAgg app'''
 
+    def __init__(self, *args, **kargs):
+        super(GTAPAggTabs, self).__init__(*args, **kargs)
+
+        self.initilizeTabs()
+
+    def initilizeTabs(self):
+
+        #setup parameters
+        self.setMovable=True
+        self.setTabPosition= qtw.QTabWidget.TabPosition.North
+        self.setTabShape = qtw.QTabWidget.TabShape.Triangular
+        self.setTabBarAutoHide = False
+        
+        
+        
+        
+        #Our Tabs
+        self.databases=dbwidget.Databases()
+
+        self.addTab(self.databases, 'Databases')
+        
 
