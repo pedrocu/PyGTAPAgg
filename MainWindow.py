@@ -9,6 +9,7 @@ from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
 
 import DatabaseWidget as dbwidget
+import selectwidget as slwidget
 
 
 class MainWindow(qtw.QMainWindow):
@@ -63,7 +64,11 @@ class GTAPAggTabs(qtw.QTabWidget):
         
         #Our Tabs
         self.databases=dbwidget.Databases()
-
         self.addTab(self.databases, 'Databases')
+
+        headers=['pos', 'abbrev', 'name', 'lng_desc' ,'group']
+        pick_start = ['Agriculture', 'Manufactures', 'Extractive','Services']
+        self.sectors=slwidget.Select('Sectors', headers, pick_start)
+        self.addTab(self.sectors, 'Sectors')
         
 

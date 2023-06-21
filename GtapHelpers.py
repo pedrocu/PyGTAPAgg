@@ -42,3 +42,10 @@ def getdbversize(gtap, source) -> tuple:
     gtap_dat = [gtap, gtap_ver_num, gtap_num_reg, gtap_num_sect, gtap_num_endow]
 
     return gtap_dat
+
+
+def getvalues(self, selectionlist)-> list:
+    values = []
+    for item in selectionlist:
+        values.append(self.picker_model.data(item, qtc.Qt.ItemDataRole.DisplayRole))
+    return values
