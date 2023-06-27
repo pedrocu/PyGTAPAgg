@@ -66,9 +66,10 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.databases=dbwidget.Databases()
         self.addTab(self.databases, 'Databases')
 
-        headers=['pos', 'abbrev', 'name', 'lng_desc' ,'group']
+        headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
         pick_start = ['Agriculture', 'Manufactures', 'Extractive','Services']
         self.sectors=slwidget.Select('Sectors', headers, pick_start)
         self.addTab(self.sectors, 'Sectors')
-        
+
+
 

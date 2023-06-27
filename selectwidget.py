@@ -283,9 +283,11 @@ class ItemTableModel(qtc.QAbstractTableModel):
         self._newlist = []    
         
         data=self.load(tab_type)
+        
 
         for item in data:
             self._newlist.append(list(item.values()))
+            print(self._newlist)
         
        # Minimum necessary methods:
     @property
@@ -305,13 +307,15 @@ class ItemTableModel(qtc.QAbstractTableModel):
             data=json.load(f)
         return data
     
+    #Required for QTableModel
     def rowCount(self, parent):
-        
         return len(self._newlist)
 
+    #Required for QTableModel
     def columnCount(self, parent):
         return len(self._headers)
-
+    
+    #Required for QTAbleModel
     def data(self, index, role):
         if role in (qtc.Qt.ItemDataRole.DisplayRole, qtc.Qt.ItemDataRole.EditRole):
            return self._newlist[index.row()][index.column()]
@@ -344,7 +348,8 @@ class ItemTableModel(qtc.QAbstractTableModel):
             return super().flags(index) | qtc.Qt.ItemFlag.ItemIsEditable
         else:
             return super().flags(index)
-
+    
+    #Qt Required to edit data
     def setData(self, index, value, role):
         if index.isValid():
             if role == qtc.Qt.ItemDataRole.EditRole and index.column()==self.columnCount(None)-1:
@@ -378,7 +383,7 @@ class ListDelegate(qtw.QStyledItemDelegate):
         #for item in self.editorItems:
         #    ai = qtw.QListWidgetItem(item)
             #editor.addItem(ai)
-        #    if item == index.data():
+        #    if item == index):
         #        editor.setCurrentItem(editor.item(z))
         #    z += 1
         editor.setGeometry(0,index.row(),self.width,self.height*self.picker_model.rowCount())
