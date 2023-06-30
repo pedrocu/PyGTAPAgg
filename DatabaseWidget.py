@@ -57,8 +57,8 @@ class Databases(qtw.QWidget):
 
         #Check if directory is in registry
         if self.settings.contains('indir') and self.settings.value('indir') != 'NA':
-           print(self.settings.value('indir'))
-        
+           #print(self.settings.value('indir'))
+           self.version_label0.setText(self.settings.value('indir'))
            self.getdbinfo(self.settings.value('indir') )
  
 
@@ -79,7 +79,7 @@ class Databases(qtw.QWidget):
 
     def getdbinfo(self, dir):
         
-        gtap_info=helpers.getdbversize(dir.replace('/','\\'), '\\basedata.har')  #Can change here to work with flexagg
+        gtap_info=helpers.getdbversize(dir.replace('/','\\'), '\\basedata.har')  #Can change here to work with flexagg, getdbverssize checks for valid database
         self.splitverinfo(gtap_info)
 
     def splitverinfo(self, gtap_info):

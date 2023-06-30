@@ -23,8 +23,9 @@ def getdbversize(gtap, source) -> tuple:
         
         
         settings.setValue('indir', gtap)
+        
 
-        print(settings.value('indir'))
+        #print(settings.value('indir'))
 
     except Exception as error:
         execute_problem=qtw.QMessageBox()

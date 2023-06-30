@@ -1,0 +1,540 @@
+{
+  "sectors": {
+    "headers": [
+      "pos",
+      "GTAP Code",
+      "GTAP Name",
+      "Long Description",
+      "Sort Group",
+      "Agg Category"
+    ],
+    "picks": [
+      "Agriculture",
+      "Manufactures",
+      "Extraction",
+      "Services"
+    ],
+    "allsect": [
+      [
+        1,
+        "pdr",
+        "Paddy rice",
+        "Rice: seed, paddy (not husked)",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        2,
+        "wht",
+        "Wheat",
+        "Wheat: seed, other",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        3,
+        "gro",
+        "Cereal grains nec",
+        "Other Grains: maize (corn), sorghum, barley, rye, oats, millets, other cereals",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        4,
+        "v_f",
+        "Vegetables, fruit, nuts",
+        "Veg & Fruit: vegetables, fruit and nuts, edible roots and tubers, pulses",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        5,
+        "osd",
+        "Oil seeds",
+        "Oil Seeds: oil seeds and oleaginous fruit",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        6,
+        "c_b",
+        "Sugar cane, sugar beet",
+        "Cane & Beet: sugar crops",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        7,
+        "pfb",
+        "Plant-based fibers",
+        "Fibres crops",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        8,
+        "ocr",
+        "Crops nec",
+        "Other Crops: stimulant; spice and aromatic crops; forage products; plants and parts of plants used primarily in perfumery, pharmacy, or for insecticidal, fungicidal or similar purposes; beet seeds (excluding sugar beet seeds) and seeds of forage plants; natural rubber in primary forms or in plates, sheets or strip, living plants; cut flowers and flower buds; flower seeds, unmanufactured tobacco; other raw vegetable materials nec",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        9,
+        "ctl",
+        "Bovine cattle, sheep and goats, horses",
+        "Cattle: bovine animals, live, other ruminants, horses and other equines, bovine semen",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        10,
+        "oap",
+        "Animal products nec",
+        "Other Animal Products: swine; poultry; other live animals; eggs of hens or other birds in shell, fresh; reproductive materials of animals; natural honey; snails, fresh, chilled, frozen, dried, salted or in brine, except sea snails; edible products of animal origin n.e.c.; hides, skins and furskins, raw; insect waxes and spermaceti, whether or not refined or coloured",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        11,
+        "rmk",
+        "Raw milk",
+        "Raw milk",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        12,
+        "wol",
+        "Wool, silk-worm cocoons",
+        "Wool: wool, silk, and other raw animal materials used in textile",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        13,
+        "frs",
+        "Forestry",
+        "Forestry: forestry, logging and related service activities",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        14,
+        "fsh",
+        "Fishing",
+        "Fishing: hunting, trapping and game propagation including related service activities, fishing, fish farms; service activities incidental to fishing",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        15,
+        "coa",
+        "Coal",
+        "Coal: mining and agglomeration of hard coal, lignite and peat",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        16,
+        "oil",
+        "Oil",
+        "Oil: extraction of crude petroleum, service activities incidental to oil and gas extraction excluding surveying (part)",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        17,
+        "gas",
+        "Gas",
+        "Gas: extraction of natural gas, service activities incidental to oil and gas extraction excluding surveying (part)",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        18,
+        "oxt",
+        "Other Extraction (formerly omn Minerals nec)",
+        "Other Mining Extraction (formerly omn): mining of metal ores; other mining and quarrying",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        19,
+        "cmt",
+        "Bovine meat products",
+        "Cattle Meat: fresh or chilled; meat of buffalo, fresh or chilled; meat of sheep, fresh or chilled; meat of goat, fresh or chilled; meat of camels and camelids, fresh or chilled; meat of horses and other equines, fresh or chilled; other meat of mammals, fresh or chilled; meat of mammals, frozen; edible offal of mammals, fresh, chilled or frozen",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        20,
+        "omt",
+        "Meat products nec",
+        "Other Meat: meat of pigs, fresh or chilled; meat of rabbits and hares, fresh or chilled; meat of poultry, fresh or chilled; meat of poultry, frozen; edible offal of poultry, fresh, chilled or frozen; other meat and edible offal, fresh, chilled or frozen; preserves and preparations of meat, meat offal or blood; flours, meals and pellets of meat or meat offal, inedible; greaves",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        21,
+        "vol",
+        "Vegetable oils and fats",
+        "Vegetable Oils: margarine and similar preparations; cotton linters; oil-cake and other residues resulting from the extraction of vegetable fats or oils; flours and meals of oil seeds or oleaginous fruits, except those of mustard; vegetable waxes, except triglycerides; degras; residues resulting from the treatment of fatty substances or animal or vegetable waxes; animal fats",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        22,
+        "mil",
+        "Dairy products",
+        "Milk: dairy products",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        23,
+        "pcr",
+        "Processed rice",
+        "Processed Rice: semi- or wholly milled, or husked",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        24,
+        "sgr",
+        "Sugar",
+        "Sugar and molasses",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        25,
+        "ofd",
+        "Food products nec",
+        "Other Food: prepared and preserved fish, crustaceans, molluscs and other aquatic invertebrates; prepared and preserved vegetables, pulses and potatoes; prepared and preserved fruits and nuts; wheat and meslin flour; other cereal flours; groats, meal and pellets of wheat and other cereals; other cereal grain products (including corn flakes); other vegetable flours and meals; mixes and doughs for the preparation of bakers' wares; st",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        26,
+        "b_t",
+        "Beverages and tobacco products",
+        "Beverages and Tobacco products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        27,
+        "tex",
+        "Textiles",
+        "Manufacture of textiles",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        28,
+        "wap",
+        "Wearing apparel",
+        "Manufacture of wearing apparel",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        29,
+        "lea",
+        "Leather products",
+        "Manufacture of leather and related products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        30,
+        "lum",
+        "Wood products",
+        "Lumber: manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        31,
+        "ppp",
+        "Paper products, publishing",
+        "Paper & Paper Products: includes printing and reproduction of recorded media",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        32,
+        "p_c",
+        "Petroleum, coal products",
+        "Petroleum & Coke: manufacture of coke and refined petroleum products",
+        "Extractive",
+        "Extractive"
+      ],
+      [
+        33,
+        "chm",
+        "Chemical products",
+        "Manufacture of chemicals and chemical products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        34,
+        "bph",
+        "Basic pharmaceutical products",
+        "Manufacture of pharmaceuticals, medicinal chemical and botanical products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        35,
+        "rpp",
+        "Rubber and plastic products",
+        "Manufacture of rubber and plastics products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        36,
+        "nmm",
+        "Mineral products nec",
+        "Manufacture of other non-metallic mineral products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        37,
+        "i_s",
+        "Ferrous metals",
+        "Iron & Steel: basic production and casting",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        38,
+        "nfm",
+        "Metals nec",
+        "Non-Ferrous Metals: production and casting of copper, aluminium, zinc, lead, gold, and silver",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        39,
+        "fmp",
+        "Metal products",
+        "Manufacture of fabricated metal products, except machinery and equipment",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        40,
+        "ele",
+        "Computer, electronic and optical products",
+        "Manufacture of computer, electronic and optical products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        41,
+        "eeq",
+        "Electrical equipment",
+        "Manufacture of electrical equipment",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        42,
+        "ome",
+        "Machinery and equipment nec",
+        "Manufacture of machinery and equipment n.e.c.",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        43,
+        "mvh",
+        "Motor vehicles and parts",
+        "Manufacture of motor vehicles, trailers and semi-trailers",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        44,
+        "otn",
+        "Transport equipment nec",
+        "Manufacture of other transport equipment",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        45,
+        "omf",
+        "Manufactures nec",
+        "Other Manufacturing: includes furniture",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        46,
+        "ely",
+        "Electricity",
+        "Electricity; steam and air conditioning supply",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        47,
+        "gdt",
+        "Gas manufacture, distribution",
+        "Gas manufacture, distribution",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        48,
+        "wtr",
+        "Water",
+        "Water supply; sewerage, waste management and remediation activities",
+        "Services",
+        "Services"
+      ],
+      [
+        49,
+        "cns",
+        "Construction",
+        "Construction: building houses factories offices and roads",
+        "Services",
+        "Services"
+      ],
+      [
+        50,
+        "trd",
+        "Trade",
+        "Wholesale and retail trade; repair of motor vehicles and motorcycles",
+        "Services",
+        "Services"
+      ],
+      [
+        51,
+        "afs",
+        "Accommodation, Food and service activities",
+        "Accommodation, Food and service activities",
+        "Services",
+        "Services"
+      ],
+      [
+        52,
+        "otp",
+        "Transport nec",
+        "Land transport and transport via pipelines",
+        "Services",
+        "Services"
+      ],
+      [
+        53,
+        "wtp",
+        "Water transport",
+        "Water transport",
+        "Services",
+        "Services"
+      ],
+      [
+        54,
+        "atp",
+        "Air transport",
+        "Air transport",
+        "Services",
+        "Services"
+      ],
+      [
+        55,
+        "whs",
+        "Warehousing and support activities",
+        "Warehousing and support activities",
+        "Services",
+        "Services"
+      ],
+      [
+        56,
+        "cmn",
+        "Communication",
+        "Information and communication",
+        "Services",
+        "Services"
+      ],
+      [
+        57,
+        "ofi",
+        "Financial services nec",
+        "Other Financial Intermediation: includes auxiliary activities but not insurance and pension funding",
+        "Services",
+        "Services"
+      ],
+      [
+        58,
+        "ins",
+        "Insurance (formerly isr)",
+        "Insurance (formerly isr): includes pension funding, except compulsory social security",
+        "Services",
+        "Services"
+      ],
+      [
+        59,
+        "rsa",
+        "Real estate activities",
+        "Real estate activities",
+        "Services",
+        "Services"
+      ],
+      [
+        60,
+        "obs",
+        "Business services nec",
+        "Other Business Services nec",
+        "Services",
+        "Services"
+      ],
+      [
+        61,
+        "ros",
+        "Recreational and other services",
+        "Recreation & Other Services: recreational, cultural and sporting activities, other service activities; private households with employed persons (servants)",
+        "Services",
+        "Services"
+      ],
+      [
+        62,
+        "osg",
+        "Public Administration and defense",
+        "Other Services (Government): public administration and defense; compulsory social security, activities of membership organizations n.e.c., extra-territorial organizations and bodies",
+        "Services",
+        "Services"
+      ],
+      [
+        63,
+        "edu",
+        "Education",
+        "Education",
+        "Services",
+        "Services"
+      ],
+      [
+        64,
+        "hht",
+        "Human health and social work activities",
+        "Human health and social work",
+        "Services",
+        "Services"
+      ],
+      [
+        65,
+        "dwe",
+        "Dwellings",
+        "Dwellings: ownership of dwellings (imputed rents of houses occupied by owners)",
+        "Services",
+        "Services"
+      ]
+    ]
+  }
+}
