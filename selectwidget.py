@@ -13,13 +13,18 @@ class Select(qtw.QWidget):
              STR headers - structure of data entry table
              STR - pick_start default list to aggrgate by 
     """ 
-    def __init__(self, tab_type, headers, pick_start):
-        self.tab_type=tab_type
-        self._pick_start=pick_start
-        self.model=ItemTableModel(tab_type, headers)
-        self.headers=headers
+    def __init__(self, tab_type, datastore):
 
         super().__init__()
+        self._dataStore= datastore
+        self._tab_type=tab_type
+        if self._tab_type=='Sectors':
+            self.pick_start = self._dataStore.sector_pick_start
+            self.headers=self._dataStore.sector_headers
+            self.data=self._dataStore.sector_all
+        self.model=ItemTableModel(tab_type, self.headers, self.data)
+        
+        
 
         self.picker_model = qtc.QStringListModel(self._pick_start)
             
@@ -273,21 +278,21 @@ class Select(qtw.QWidget):
 class ItemTableModel(qtc.QAbstractTableModel):
     """The model for aggregation table"""
 
-    def __init__(self, tab_type, headers):
+    def __init__(self, tab_type, headers, data):
         super().__init__()
-        self.start(tab_type, headers)
+        self.start(tab_type, headers, data)
         
-    def start(self, tab_type, headers):
+    def start(self, tab_type, headers, data):
         ''''__init__ code'''
         self._headers=headers             
-        self._newlist = []    
+        self._newlist = data    
         
-        data=self.load(tab_type)
+        #data=self.load(tab_type)
         
 
-        for item in data:
-            self._newlist.append(list(item.values()))
-            print(self._newlist)
+        #for item in data:
+        #    self._newlist.append(list(item.values()))
+        #    print(self._newlist)
         
        # Minimum necessary methods:
     @property
