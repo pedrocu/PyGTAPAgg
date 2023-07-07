@@ -21,7 +21,7 @@ class DataStore():
         self.agg_store_data=self.load_aggstore(self.agg_store_file)
         self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
         self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
-        self.sector_headers = self.make_sector_headers(self.agg_store_data)[0:4]
+        self.sector_headers = self.make_sector_headers(self.agg_store_data)[0:4]   #change here to make generic
         print(self.sector_headers)
 
     @property
