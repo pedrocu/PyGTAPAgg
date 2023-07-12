@@ -26,14 +26,14 @@ class Databases(qtw.QWidget):
         choose_GTAP_button = qtw.QPushButton("Choose GTAP Database", clicked=self.getgtapdir)
                
         info_head = qtw.QLabel("<h1>Database Currently Selected:</h1>")
-        self.version_label0 = LabelGtap('N\\A')
-        self.version_label1 = qtw.QLabel('N\\A')
-        self.version_label2 = qtw.QLabel('N\\A')
-        self.version_label3 = qtw.QLabel('N\\A')
-        self.version_label4 = qtw.QLabel('N\\A')
-        self.version_label5 = qtw.QLabel('N\\A')
-        self.version_label6 = qtw.QLabel('N\\A')
-        self.version_label7 = qtw.QLabel('N\\A')
+        self.version_label0 = LabelGtap("NA")
+        self.version_label1 = qtw.QLabel('NA')
+        self.version_label2 = qtw.QLabel('NA')
+        self.version_label3 = qtw.QLabel('NA')
+        self.version_label4 = qtw.QLabel('NA')
+        self.version_label5 = qtw.QLabel('NA')
+        self.version_label6 = qtw.QLabel('NA')
+        self.version_label7 = qtw.QLabel('NA')
   
         vertical_layout1.addWidget(choose_GTAP_button)
         vertical_layout1.addWidget(qtw.QWidget())
@@ -56,7 +56,8 @@ class Databases(qtw.QWidget):
         
 
         #Check if directory is in registry
-        if self.settings.contains('indir') and self.settings.value('indir') != 'NA':
+        if self.settings.contains('indir') and self.settings.value('indir') is not None :
+           print('Inital Check setting dir :',self.settings.value('indir') )
            #print(self.settings.value('indir'))
            self.version_label0.setText(self.settings.value('indir'))
            self.getdbinfo(self.settings.value('indir') )

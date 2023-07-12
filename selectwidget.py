@@ -314,15 +314,21 @@ class ItemTableModel(qtc.QAbstractTableModel):
     
     #Required for QTableModel
     def rowCount(self, parent):
+        #print(self._newlist)
+        #print('number of rows ', len(self._newlist))
         return len(self._newlist)
 
     #Required for QTableModel
     def columnCount(self, parent):
+        #print('number of colums ', len(self._headers))
         return len(self._headers)
     
     #Required for QTAbleModel
     def data(self, index, role):
         if role in (qtc.Qt.ItemDataRole.DisplayRole, qtc.Qt.ItemDataRole.EditRole):
+           #print(self._newlist)
+           #print(index.row())
+           #print(index.column())
            return self._newlist[index.row()][index.column()]
         if role == qtc.Qt.ItemDataRole.BackgroundRole:
             if self._newlist[index.row()][index.column()] == '':

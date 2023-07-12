@@ -37,7 +37,7 @@ def getdbversize(gtap, source) -> tuple:
         execute_problem.exec()
         iesc_dat = ['NA']*5
         iesc_dat[1] = 'NA_NA_NA'
-        settings.setValue('indir', 'NA')
+        settings.setValue('indir', None)
         return iesc_dat
 
     gtap_dat = [gtap, gtap_ver_num, gtap_num_reg, gtap_num_sect, gtap_num_endow]
