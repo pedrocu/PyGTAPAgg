@@ -1,29 +1,35 @@
 import json
+from PyQt6 import QtCore as qtc
 from harpy import *
 
 
 class DataStore():
-    def __init__(self, gtap_source=None, agg_store_file="defaults.json"):
-        
+    def __init__(self, agg_store_file="defaults.json"):
+
+        qtc.QCoreApplication.setOrganizationName("ImpactECON")
+        qtc.QCoreApplication.setOrganizationDomain("impactecon.com")
+        qtc.QCoreApplication.setOrganizationName("PyGTAPAgg")
+        self.settings=qtc.QSettings()
+           
         self.agg_store_file= agg_store_file
         self.agg_store_data=self.load_aggstore(self.agg_store_file)
-        self.gtap_source=gtap_source
+        
+        if self.settings.contains('indir') and self.settings.value('indir') is not None:
+            
+            self.gtap_source=self.settings.value('indir')
+            
+        else:
+            self.gtap_source = None
+            print('other thing', self.gtap_source)
 
         if self.gtap_source is not None:
             self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
         else: 
-            self.sector_all = [[
-        '',
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]]
+            self.sector_all = [["", "", "", "", "", "" ]]
 
-        self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
-        self.sector_headers = self.make_sector_headers(self.agg_store_data)   #change here to make generic
-        #print(self.sector_headers)
+          #change here to make generic
+        
+       
 
     @property
     def gtap_source(self):
@@ -36,10 +42,17 @@ class DataStore():
         self._gtap_source=value
         if value != 'NA' and value is not None:
            self.load_gtap_sets(value)
+           
            self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
+           self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
+        
+           self.sector_header = self.make_sector_headers(self.agg_store_data) 
+           
         else:
             self.gtap_sets=None
             self.sector_all = [['', '', '', '', '', ]]
+            self.sector_header = ['bugs', 'bugs2', '', '', '', ]
+            self.sector_pick_start = ['Agriculture', 'Manufactures', 'Services']
    
     @property
     def agg_store_file(self):
@@ -72,6 +85,24 @@ class DataStore():
     @sector_all.setter
     def sector_all(self, value):
         self._sector_all=value
+
+    @property
+    def sector_pick_start(self):
+        
+        return self._sector_pick_start
+
+    @sector_pick_start.setter
+    def sector_pick_start(self, value):
+        self._sector_pick_start = value
+
+    @property
+    def sector_header(self):
+        return self._sector_header
+
+    @sector_header.setter
+    def sector_header(self, value):
+        self._sector_header = value        
+
   
     def load_default(self, mydefaults):
         with open(mydefaults) as f:
@@ -80,6 +111,7 @@ class DataStore():
        
      #slot
     def gtapraw_source(self, value):
+        print('GTAP  RAW SOURCE')
         value.replace('/','\\')
         
         self.gtap_source=value
@@ -107,7 +139,10 @@ class DataStore():
         return matchlist
     
     def make_sector_pickstart(self, agg_store):
+        
         return agg_store['sectors']['picks']
     
     def make_sector_headers(self, agg_store):
         return agg_store['sectors']['headers']
+    
+  

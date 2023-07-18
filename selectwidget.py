@@ -13,21 +13,37 @@ class Select(qtw.QWidget):
              STR headers - structure of data entry table
              STR - pick_start default list to aggrgate by 
     """ 
-    def __init__(self, tab_type, datastore):
+    def __init__(self, tab_type, data_store):
 
         super().__init__()
-        self._dataStore= datastore
+        #print(id(datastore))
+        
+        #print(id(self._dataStore))
         self._tab_type=tab_type
-        if self._tab_type=='Sectors':
-            self.pick_start = self._dataStore.sector_pick_start
-            self.headers=self._dataStore.sector_headers
-            self.data=self._dataStore.sector_all
-        self.model=ItemTableModel(tab_type, self.headers, self.data)
-        
-        
+        self._data_store=data_store
 
-        self.picker_model = qtc.QStringListModel(self._pick_start)
+        if self._tab_type=='Sectors':
+
+            """if data_store.gtap_source is None:
             
+                self.headers=['', '', '', '', '' ]
+                self.data=[['', '', '', '', '' ]]
+                self.pick_start=['Agriculture', 'Manufactures', 'Services']
+                self.picker_model = qtc.QStringListModel(self.pick_start) 
+        
+            else: """
+            print('we have a default')
+            self.headers=self._data_store.sector_header
+            print(self.headers)
+            self.data=self._data_store.sector_all
+            self.pick_start=self._data_store.sector_pick_start
+            print(self.pick_start)
+            self.picker_model = qtc.QStringListModel(self.pick_start)
+
+
+        self.model=ItemTableModel(tab_type, self.headers, self.data)
+                
+               
         #layout  
         self.layout_h=qtw.QHBoxLayout()
         self.widget1=qtw.QWidget()
@@ -250,6 +266,7 @@ class Select(qtw.QWidget):
         'remove from picker'
         for item in self.selected_indexes:
             self.picker_model.removeRow(item.row())
+            print(self._dataStore._sector_pick_start)
 
         'remove from main table'       
         for item in self.values:
@@ -274,6 +291,18 @@ class Select(qtw.QWidget):
         '''checks for duplicates before adding or changing picklist'''
         #TBD
         return 0
+    
+    def updatedata(self):
+        #self.picker_model = qtc.QStringListModel(self._data_store.sector_pick_start)
+        self.picker_model.setStringList(self._data_store.sector_pick_start)
+
+        #self.model=ItemTableModel(self._tab_type, self._data_store.sector_header, self._data_store.sector_all)
+       
+        self.tableview.setModel(ItemTableModel(self._tab_type, self._data_store.sector_header, self._data_store.sector_all))
+        self.tableview.setColumnHidden(0,True)
+
+    
+    
     
 class ItemTableModel(qtc.QAbstractTableModel):
     """The model for aggregation table"""

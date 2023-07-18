@@ -59,7 +59,7 @@ class Databases(qtw.QWidget):
         if self.settings.contains('indir') and self.settings.value('indir') is not None :
            print('Inital Check setting dir :',self.settings.value('indir') )
            #print(self.settings.value('indir'))
-           self.version_label0.setText(self.settings.value('indir'))
+           
            self.getdbinfo(self.settings.value('indir') )
  
 

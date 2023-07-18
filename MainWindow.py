@@ -37,11 +37,53 @@ class MainWindow(qtw.QMainWindow):
         edit_menu = menubar.addMenu('Edit')
         help_menu = menubar.addMenu('Help')
 
+        #File Menu
+        open_action = file_menu.addAction('Open')
+        save_action = file_menu.addAction('Save')
+        save_action = file_menu.addAction('Save As', self.saveFile)
+        quit_action = file_menu.addAction('Quit', self.exitThisApp)
+
+        #Help Menu
+        about_action = help_menu.addAction('About', self.showAboutDialog)
+
         ##Central Window
         self.iesc_central_widget = GTAPAggTabs()
         self.setCentralWidget(self.iesc_central_widget)
 
+        self.statusBar().showMessage('Welcome to PyQtAgg for GTAP')
+
         self.show()
+
+    def showAboutDialog(self):
+        qtw.QMessageBox.about(self, "About PyQt GTAPAgg", """PyQtAgg Aggregates the GTAP Database
+                              
+                              Developed by Peter Minor, ImpactECON, LLC
+                              https://impactecon.com
+                              Developed in PyQt for Python""")
+        
+    def exitThisApp(self):
+         self.close()
+         sys.exit()
+
+    def saveFile(self):
+        filename, _ = qtw.QFileDialog.getSaveFileName(self,
+                                                       "Select the file to save to...",
+                                                       "c:\\",
+                                                       'JSON Files (*.json);; All Files (*)')
+        
+        if filename:
+            try:
+                 print(self.iesc_central_widget.sectors.picker_model.stringList())
+                 print(self.iesc_central_widget.sectors.data)
+                 print(self.iesc_central_widget.sectors.headers)
+                
+
+
+            except Exception as e:
+                 print('did not work')
+
+
+
     
 
 
@@ -62,30 +104,46 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.setTabShape = qtw.QTabWidget.TabShape.Triangular
         self.setTabBarAutoHide = False
         
-        
-        
-        
+        #Initialize dataobject
+        #print(self.databases.version_label0.text() )
+        self.dataStore = store.DataStore()
+
         #Our Tabs
         self.databases=dbwidget.Databases()
         self.addTab(self.databases, 'Databases')
+        print("here is the source", self.dataStore.gtap_source)
 
-        
-        #Initialize dataobject
-        print(self.databases.version_label0.text() )
-        if self.databases.version_label0.text() != 'NA':
-            self.dataStore = store.DataStore(self.databases.version_label0.text())
-        else:
-            self.dataStore = store.DataStore(None)
+
+        self.sectors=slwidget.Select('Sectors', self.dataStore)
+        self.addTab(self.sectors, 'Sectors')
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
         
         #pick_start = ['Agriculture', 'Manufactures', 'Extractive','Services']
-        
-        self.sectors=slwidget.Select('Sectors', self.dataStore)
-        self.addTab(self.sectors, 'Sectors')
-        
 
-        #Connection
-
+        #Connections
         self.databases.version_label0.gtap_source.connect(self.dataStore.gtapraw_source)
+        self.databases.version_label0.gtap_source.connect(self.update_data_tabs)
+        
+    def update_data_tabs(self):
+                print('here is myvalue:')
+                
+                #self.sectors.picker_model.setStringList(self.dataStore.sector_pick_start)
+                #self.sectors.headers=self.dataStore.sector_header
+                #self.sectors
+                #self.sectors.model=slwidget.ItemTableModel("Sectors", self.dataStore.sector_header, self.dataStore.sector_all)
+                #self.sectors.tableview.setModel(self.sectors.model)
+                self.sectors.updatedata()
+
+
+
+                    
+
+                
+
+        
+
+        
+
+        
         
