@@ -39,7 +39,7 @@ class MainWindow(qtw.QMainWindow):
         help_menu = menubar.addMenu('Help')
 
         #File Menu
-        open_action = file_menu.addAction('Open')
+        open_action = file_menu.addAction('Open', self.openFile)
         save_action = file_menu.addAction('Save')
         save_action = file_menu.addAction('Save As', self.saveFile)
         quit_action = file_menu.addAction('Quit', self.exitThisApp)
@@ -79,11 +79,20 @@ class MainWindow(qtw.QMainWindow):
                 self.iesc_central_widget.dataStore.to_json_file(filename)
 
             except Exception as e:
+                 #TBD this should be a valid exception
                  print('did not work')
 
+    def openFile(self):
+         filename, _ = qtw.QFileDialog.getOpenFileName(self,
+                                                       "Select the file to open...",
+                                                       "c:\\",
+                                                       'JSON Files (*.json);; All Files (*)')
+         print(filename)
+         if filename:
+              
+                   self.iesc_central_widget.dataStore.load_new_agg_file(filename)
 
 
-    
 
 
 class GTAPAggTabs(qtw.QTabWidget):
@@ -123,6 +132,7 @@ class GTAPAggTabs(qtw.QTabWidget):
         #Connections
         self.databases.version_label0.gtap_source.connect(self.dataStore.gtapraw_source)
         self.databases.version_label0.gtap_source.connect(self.update_data_tabs)
+        self.dataStore.update_tabs.connect(self.update_data_tabs)
     
     def update_picker(self):
          self.dataStore.sector_pick_start=self.sectors._picker_model.stringList()

@@ -123,6 +123,7 @@ class Select(qtw.QWidget):
         #Set contextmenu (right click)
         self.tableview.setContextMenuPolicy(qtc.Qt.ContextMenuPolicy.CustomContextMenu)
         self.tableview.customContextMenuRequested.connect(self.openMenu)
+        
         #Connect the right click to openmenu
 
         #self.show()
@@ -171,7 +172,7 @@ class Select(qtw.QWidget):
 
         #Change selection to list pick        
         for i in indexes:
-            self.model.setData(i, text, qtc.Qt.ItemDataRole.EditRole)
+            self._model.setData(i, text, qtc.Qt.ItemDataRole.EditRole)
             
         self.editor.close()
   

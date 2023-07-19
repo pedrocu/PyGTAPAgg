@@ -1,10 +1,14 @@
 import json
 from PyQt6 import QtCore as qtc
+from PyQt6 import QtWidgets as qtw
 from harpy import *
 
 
-class DataStore():
+class DataStore(qtw.QWidget):
+    update_tabs=qtc.pyqtSignal(str)
+
     def __init__(self, agg_store_file="defaults.json"):
+        super().__init__()
 
         qtc.QCoreApplication.setOrganizationName("ImpactECON")
         qtc.QCoreApplication.setOrganizationDomain("impactecon.com")
@@ -41,9 +45,10 @@ class DataStore():
         self._gtap_source=value
         if value != 'NA' and value is not None:
            self.load_gtap_sets(value)
-           
+           print('we are loading new data')
            self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
            self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
+           print(self.sector_pick_start)
            self.sector_header = self.make_sector_headers(self.agg_store_data) 
            
         else:
@@ -143,13 +148,23 @@ class DataStore():
         return agg_store['sectors']['headers']
     
     def to_agg_store(self):
-        self.agg_store_data={'sector': {'picks': self.sector_pick_start , 'headers': self.sector_header,  'allsect': self.sector_all } }
+        self.agg_store_data={'sectors': {'picks': self.sector_pick_start , 'headers': self.sector_header,  'allsect': self.sector_all } }
 
     def to_json_file(self, filename):
         self.to_agg_store()
         print('got here')
         with open(filename, 'w') as f:
                       json.dump(self.agg_store_data,f, ensure_ascii=False, indent=4)
+
+    def load_new_agg_file(self, filename):
+        self.agg_store_file = filename        
+        self.agg_store_data=self.load_aggstore(filename)
+        self.gtap_source=self.gtap_source
+        self.update_tabs.emit('')
+
+   
+
+        
         
 
     
