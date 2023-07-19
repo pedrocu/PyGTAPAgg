@@ -73,9 +73,10 @@ class MainWindow(qtw.QMainWindow):
         
         if filename:
             try:
-                 print(self.iesc_central_widget.sectors.picker_model.stringList())
-                 print(self.iesc_central_widget.sectors.data)
-                 print(self.iesc_central_widget.sectors.headers)
+                 print(self.iesc_central_widget.sectors._picker_model.stringList())
+                 print(self.iesc_central_widget.sectors._data)
+                 print(self.iesc_central_widget.sectors._headers)
+                 print('this is it')
                 
 
 
@@ -114,7 +115,7 @@ class GTAPAggTabs(qtw.QTabWidget):
         print("here is the source", self.dataStore.gtap_source)
 
 
-        self.sectors=slwidget.Select('Sectors', self.dataStore)
+        self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore._sector_pick_start, self.dataStore._sector_header, self.dataStore._sector_all)
         self.addTab(self.sectors, 'Sectors')
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
@@ -126,14 +127,16 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.databases.version_label0.gtap_source.connect(self.update_data_tabs)
         
     def update_data_tabs(self):
-                print('here is myvalue:')
-                
+                self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore._sector_pick_start, self.dataStore._sector_header, self.dataStore._sector_all)
+                self.removeTab(1)
+                self.addTab(self.sectors, 'Sectors')
+                #self.tabBar().moveTab(0,1)
                 #self.sectors.picker_model.setStringList(self.dataStore.sector_pick_start)
                 #self.sectors.headers=self.dataStore.sector_header
                 #self.sectors
                 #self.sectors.model=slwidget.ItemTableModel("Sectors", self.dataStore.sector_header, self.dataStore.sector_all)
                 #self.sectors.tableview.setModel(self.sectors.model)
-                self.sectors.updatedata()
+                #self.sectors.updatedata()
 
 
 

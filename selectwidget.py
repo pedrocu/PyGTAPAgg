@@ -9,39 +9,42 @@ import GtapHelpers as helpers
 
 class Select(qtw.QWidget):
     """Select sectors, regions, endowment
-       Args: STR tab_type - which item to aggregate in tab
-             STR headers - structure of data entry table
-             STR - pick_start default list to aggrgate by 
+       Args: 
     """ 
-    def __init__(self, tab_type, data_store):
+    def __init__(self, tab_type, data_store, pick_start, headers, data):
 
         super().__init__()
-        #print(id(datastore))
         
-        #print(id(self._dataStore))
         self._tab_type=tab_type
         self._data_store=data_store
-
-        if self._tab_type=='Sectors':
-
-            """if data_store.gtap_source is None:
-            
-                self.headers=['', '', '', '', '' ]
-                self.data=[['', '', '', '', '' ]]
-                self.pick_start=['Agriculture', 'Manufactures', 'Services']
-                self.picker_model = qtc.QStringListModel(self.pick_start) 
+        self._pick_start=pick_start
+        self._headers=headers
+        self._data=data
         
-            else: """
-            print('we have a default')
-            self.headers=self._data_store.sector_header
-            print(self.headers)
-            self.data=self._data_store.sector_all
-            self.pick_start=self._data_store.sector_pick_start
-            print(self.pick_start)
-            self.picker_model = qtc.QStringListModel(self.pick_start)
+       
+        
+
+        self._model=ItemTableModel(tab_type, self._headers, self._data)
+        self._picker_model = qtc.QStringListModel(self._pick_start)
+
+        self.tableview = qtw.QTableView()
+        self.tableview.setModel(self._model)
 
 
-        self.model=ItemTableModel(tab_type, self.headers, self.data)
+
+
+        # if self._tab_type=='Sectors':
+
+        #     print('we have a default')
+        #     self.headers=self._data_store.sector_header
+        #     print(self.headers)
+        #     self.data=self._data_store.sector_all
+        #     self.pick_start=self._data_store.sector_pick_start
+        #     print(self.pick_start)
+            
+
+
+        
                 
                
         #layout  
@@ -82,7 +85,7 @@ class Select(qtw.QWidget):
         
         #picker
         self.picker_view = qtw.QListView()
-        self.picker_view.setModel(self.picker_model)
+        self.picker_view.setModel(self._picker_model)
         self.picker_view.setSelectionMode(qtw.QAbstractItemView.SelectionMode.MultiSelection)
         self.picker_view.setDragDropMode(qtw.QAbstractItemView.DragDropMode.InternalMove)
         self.picker_view.doubleClicked.connect(self.prioritem)
@@ -97,16 +100,16 @@ class Select(qtw.QWidget):
         self.add_button.clicked.connect(self.newitem)
         self.remove_button.clicked.connect(self.remove)
         self.clear_button.clicked.connect(self.clearall)
-        self.picker_model.dataChanged.connect(self.edititem)
+        self._picker_model.dataChanged.connect(self.edititem)
         
         #RIGHT side - table
-        self.tableview = qtw.QTableView()
+        
         
         self.tableview.setSortingEnabled(True)
         self.setGeometry(200, 200, 600, 600)
         
         
-        self.tableview.setModel(self.model)
+        
         #Hide GEMPACK position number
         self.tableview.setColumnHidden(0,True)
         #Hide long description sectors
@@ -120,11 +123,6 @@ class Select(qtw.QWidget):
         table_header_h=self.tableview.horizontalHeader()
         table_header_h.setSectionsMovable(1)
         
-        '''for i in range(0,141):
-            self.tableview.setRowHeight(i,self.tableview.itemDelegate().height)
-        for i in range(0,self.tableview.model().columnCount()):
-            self.tableview.setColumnWidth(i,self.tableview.itemDelegate().width) '''
-
         self.set_Selection = self.tableview.selectionModel()
         
         self.select_box = qtw.QGroupBox('Aggregation')
@@ -135,8 +133,8 @@ class Select(qtw.QWidget):
         
        
         #Delgate for standard editing
-        self.delegate = ListDelegate(self.picker_model)
-        self.tableview.setItemDelegateForColumn(self.model.columnCount(None)-1,self.delegate)
+        self.delegate = ListDelegate(self._picker_model)
+        self.tableview.setItemDelegateForColumn(self._model.columnCount(None)-1,self.delegate)
 
         #Set contextmenu (right click)
         self.tableview.setContextMenuPolicy(qtc.Qt.ContextMenuPolicy.CustomContextMenu)
@@ -148,19 +146,20 @@ class Select(qtw.QWidget):
         #Can add with a subclass addtional items to this tab widget
         #self.layout_v1.addWidget(qtw.QTextEdit())
     
-    @property
-    def pick_start(self):
-        return self._pick_start
+    # @property
+    # def pick_start(self):
+    #     return self._pick_start
     
-    @pick_start.setter
-    def pick_start(self, x):
-        self._pick_start=x
+    # @pick_start.setter
+    # def pick_start(self, x):
+    #     self._pick_start=x
 
+        print('data address', id(self._data))   
 
     def prioritem(self, index):
         '''gets item before edit so it can be used for changing table data'''
         
-        self.before_edit=self.picker_model.data(index, qtc.Qt.ItemDataRole.DisplayRole)
+        self.before_edit=self._picker_model.data(index, qtc.Qt.ItemDataRole.DisplayRole)
         
     def openMenu(self, position):
         '''The list of items to pick from with right click - context menu'''
@@ -168,7 +167,7 @@ class Select(qtw.QWidget):
         self.editor = qtw.QListView()
         self.editor.setWindowFlags(qtc.Qt.WindowType.WindowStaysOnTopHint)
         self.editor.setSelectionMode(qtw.QAbstractItemView.SelectionMode.MultiSelection)
-        self.editor.setModel(self.picker_model)
+        self.editor.setModel(self._picker_model)
         #self.editor.setWindowFlags(qtc.Qt.FramelessWindowHint)
 
         self.editor.setGeometry(400, 100, 100, 100)
@@ -180,7 +179,7 @@ class Select(qtw.QWidget):
     def changemyselection(self, item):
         '''based on item selected with right click context menu fills the selection'''
         #list item retrieve text
-        text=self.picker_model.data(item,0)        
+        text=self._picker_model.data(item,0)        
        
         #Retrieve selction model
         self.myselection = self.tableview.selectionModel()
@@ -194,10 +193,10 @@ class Select(qtw.QWidget):
   
     def onetone(self):
         '''changes regions/sectors/endowments to one-to-one'''
-        for i in range(0, self.model.rowCount(None)):
-            abbrev_index=self.model.index(i,1)
-            item_index=self.model.index(i,self.model.columnCount(None)-1)
-            self.model.setData(item_index,self.model.data(abbrev_index, qtc.Qt.ItemDataRole.DisplayRole),qtc.Qt.ItemDataRole.EditRole )
+        for i in range(0, self._model.rowCount(None)):
+            abbrev_index=self._model.index(i,1)
+            item_index=self._model.index(i,self._model.columnCount(None)-1)
+            self._model.setData(item_index,self._model.data(abbrev_index, qtc.Qt.ItemDataRole.DisplayRole),qtc.Qt.ItemDataRole.EditRole )
     
     def newitem(self):
         '''dialgoue to add new item to list'''
@@ -229,28 +228,28 @@ class Select(qtw.QWidget):
 
     def additem(self):
         '''logic to add item to edit list see newitem() for dialgoue'''
-        num_rows=self.picker_model.rowCount()
+        num_rows=self._picker_model.rowCount()
         self.line_edit_text = [self.line_edit.text()]
 
         selection = self.picker_view.selectionModel()
         self.selected_indexes=selection.selectedIndexes()
 
         if len(self.selected_indexes) ==0: 
-            self.selected_indexes=[self.picker_model.index(num_rows-1)]
+            self.selected_indexes=[self._picker_model.index(num_rows-1)]
         if num_rows == 0:
-           self.picker_model.setStringList(self.line_edit_text) 
+           self._picker_model.setStringList(self.line_edit_text) 
                 
-        self.picker_model.insertRows(self.selected_indexes[0].row(),1)
-        self.newthing = self.picker_model.index(self.selected_indexes[0].row())
-        self.picker_model.setData(self.newthing, self.line_edit.text(), qtc.Qt.ItemDataRole.EditRole)
+        self._picker_model.insertRows(self.selected_indexes[0].row(),1)
+        self.newthing = self._picker_model.index(self.selected_indexes[0].row())
+        self._picker_model.setData(self.newthing, self.line_edit.text(), qtc.Qt.ItemDataRole.EditRole)
     
     def edititem(self, index):     
         '''when a item is changed in the list, it is changed in the table'''
         
-        for i in range(0, self.model.rowCount(None)):
-            item_index=self.model.index(i,self.model.columnCount(None)-1)
-            if self.model.data(item_index, qtc.Qt.ItemDataRole.DisplayRole) == self.before_edit:
-                self.model.setData(item_index,self.picker_model.data(index, qtc.Qt.ItemDataRole.DisplayRole),qtc.Qt.ItemDataRole.EditRole )
+        for i in range(0, self._model.rowCount(None)):
+            item_index=self._model.index(i,self._model.columnCount(None)-1)
+            if self._model.data(item_index, qtc.Qt.ItemDataRole.DisplayRole) == self.before_edit:
+                self._model.setData(item_index,self._picker_model.data(index, qtc.Qt.ItemDataRole.DisplayRole),qtc.Qt.ItemDataRole.EditRole )
 
     def remove(self):
         '''remove item in list and from associated table/s'''
@@ -265,41 +264,58 @@ class Select(qtw.QWidget):
 
         'remove from picker'
         for item in self.selected_indexes:
-            self.picker_model.removeRow(item.row())
-            print(self._dataStore._sector_pick_start)
+            self._picker_model.removeRow(item.row())
+            
 
         'remove from main table'       
         for item in self.values:
-            for i in range(0, self.model.rowCount(None)):
-                item_index=self.model.index(i,self.model.columnCount(None)-1)
-                if self.model.data(item_index, qtc.Qt.ItemDataRole.DisplayRole) == item:
+            for i in range(0, self._model.rowCount(None)):
+                item_index=self._model.index(i,self._model.columnCount(None)-1)
+                if self._model.data(item_index, qtc.Qt.ItemDataRole.DisplayRole) == item:
                     #self.model.data(item_index,qtc.Qt.BackgroundRole)
-                    self.model.setData(item_index,'',qtc.Qt.ItemDataRole.EditRole)
+                    self._model.setData(item_index,'',qtc.Qt.ItemDataRole.EditRole)
         
         'see EndowSelect for subclass on endowments'
 
     def clearall(self):
         '''clears the picker list and associted table entries'''
-        num_rows=self.picker_model.rowCount()
+        num_rows=self._picker_model.rowCount()
 
-        self.picker_model.removeRows(0,num_rows)
-        for i in range(0, self.model.rowCount(None)):
-            item_index=self.model.index(i,self.model.columnCount(None)-1)
-            self.model.setData(item_index,'',qtc.Qt.ItemDataRole.EditRole )
+        self._picker_model.removeRows(0,num_rows)
+        for i in range(0, self._model.rowCount(None)):
+            item_index=self._model.index(i,self._model.columnCount(None)-1)
+            self._model.setData(item_index,'',qtc.Qt.ItemDataRole.EditRole )
 
     def checkdup(self):
         '''checks for duplicates before adding or changing picklist'''
         #TBD
         return 0
     
-    def updatedata(self):
-        #self.picker_model = qtc.QStringListModel(self._data_store.sector_pick_start)
-        self.picker_model.setStringList(self._data_store.sector_pick_start)
 
-        #self.model=ItemTableModel(self._tab_type, self._data_store.sector_header, self._data_store.sector_all)
        
-        self.tableview.setModel(ItemTableModel(self._tab_type, self._data_store.sector_header, self._data_store.sector_all))
-        self.tableview.setColumnHidden(0,True)
+    # def updatedata(self):
+    #     #self.picker_model = qtc.QStringListModel(self._data_store.sector_pick_start)
+        
+        
+    #     self._pick_start=pick_start
+    #     self._headers=headers
+    #     self._data=data
+
+
+
+    #     self._model=ItemTableModel(self._tab_type, self._data_store._sector_header, self._data_store.sector_all)
+    #     self._picker_model.setStringList(self._data_store.sector_pick_start)
+    #     self.tableview.setModel(self._model)
+        
+    #     print('data store')
+    #     print(id(self._data_store))
+
+    #     print('DATA')
+    #     print('from datastore', id(self._data_store._sector_all))
+    #     print('from data', id(self._data))
+
+      
+    #     self.tableview.setColumnHidden(0,True)
 
     
     
