@@ -11,6 +11,7 @@ from PyQt6 import QtGui as qtg
 import DatabaseWidget as dbwidget
 import selectwidget as slwidget
 import DatabaseStore as store
+import json
 
 
 
@@ -66,6 +67,7 @@ class MainWindow(qtw.QMainWindow):
          sys.exit()
 
     def saveFile(self):
+        self.iesc_central_widget.update_picker()
         filename, _ = qtw.QFileDialog.getSaveFileName(self,
                                                        "Select the file to save to...",
                                                        "c:\\",
@@ -73,12 +75,8 @@ class MainWindow(qtw.QMainWindow):
         
         if filename:
             try:
-                 print(self.iesc_central_widget.sectors._picker_model.stringList())
-                 print(self.iesc_central_widget.sectors._data)
-                 print(self.iesc_central_widget.sectors._headers)
-                 print('this is it')
-                
 
+                self.iesc_central_widget.dataStore.to_json_file(filename)
 
             except Exception as e:
                  print('did not work')
@@ -125,6 +123,9 @@ class GTAPAggTabs(qtw.QTabWidget):
         #Connections
         self.databases.version_label0.gtap_source.connect(self.dataStore.gtapraw_source)
         self.databases.version_label0.gtap_source.connect(self.update_data_tabs)
+    
+    def update_picker(self):
+         self.dataStore.sector_pick_start=self.sectors._picker_model.stringList()
         
     def update_data_tabs(self):
                 self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore._sector_pick_start, self.dataStore._sector_header, self.dataStore._sector_all)

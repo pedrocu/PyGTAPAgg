@@ -48,5 +48,5 @@ def getdbversize(gtap, source) -> tuple:
 def getvalues(self, selectionlist)-> list:
     values = []
     for item in selectionlist:
-        values.append(self.picker_model.data(item, qtc.Qt.ItemDataRole.DisplayRole))
+        values.append(self._picker_model.data(item, qtc.Qt.ItemDataRole.DisplayRole))
     return values

@@ -11,7 +11,7 @@
     "picks": [
       "Agriculture",
       "Manufactures",
-      "Extraction",
+      "Extractive",
       "Services"
     ],
     "allsect": [
@@ -139,7 +139,7 @@
         16,
         "oil",
         "Oil",
-        "Oil: extraction of crude petroleum, service activities incidental to oil and gas extraction excluding surveying (part)",
+        "Oil: Extractive of crude petroleum, service activities incidental to oil and gas Extractive excluding surveying (part)",
         "Extractive",
         "Extractive"
       ],
@@ -147,15 +147,15 @@
         17,
         "gas",
         "Gas",
-        "Gas: extraction of natural gas, service activities incidental to oil and gas extraction excluding surveying (part)",
+        "Gas: Extractive of natural gas, service activities incidental to oil and gas Extractive excluding surveying (part)",
         "Extractive",
         "Extractive"
       ],
       [
         18,
         "oxt",
-        "Other Extraction (formerly omn Minerals nec)",
-        "Other Mining Extraction (formerly omn): mining of metal ores; other mining and quarrying",
+        "Other Extractive (formerly omn Minerals nec)",
+        "Other Mining Extractive (formerly omn): mining of metal ores; other mining and quarrying",
         "Extractive",
         "Extractive"
       ],
@@ -179,7 +179,7 @@
         21,
         "vol",
         "Vegetable oils and fats",
-        "Vegetable Oils: margarine and similar preparations; cotton linters; oil-cake and other residues resulting from the extraction of vegetable fats or oils; flours and meals of oil seeds or oleaginous fruits, except those of mustard; vegetable waxes, except triglycerides; degras; residues resulting from the treatment of fatty substances or animal or vegetable waxes; animal fats",
+        "Vegetable Oils: margarine and similar preparations; cotton linters; oil-cake and other residues resulting from the Extractive of vegetable fats or oils; flours and meals of oil seeds or oleaginous fruits, except those of mustard; vegetable waxes, except triglycerides; degras; residues resulting from the treatment of fatty substances or animal or vegetable waxes; animal fats",
         "Agriculture",
         "Agriculture"
       ],

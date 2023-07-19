@@ -30,23 +30,7 @@ class Select(qtw.QWidget):
         self.tableview = qtw.QTableView()
         self.tableview.setModel(self._model)
 
-
-
-
-        # if self._tab_type=='Sectors':
-
-        #     print('we have a default')
-        #     self.headers=self._data_store.sector_header
-        #     print(self.headers)
-        #     self.data=self._data_store.sector_all
-        #     self.pick_start=self._data_store.sector_pick_start
-        #     print(self.pick_start)
-            
-
-
-        
-                
-               
+              
         #layout  
         self.layout_h=qtw.QHBoxLayout()
         self.widget1=qtw.QWidget()

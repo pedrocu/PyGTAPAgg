@@ -20,7 +20,7 @@ class DataStore():
             
         else:
             self.gtap_source = None
-            print('other thing', self.gtap_source)
+          
 
         if self.gtap_source is not None:
             self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
@@ -38,14 +38,12 @@ class DataStore():
     
     @gtap_source.setter
     def gtap_source(self, value):
-        print(value)
         self._gtap_source=value
         if value != 'NA' and value is not None:
            self.load_gtap_sets(value)
            
            self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
            self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
-        
            self.sector_header = self.make_sector_headers(self.agg_store_data) 
            
         else:
@@ -111,7 +109,6 @@ class DataStore():
        
      #slot
     def gtapraw_source(self, value):
-        print('GTAP  RAW SOURCE')
         value.replace('/','\\')
         
         self.gtap_source=value
@@ -144,5 +141,16 @@ class DataStore():
     
     def make_sector_headers(self, agg_store):
         return agg_store['sectors']['headers']
+    
+    def to_agg_store(self):
+        self.agg_store_data={'sector': {'picks': self.sector_pick_start , 'headers': self.sector_header,  'allsect': self.sector_all } }
+
+    def to_json_file(self, filename):
+        self.to_agg_store()
+        print('got here')
+        with open(filename, 'w') as f:
+                      json.dump(self.agg_store_data,f, ensure_ascii=False, indent=4)
+        
+
     
   
