@@ -139,7 +139,7 @@ class Select(qtw.QWidget):
     # def pick_start(self, x):
     #     self._pick_start=x
 
-        print('data address', id(self._data))   
+      
 
     def prioritem(self, index):
         '''gets item before edit so it can be used for changing table data'''

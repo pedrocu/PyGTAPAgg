@@ -87,7 +87,7 @@ class MainWindow(qtw.QMainWindow):
                                                        "Select the file to open...",
                                                        "c:\\",
                                                        'JSON Files (*.json);; All Files (*)')
-         print(filename)
+        
          if filename:
               
                    self.iesc_central_widget.dataStore.load_new_agg_file(filename)
@@ -119,7 +119,7 @@ class GTAPAggTabs(qtw.QTabWidget):
         #Our Tabs
         self.databases=dbwidget.Databases()
         self.addTab(self.databases, 'Databases')
-        print("here is the source", self.dataStore.gtap_source)
+        
 
 
         self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore._sector_pick_start, self.dataStore._sector_header, self.dataStore._sector_all)

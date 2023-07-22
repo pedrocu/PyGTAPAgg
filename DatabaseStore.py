@@ -4,30 +4,41 @@ from PyQt6 import QtCore as qtc
 from PyQt6 import QtWidgets as qtw
 from harpy import *
 
-class GtapSets:
-    def __init__(self, directory) -> None:
-        super().__init__()
-        
+class GtapSets():
 
-    def __getattribute__(self, __name: str) -> Any:
-        pass
+    def __init__(self) -> None:
+        self.gtap_sets=None
+        super().__init__() 
 
-    def __setattr__(self, __name: str, __value: Any) -> None:
-        pass
+    def __getattribute__(self, name: str) -> Any:
+        return super().__getattribute__(name)
+    
+    def __setattr__(self, name: str, value: Any) -> None:    
+        if name == "gtap_sets":
+            if isinstance(value, str):
+               self.get_gtap_sets(value) 
+            else: 
+                if value is None:
+                    super().__setattr__("gtap_sets", None)
+                else:
+                    raise TypeError('Not a valid directory or none')
+        else:
+            return super().__setattr__(name, value)
 
-    def load_gtap_sets(self, directory):
-        InFile=HarFileObj(directory+"\\sets.har")
+    def get_gtap_sets(self, dir):
+        InFile=HarFileObj(dir+"\\sets.har")
         DataHead=InFile["H2"]
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
         newlist = []
-        for pos, value in enumerate(npDataArray):
-            newlist.append([pos+1, value])
-        
-        self.gtap_sets = newlist
+        for pos, var in enumerate(npDataArray):
+            newlist.append([pos+1, var])
+        super().__setattr__("gtap_sets", newlist)    
 
 
 
-class DataStore(qtw.QWidget):
+
+
+class DataStore(GtapSets,qtw.QWidget):
     update_tabs=qtc.pyqtSignal(str)
 
     def __init__(self, agg_store_file="defaults.json"):
@@ -60,18 +71,17 @@ class DataStore(qtw.QWidget):
 
     @property
     def gtap_source(self):
-        #In practive, this should only be setby the database widget for validity checking
+        #In practice, this should only be setby the database widget for validity checking
         return self._gtap_source
     
     @gtap_source.setter
     def gtap_source(self, value):
         self._gtap_source=value
         if value != 'NA' and value is not None:
-           self.load_gtap_sets(value)
-           print('we are loading new data')
+           self.gtap_sets=value
            self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
            self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
-           print(self.sector_pick_start)
+           
            self.sector_header = self.make_sector_headers(self.agg_store_data) 
            
         else:
@@ -95,15 +105,6 @@ class DataStore(qtw.QWidget):
     @agg_store_data.setter
     def agg_store_data(self, value):
         self._agg_store_data=value
-
-    #Move this out
-    @property
-    def gtap_sets(self):
-        return self._gtap_sets
-
-    @gtap_sets.setter
-    def gtap_sets(self, value):
-        self._gtap_sets=value
 
     @property
     def sector_all(self):
@@ -140,18 +141,9 @@ class DataStore(qtw.QWidget):
     def gtapraw_source(self, value):
         value.replace('/','\\')
         
-        self.gtap_source=value
-
-    def load_gtap_sets(self, directory):
-        InFile=HarFileObj(directory+"\\sets.har")
-        DataHead=InFile["H2"]
-        npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
-        newlist = []
-        for pos, value in enumerate(npDataArray):
-            newlist.append([pos+1, value])
         
-        self.gtap_sets = newlist
-    
+        self.gtap_source=value
+  
     def load_aggstore(self, file_name):
         
         with open(file_name) as f:
@@ -176,7 +168,6 @@ class DataStore(qtw.QWidget):
 
     def to_json_file(self, filename):
         self.to_agg_store()
-        print('got here')
         with open(filename, 'w') as f:
                       json.dump(self.agg_store_data,f, ensure_ascii=False, indent=4)
 
