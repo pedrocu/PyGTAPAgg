@@ -1,7 +1,30 @@
 import json
+from typing import Any
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtWidgets as qtw
 from harpy import *
+
+class GtapSets:
+    def __init__(self, directory) -> None:
+        super().__init__()
+        
+
+    def __getattribute__(self, __name: str) -> Any:
+        pass
+
+    def __setattr__(self, __name: str, __value: Any) -> None:
+        pass
+
+    def load_gtap_sets(self, directory):
+        InFile=HarFileObj(directory+"\\sets.har")
+        DataHead=InFile["H2"]
+        npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
+        newlist = []
+        for pos, value in enumerate(npDataArray):
+            newlist.append([pos+1, value])
+        
+        self.gtap_sets = newlist
+
 
 
 class DataStore(qtw.QWidget):
@@ -73,6 +96,7 @@ class DataStore(qtw.QWidget):
     def agg_store_data(self, value):
         self._agg_store_data=value
 
+    #Move this out
     @property
     def gtap_sets(self):
         return self._gtap_sets
