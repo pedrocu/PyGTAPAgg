@@ -14,26 +14,17 @@ class GtapSets():
         return super().__getattribute__(name)
     
     def __setattr__(self, name: str, value: Any) -> None:    
-        if name == "gtap_sets":
-            if isinstance(value, str):
-               self.get_gtap_sets(value) 
-            else: 
-                if value is None:
-                    super().__setattr__("gtap_sets", None)
-                else:
-                    raise TypeError('Not a valid directory or none')
-        else:
-            return super().__setattr__(name, value)
+        return super().__setattr__(name, value)
 
-    def get_gtap_sets(self, dir):
+    def readin_gtap_sets(self, dir):
         InFile=HarFileObj(dir+"\\sets.har")
         DataHead=InFile["H2"]
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
         newlist = []
         for pos, var in enumerate(npDataArray):
             newlist.append([pos+1, var])
-        super().__setattr__("gtap_sets", newlist)    
-
+        return newlist
+    
 
 
 
@@ -61,6 +52,7 @@ class DataStore(GtapSets,qtw.QWidget):
           
 
         if self.gtap_source is not None:
+            
             self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
         else: 
             self.sector_all = [["", "", "", "", "", "" ]]
@@ -78,7 +70,8 @@ class DataStore(GtapSets,qtw.QWidget):
     def gtap_source(self, value):
         self._gtap_source=value
         if value != 'NA' and value is not None:
-           self.gtap_sets=value
+           self.gtap_sets=self.readin_gtap_sets(value)
+           
            self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
            self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
            
