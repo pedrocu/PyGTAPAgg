@@ -25,10 +25,28 @@ class GtapSets():
             newlist.append([pos+1, var])
         return newlist
     
+class TabData():
 
+    def __init__(self) -> None:
+        self.pick_start = None
+        self.headers= None
+        self.data=None
 
+        super().__init__()
 
+    def make_pick_start(self, agg_store):
+        return agg_store['picks']
+    
+    def make_headers(self, agg_store):
+        return agg_store['headers']
 
+    def make_data(self, sets, agg_store):
+        '''takes sets and aggstore and does a match merge on sect abrev'''
+        newdict={x[1]: x for x in agg_store['data']}
+        matchlist =  [x+newdict.get(x[1], ['','', '','',''])[2:] for x in sets ]
+        return matchlist
+    
+   
 class DataStore(GtapSets,qtw.QWidget):
     update_tabs=qtc.pyqtSignal(str)
 
@@ -42,25 +60,17 @@ class DataStore(GtapSets,qtw.QWidget):
            
         self.agg_store_file= agg_store_file
         self.agg_store_data=self.load_aggstore(self.agg_store_file)
+
+        self.sectors=TabData()
         
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
             
             self.gtap_source=self.settings.value('indir')
-            
+           
         else:
             self.gtap_source = None
-          
-
-        if self.gtap_source is not None:
-            
-            self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
-        else: 
-            self.sector_all = [["", "", "", "", "", "" ]]
-
-          #change here to make generic
-        
-       
-
+            self.sectors.data = [["", "", "", "", "", "" ]]
+   
     @property
     def gtap_source(self):
         #In practice, this should only be setby the database widget for validity checking
@@ -72,16 +82,15 @@ class DataStore(GtapSets,qtw.QWidget):
         if value != 'NA' and value is not None:
            self.gtap_sets=self.readin_gtap_sets(value)
            
-           self.sector_all = self.make_sector_all(self.gtap_sets, self.agg_store_data)
-           self.sector_pick_start = self.make_sector_pickstart(self.agg_store_data)
-           
-           self.sector_header = self.make_sector_headers(self.agg_store_data) 
+           self.sectors.data=self.sectors.make_data(self.gtap_sets, self.agg_store_data['sectors'])
+           self.sectors.pick_start=self.sectors.make_pick_start(self.agg_store_data['sectors'])
+           self.sectors.headers = self.sectors.make_headers(self.agg_store_data['sectors']) 
            
         else:
             self.gtap_sets=None
-            self.sector_all = [['', '', '', '', '', ]]
-            self.sector_header = ['bugs', 'bugs2', '', '', '', ]
-            self.sector_pick_start = ['Agriculture', 'Manufactures', 'Services']
+            self.sectors.data = [['', '', '', '', '', ]]
+            self.sectors.headers = ['bugs', 'bugs2', '', '', '', ]
+            self.sectors.pick_start = ['Agriculture', 'Manufactures', 'Services']
    
     @property
     def agg_store_file(self):
@@ -99,32 +108,6 @@ class DataStore(GtapSets,qtw.QWidget):
     def agg_store_data(self, value):
         self._agg_store_data=value
 
-    @property
-    def sector_all(self):
-        return self._sector_all
-    
-    @sector_all.setter
-    def sector_all(self, value):
-        self._sector_all=value
-
-    @property
-    def sector_pick_start(self):
-        
-        return self._sector_pick_start
-
-    @sector_pick_start.setter
-    def sector_pick_start(self, value):
-        self._sector_pick_start = value
-
-    @property
-    def sector_header(self):
-        return self._sector_header
-
-    @sector_header.setter
-    def sector_header(self, value):
-        self._sector_header = value        
-
-  
     def load_default(self, mydefaults):
         with open(mydefaults) as f:
             data=json.load(f)
@@ -133,31 +116,15 @@ class DataStore(GtapSets,qtw.QWidget):
      #slot
     def gtapraw_source(self, value):
         value.replace('/','\\')
-        
-        
         self.gtap_source=value
   
     def load_aggstore(self, file_name):
-        
         with open(file_name) as f:
            aggstore=json.load(f)
            return aggstore
         
-    def make_sector_all(self, sets, agg_store):
-        '''takes sets and aggstore and does a match merge on sect abrev'''
-        newdict={x[1]: x for x in agg_store['sectors']['allsect']}
-        matchlist =  [x+newdict.get(x[1], ['','', '','',''])[2:] for x in sets ]
-        return matchlist
-    
-    def make_sector_pickstart(self, agg_store):
-        
-        return agg_store['sectors']['picks']
-    
-    def make_sector_headers(self, agg_store):
-        return agg_store['sectors']['headers']
-    
     def to_agg_store(self):
-        self.agg_store_data={'sectors': {'picks': self.sector_pick_start , 'headers': self.sector_header,  'allsect': self.sector_all } }
+        self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data } }
 
     def to_json_file(self, filename):
         self.to_agg_store()
@@ -169,11 +136,3 @@ class DataStore(GtapSets,qtw.QWidget):
         self.agg_store_data=self.load_aggstore(filename)
         self.gtap_source=self.gtap_source
         self.update_tabs.emit('')
-
-   
-
-        
-        
-
-    
-  

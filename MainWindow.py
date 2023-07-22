@@ -122,7 +122,7 @@ class GTAPAggTabs(qtw.QTabWidget):
         
 
 
-        self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore._sector_pick_start, self.dataStore._sector_header, self.dataStore._sector_all)
+        self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
         self.addTab(self.sectors, 'Sectors')
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
@@ -138,7 +138,7 @@ class GTAPAggTabs(qtw.QTabWidget):
          self.dataStore.sector_pick_start=self.sectors._picker_model.stringList()
         
     def update_data_tabs(self):
-                self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore._sector_pick_start, self.dataStore._sector_header, self.dataStore._sector_all)
+                self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
                 self.removeTab(1)
                 self.addTab(self.sectors, 'Sectors')
                 #self.tabBar().moveTab(0,1)
