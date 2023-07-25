@@ -21,16 +21,12 @@ class Select(qtw.QWidget):
         self._headers=headers
         self._data=data
         
-       
-        
-
         self._model=ItemTableModel(tab_type, self._headers, self._data)
         self._picker_model = qtc.QStringListModel(self._pick_start)
 
         self.tableview = qtw.QTableView()
         self.tableview.setModel(self._model)
-
-              
+    
         #layout  
         self.layout_h=qtw.QHBoxLayout()
         self.widget1=qtw.QWidget()
@@ -92,7 +88,7 @@ class Select(qtw.QWidget):
         self.tableview.setSortingEnabled(True)
         self.setGeometry(200, 200, 600, 600)
         
-        
+
         
         #Hide GEMPACK position number
         self.tableview.setColumnHidden(0,True)

@@ -14,10 +14,6 @@ import DatabaseStore as store
 import json
 
 
-
-
-
-
 class MainWindow(qtw.QMainWindow):
     def __init__(self, my_screen):
         super().__init__()
@@ -40,7 +36,7 @@ class MainWindow(qtw.QMainWindow):
 
         #File Menu
         open_action = file_menu.addAction('Open', self.openFile)
-        save_action = file_menu.addAction('Save')
+        save_action = file_menu.addAction('Save', self.saveFile)
         save_action = file_menu.addAction('Save As', self.saveFile)
         quit_action = file_menu.addAction('Quit', self.exitThisApp)
 
@@ -124,6 +120,9 @@ class GTAPAggTabs(qtw.QTabWidget):
 
         self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
         self.addTab(self.sectors, 'Sectors')
+        self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
+        self.addTab(self.regions, 'Regions')
+
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
         
@@ -138,9 +137,12 @@ class GTAPAggTabs(qtw.QTabWidget):
          self.dataStore.sector_pick_start=self.sectors._picker_model.stringList()
         
     def update_data_tabs(self):
-                self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
                 self.removeTab(1)
+                self.removeTab(1)
+                self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
                 self.addTab(self.sectors, 'Sectors')
+                self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
+                self.addTab(self.regions, 'Regions')
                 #self.tabBar().moveTab(0,1)
                 #self.sectors.picker_model.setStringList(self.dataStore.sector_pick_start)
                 #self.sectors.headers=self.dataStore.sector_header

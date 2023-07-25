@@ -7,7 +7,8 @@ from harpy import *
 class GtapSets():
 
     def __init__(self) -> None:
-        self.gtap_sets=None
+        self.gtap_sets_sectors=None
+        self.gtap_regions=None
         super().__init__() 
 
     def __getattribute__(self, name: str) -> Any:
@@ -16,14 +17,16 @@ class GtapSets():
     def __setattr__(self, name: str, value: Any) -> None:    
         return super().__setattr__(name, value)
 
-    def readin_gtap_sets(self, dir):
+    def readin_gtap_sets(self, dir, header):
         InFile=HarFileObj(dir+"\\sets.har")
-        DataHead=InFile["H2"]
+        DataHead=InFile[header]
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
         newlist = []
         for pos, var in enumerate(npDataArray):
             newlist.append([pos+1, var])
         return newlist
+    
+
     
 class TabData():
 
@@ -62,6 +65,7 @@ class DataStore(GtapSets,qtw.QWidget):
         self.agg_store_data=self.load_aggstore(self.agg_store_file)
 
         self.sectors=TabData()
+        self.regions=TabData()
         
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
             
@@ -80,17 +84,24 @@ class DataStore(GtapSets,qtw.QWidget):
     def gtap_source(self, value):
         self._gtap_source=value
         if value != 'NA' and value is not None:
-           self.gtap_sets=self.readin_gtap_sets(value)
+           self.gtap_sectors=self.readin_gtap_sets(value, "H2")
+           self.gtap_regions=self.readin_gtap_sets(value, "H1")
            
-           self.sectors.data=self.sectors.make_data(self.gtap_sets, self.agg_store_data['sectors'])
+           self.sectors.data=self.sectors.make_data(self.gtap_sectors, self.agg_store_data['sectors'])
            self.sectors.pick_start=self.sectors.make_pick_start(self.agg_store_data['sectors'])
            self.sectors.headers = self.sectors.make_headers(self.agg_store_data['sectors']) 
+           self.regions.data=self.sectors.make_data(self.gtap_regions, self.agg_store_data['regions'])
+           self.regions.pick_start=self.sectors.make_pick_start(self.agg_store_data['regions'])
+           self.regions.headers = self.sectors.make_headers(self.agg_store_data['regions']) 
            
         else:
             self.gtap_sets=None
             self.sectors.data = [['', '', '', '', '', ]]
             self.sectors.headers = ['bugs', 'bugs2', '', '', '', ]
             self.sectors.pick_start = ['Agriculture', 'Manufactures', 'Services']
+            self.regions.data = [['', '', '', '', '', ]]
+            self.regions.headers = ['pigs', 'prigs2', '', '', '', ]
+            self.regions.pick_start = ['NAFTA', 'EU28', 'Other']
    
     @property
     def agg_store_file(self):
@@ -124,7 +135,7 @@ class DataStore(GtapSets,qtw.QWidget):
            return aggstore
         
     def to_agg_store(self):
-        self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data } }
+        self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data }, 'regions' : {'picks': self.regions.pick_start , 'headers': self.regions.headers,  'data': self.regions.data }}
 
     def to_json_file(self, filename):
         self.to_agg_store()
