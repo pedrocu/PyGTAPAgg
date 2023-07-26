@@ -2537,5 +2537,93 @@
         "Other"
       ]
     ]
+  },
+  "endowments": {
+    "headers": [
+      "pos",
+      "GTAP Code",
+      "Short Name",
+      "Long Description",
+      "Agg Category"
+    ],
+    "picks": [
+      "Skilled",
+      "Unskilled",
+      "Capital",
+      "Land",
+      "NatlRes"
+    ],
+    "data": [
+      [
+        "2",
+        "off_mgr_pros",
+        "Managers and professionals",
+        "Managers, senior officials and Legislators (Major Groups 1), and professionals (Major Group 2)",
+        "Skilled"
+      ],
+      [
+        "3",
+        "tech_aspros",
+        "Associate professionals and Technicians",
+        "Technicians and associate professionals. ICT, health, teachers, engineers, specialized administration, arts, entertainment, design and sport.  (Major Group 3)",
+        "Skilled"
+      ],
+      [
+        "4",
+        "clerks",
+        "Clerks",
+        "Clerical support workers (Major Group 4)",
+        "Unskilled"
+      ],
+      [
+        "5",
+        "service_shop",
+        "Service workers",
+        "Service workers and shop and market sales (Major Group 5)",
+        "Unskilled"
+      ],
+      [
+        "6",
+        "ag_othlowsk",
+        "Trade and agricultural workers",
+        "Skilled agricultural and fishery workers (Major Group 6), craft and related trade workers (Major Group 7), plant and machine operators and assemblers (Major Group 8), and elementary occupations (Major Group 9)",
+        "Unskilled"
+      ],
+      [
+        "1",
+        "Land",
+        "Land",
+        "Land",
+        "Land"
+      ],
+      [
+        "7",
+        "Capital",
+        "Capital",
+        "Capital",
+        "Capital"
+      ],
+      [
+        "9",
+        "NatlRes",
+        "Natural Resources",
+        "Naural Resources",
+        "NatRes"
+      ],
+      [
+        "",
+        "SkLab",
+        "Skilled labor",
+        "Skilled labor",
+        "Skilled"
+      ],
+      [
+        "",
+        "UnskLab",
+        "Unskilled labor",
+        "Skilled labor",
+        "Unskilled"
+      ]
+    ]
   }
 }

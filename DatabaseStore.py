@@ -66,6 +66,8 @@ class DataStore(GtapSets,qtw.QWidget):
 
         self.sectors=TabData()
         self.regions=TabData()
+        self.endowments=TabData()
+        
         
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
             
@@ -74,6 +76,8 @@ class DataStore(GtapSets,qtw.QWidget):
         else:
             self.gtap_source = None
             self.sectors.data = [["", "", "", "", "", "" ]]
+            self.regions.data = [["", "", "", "", "", "" ]]
+            self.endowments.data = [["", "", "", "", ""]]
    
     @property
     def gtap_source(self):
@@ -84,24 +88,35 @@ class DataStore(GtapSets,qtw.QWidget):
     def gtap_source(self, value):
         self._gtap_source=value
         if value != 'NA' and value is not None:
+           
            self.gtap_sectors=self.readin_gtap_sets(value, "H2")
            self.gtap_regions=self.readin_gtap_sets(value, "H1")
-           
+           self.gtap_endowments=self.readin_gtap_sets(value, "H6")
+         
+
            self.sectors.data=self.sectors.make_data(self.gtap_sectors, self.agg_store_data['sectors'])
            self.sectors.pick_start=self.sectors.make_pick_start(self.agg_store_data['sectors'])
            self.sectors.headers = self.sectors.make_headers(self.agg_store_data['sectors']) 
-           self.regions.data=self.sectors.make_data(self.gtap_regions, self.agg_store_data['regions'])
-           self.regions.pick_start=self.sectors.make_pick_start(self.agg_store_data['regions'])
-           self.regions.headers = self.sectors.make_headers(self.agg_store_data['regions']) 
+
+           self.regions.data=self.regions.make_data(self.gtap_regions, self.agg_store_data['regions'])
+           self.regions.pick_start=self.regions.make_pick_start(self.agg_store_data['regions'])
+           self.regions.headers = self.regions.make_headers(self.agg_store_data['regions']) 
+
+           self.endowments.data=self.endowments.make_data(self.gtap_endowments, self.agg_store_data['endowments'])
+           self.endowments.pick_start=self.endowments.make_pick_start(self.agg_store_data['endowments'])
+           self.endowments.headers = self.endowments.make_headers(self.agg_store_data['endowments']) 
            
         else:
             self.gtap_sets=None
-            self.sectors.data = [['', '', '', '', '', ]]
-            self.sectors.headers = ['bugs', 'bugs2', '', '', '', ]
+            self.sectors.data = [['', '', '', '', '' ]]
+            self.sectors.headers = ['pos', 'GTAP Code', 'GTAP Name', 'Long Name', 'Agg Group' ]
             self.sectors.pick_start = ['Agriculture', 'Manufactures', 'Services']
-            self.regions.data = [['', '', '', '', '', ]]
-            self.regions.headers = ['pigs', 'prigs2', '', '', '', ]
+            self.regions.data = [['', '', '', '', '' ]]
+            self.regions.headers = ['pos', 'GTAP Code', 'GTAP Name', 'Long Name', 'Agg Group' ]
             self.regions.pick_start = ['NAFTA', 'EU28', 'Other']
+            self.endowments.data = [['', '', '', '', '' ]]
+            self.endowments.headers = ['pos', 'GTAP Code', 'GTAP Name', 'Long Name', 'Agg Group' ]
+            self.endowments.pick_start = ['Skilled', 'UnSkilled', 'Capital', 'NatlRes']
    
     @property
     def agg_store_file(self):
@@ -135,7 +150,9 @@ class DataStore(GtapSets,qtw.QWidget):
            return aggstore
         
     def to_agg_store(self):
-        self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data }, 'regions' : {'picks': self.regions.pick_start , 'headers': self.regions.headers,  'data': self.regions.data }}
+        self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data }, 
+                             'regions' : {'picks': self.regions.pick_start , 'headers': self.regions.headers,  'data': self.regions.data },
+                             'endowments' : {'picks': self.endowments.pick_start , 'headers': self.endowments.headers,  'data': self.endowments.data }}
 
     def to_json_file(self, filename):
         self.to_agg_store()

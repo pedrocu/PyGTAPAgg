@@ -20,7 +20,6 @@ class Select(qtw.QWidget):
         self._pick_start=pick_start
         self._headers=headers
         self._data=data
-        
         self._model=ItemTableModel(tab_type, self._headers, self._data)
         self._picker_model = qtc.QStringListModel(self._pick_start)
 
@@ -340,13 +339,11 @@ class ItemTableModel(qtc.QAbstractTableModel):
     
     #Required for QTableModel
     def rowCount(self, parent):
-        #print(self._newlist)
-        #print('number of rows ', len(self._newlist))
         return len(self._newlist)
 
     #Required for QTableModel
     def columnCount(self, parent):
-        #print('number of colums ', len(self._headers))
+        print('number of colums ', len(self._headers))
         return len(self._headers)
     
     #Required for QTAbleModel
@@ -438,3 +435,115 @@ class ListDelegate(qtw.QStyledItemDelegate):
         #None expected
     #Methods for saving data
         #TBD
+
+class EndowmentSelect(Select):
+
+    def __init__(self,tab_type, data_store, pick_start, headers, data):
+        super().__init__(tab_type, data_store, pick_start, headers, data)
+        self.parameter_model = EndowmentParameter(pick_start)
+
+        
+        self.parameter_view = qtw.QTableView()
+        self.tableview.setSortingEnabled(True)
+
+        self.parameter_view.setModel(self.parameter_model)
+
+        self.param_box = qtw.QGroupBox('Parameters')
+        self.param_box.setLayout(qtw.QVBoxLayout())
+
+        self.param_box.layout().addWidget(self.parameter_view)
+        self.layout_v1.addWidget(self.param_box)
+        
+        style_sheet=("""QHeaderView::section {background-color:rgb(215, 214, 213)}
+                        QTableCornerButton::section { background-color:rgb(215, 214, 213)}""")
+
+        self.parameter_view.setStyleSheet(style_sheet)
+
+    def additem(self):
+        super().additem()
+        self.line_edit_text.append('')
+        self.parameter_model.insertRows(values=self.line_edit_text)
+    
+    def remove(self):
+        '''remove item in main table and parameter list'''
+        super().remove()
+        for item in self.values:
+            for counter, endow in enumerate(self.parameter_model._newlist):
+                if item == endow[0]: 
+                    to_remove_index=counter
+                    self.parameter_model.removeRow(row=to_remove_index)
+
+    def onetone(self):
+        '''one to one in main table and parameter list'''
+        super().onetone()
+        all_main = set()
+        all_para = set()
+        
+        for i in range(0, self._model.rowCount(None)):
+            abbrev_index=self._model.index(i,1)
+            all_main.add(self._model.data(abbrev_index, qtc.Qt.ItemDataRole.DisplayRole))
+
+        for j in range(0, self.parameter_model.rowCount(None)):
+            abbrev_index=self.parameter_model.index(j,0)
+            all_para.add(self.parameter_model.data(abbrev_index, qtc.Qt.ItemDataRole.DisplayRole))
+
+        'preserve any existing parameters'
+        items_to_add = all_main.difference(all_para)
+        items_to_remove = all_para.difference(all_main)
+        
+        for item in items_to_remove:
+            for counter, endow in enumerate(self.parameter_model._newlist):
+                if item == endow[0]: 
+                    to_remove_index=counter
+                    self.parameter_model.removeRow(row=to_remove_index)
+        
+        for item in items_to_add:
+            self.line_edit_text=[item, '']
+            self.parameter_model.insertRows(values=self.line_edit_text)
+
+    def clearall(self):
+        super().clearall()
+        for counter in range(0,self.parameter_model.rowCount(None)):
+            self.parameter_model.removeRow(row=0)
+
+class EndowmentParameter(ItemTableModel):
+    def __init__(self, pick_start):
+        qtc.QAbstractItemModel.__init__(self)
+        self.start(pick_start)
+        
+    def start(self, pick_start):
+        self.pick_start = pick_start
+        self._headers= ['Abbreviation', 'ETRAE']
+        self._newlist = []
+
+        for item in self.pick_start:
+            if item == 'Skilled': ETRAE = 'mobile'
+            if item == 'Unskilled' : ETRAE = 'mobile'
+            if item == 'Land' : ETRAE = '1'
+            if item == 'Capital' : ETRAE = 'mobile'
+            if item == 'NatlRes' : ETRAE = '0.001'
+            nexitem=[item, ETRAE]
+            self._newlist.append(nexitem)
+    
+    def data(self, index, role):
+        '''reimplemented to remove tooltip role'''
+        if role in (qtc.Qt.ItemDataRole.DisplayRole, qtc.Qt.ItemDataRole.EditRole):
+           return self._newlist[index.row()][index.column()]
+        if role == qtc.Qt.ItemDataRole.BackgroundRole:
+           if self._newlist[index.row()][index.column()] == '':
+               return qtg.QBrush(qtc.Qt.GlobalColor.red)
+        '''removed tool tip role'''
+    
+    def insertRows(self, row=0, rows=1, index=qtc.QModelIndex(), values=['','']):
+       
+        self.beginInsertRows(qtc.QModelIndex(), row, row + rows - 1)
+        for row in range(rows):
+            self._newlist.insert(row, values)
+        self.endInsertRows()
+        return True
+
+    def removeRow(self, row=0, index=qtc.QModelIndex(), values=[]):
+        self.beginRemoveRows(qtc.QModelIndex(), row, row)
+        self._newlist.pop(row)        
+        self.endRemoveRows()
+        return True

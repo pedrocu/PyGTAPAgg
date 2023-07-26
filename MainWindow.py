@@ -26,7 +26,7 @@ class MainWindow(qtw.QMainWindow):
         self.setWindowTitle('GTAP Aggregation Program')
             ##Adjust the mainscren to take up fixed percent of desktop
         
-        self.setFixedSize(my_screen.width()*.5,my_screen.height()*.5)
+        self.setFixedSize(my_screen.width()*.7,my_screen.height()*.7)
 
         ##Main Menu
         menubar = self.menuBar()
@@ -44,8 +44,8 @@ class MainWindow(qtw.QMainWindow):
         about_action = help_menu.addAction('About', self.showAboutDialog)
 
         ##Central Window
-        self.iesc_central_widget = GTAPAggTabs()
-        self.setCentralWidget(self.iesc_central_widget)
+        self.gtap_central_widget = GTAPAggTabs()
+        self.setCentralWidget(self.gtap_central_widget)
 
         self.statusBar().showMessage('Welcome to PyQtAgg for GTAP')
 
@@ -63,7 +63,7 @@ class MainWindow(qtw.QMainWindow):
          sys.exit()
 
     def saveFile(self):
-        self.iesc_central_widget.update_picker()
+        self.gtap_central_widget.update_picker()
         filename, _ = qtw.QFileDialog.getSaveFileName(self,
                                                        "Select the file to save to...",
                                                        "c:\\",
@@ -72,7 +72,7 @@ class MainWindow(qtw.QMainWindow):
         if filename:
             try:
 
-                self.iesc_central_widget.dataStore.to_json_file(filename)
+                self.gtap_central_widget.dataStore.to_json_file(filename)
 
             except Exception as e:
                  #TBD this should be a valid exception
@@ -86,7 +86,7 @@ class MainWindow(qtw.QMainWindow):
         
          if filename:
               
-                   self.iesc_central_widget.dataStore.load_new_agg_file(filename)
+                   self.gtap_central_widget.dataStore.load_new_agg_file(filename)
 
 
 
@@ -122,6 +122,8 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.addTab(self.sectors, 'Sectors')
         self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
         self.addTab(self.regions, 'Regions')
+        self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data)
+        self.addTab(self.endowments, 'Endowments')
 
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
@@ -134,15 +136,20 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.dataStore.update_tabs.connect(self.update_data_tabs)
     
     def update_picker(self):
-         self.dataStore.sector_pick_start=self.sectors._picker_model.stringList()
+         self.dataStore.sectors.pick_start=self.sectors._picker_model.stringList()
+         self.dataStore.regions.pick_start=self.regions._picker_model.stringList()
+         self.dataStore.endowments.pick_start=self.endowments._picker_model.stringList()
         
     def update_data_tabs(self):
+                self.removeTab(1)
                 self.removeTab(1)
                 self.removeTab(1)
                 self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
                 self.addTab(self.sectors, 'Sectors')
                 self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
                 self.addTab(self.regions, 'Regions')
+                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data)
+                self.addTab(self.endowments, 'Endowments')
                 #self.tabBar().moveTab(0,1)
                 #self.sectors.picker_model.setStringList(self.dataStore.sector_pick_start)
                 #self.sectors.headers=self.dataStore.sector_header
