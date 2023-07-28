@@ -11,6 +11,7 @@ from PyQt6 import QtGui as qtg
 import DatabaseWidget as dbwidget
 import selectwidget as slwidget
 import DatabaseStore as store
+import outputwidget as outwidget
 import json
 
 
@@ -124,6 +125,8 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.addTab(self.regions, 'Regions')
         self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data)
         self.addTab(self.endowments, 'Endowments')
+        self.output=outwidget.Output(dataStore=self.dataStore)
+        self.addTab(self.output, 'Output')
 
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']

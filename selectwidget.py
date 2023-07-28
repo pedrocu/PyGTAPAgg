@@ -343,7 +343,7 @@ class ItemTableModel(qtc.QAbstractTableModel):
 
     #Required for QTableModel
     def columnCount(self, parent):
-        print('number of colums ', len(self._headers))
+        #print('number of colums ', len(self._headers))
         return len(self._headers)
     
     #Required for QTAbleModel
