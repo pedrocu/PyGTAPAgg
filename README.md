@@ -1,4 +1,4 @@
-# PyQtGTAPAgg
+# PyGTAPAgg
 GTAP Agg Program in PyQt
 
 ## Activate VENV:
