@@ -73,7 +73,7 @@ class Output(qtw.QWidget):
         self.setLayout(horizontal_layout1)
         
         self.getdirectory=qtw.QPushButton("Set Aggregation Directory", clicked=self.gettarget)
-        self.startbutton=qtw.QPushButton("Run Aggregation", clicked=(lambda : self.makeagg(self.datastore.gtapsource, self.destination_label.text() )))
+        self.startbutton=qtw.QPushButton("Run Aggregation", clicked=(lambda : self.makeagg(self.datastore.gtap_source, self.destination_label.text() )))
         self.newscreenbutton=qtw.QPushButton("New Screen", clicked=self.makescreen)
         
         vertical_layout1.addWidget(self.getdirectory)
@@ -90,7 +90,7 @@ class Output(qtw.QWidget):
         directory = qtw.QFileDialog.getExistingDirectory()
         self.destination_label.setText(directory.replace('/','\\'))
         
-    def makeagg(self, iesc_source, destination_file):
+    def makeagg(self, gtap_source, destination_file):
         #self.iesc_source = iesc_source
         #self.destination_file = destination_file
 
@@ -101,11 +101,11 @@ class Output(qtw.QWidget):
         self.buildhar(destination_file)
 
         #Make CMF files
-        self.paramcmf(iesc_source, destination_file, 'par')
-        self.emisscmf(iesc_source, destination_file, 'emiss')
-        self.gtapvolcmf(iesc_source, destination_file, 'vole')
-        self.gtapviewcmf(iesc_source, destination_file, 'gtpvew')
-        self.gtapsamcmf(iesc_source, destination_file, 'samview')
+        self.paramcmf(gtap_source, destination_file, 'par')
+        self.emisscmf(gtap_source, destination_file, 'emiss')
+        self.gtapvolcmf(gtap_source, destination_file, 'vole')
+        self.gtapviewcmf(gtap_source, destination_file, 'gtpvew')
+        self.gtapsamcmf(gtap_source, destination_file, 'samview')
 
 
         if os.path.exists(destination_file+"\\basedata.har"):
@@ -117,8 +117,8 @@ class Output(qtw.QWidget):
         #self.buildit = AggThread('agghar.exe', iesc_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
         #self.buildit.start()
         
-        self.buildit = AggThread('agghar.exe', iesc_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
-        self.buildit.aggdone.connect(lambda: self.runpostagg(iesc_source, destination_file))
+        self.buildit = AggThread('agghar.exe', gtap_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
+        self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
         self.buildit.read_file.connect(lambda x: self.updatestatusread(x, thread='base_data'))
         #self.buildit.write_file.connect(self.updatestatuswrite)
         #self.buildit.error_file.connect(self.updatestatuserror)
@@ -178,42 +178,42 @@ class Output(qtw.QWidget):
         aggsup= har_file.HarFileObj('{destination}\\aggsup.har'.format(destination=destination_file))
         dset= har_file.HarFileObj('{destination}\\dset.har'.format(destination=destination_file))
         
-        self.makeasets(self.regions, "H1", "REG", aggsup)
-        self.makeasets(self.sectors, "H2", "TRAD_COMM", aggsup)
-        self.makeasets(self.sectors, "H5", "PROD_COMM", aggsup)
-        self.makeasets(self.endowments, "H6","ENDW_COMM", aggsup)
+        self.makeasets(self.datastore.regions.pick_start, "H1", "REG", aggsup)
+        self.makeasets(self.datastore.sectors.pick_start, "H2", "TRAD_COMM", aggsup)
+        self.makeasets(self.datastore.sectors.pick_start, "H5", "PROD_COMM", aggsup)  #prod_comm is different from TRAD_COMM add CGDS for Trad_comm to get prod_Commm
+        self.makeasets(self.datastore.endowments.pick_start, "H6","ENDW_COMM", aggsup)
         self.makeasets(['CGDS'], "H9", "CGDS_COMM", aggsup)
 
-        self.makedsets(self.regions, "DH1", "DREG", aggsup)
-        self.makedsets(self.sectors, "DH2", "TRAD_COMM", aggsup)
-        self.makedsets(self.sectors, "DH5", "DPROD_COMM", aggsup)
-        self.maketrae(self.endowments, "ETRE", "ETRAE", aggsup)
-        self.makedsets(self.endowments, "DH6","DENDW_COMM", aggsup)
+        self.makedsets(self.datastore.regions.data, "DH1", "DREG", aggsup)
+        self.makedsets(self.datastore.sectors.data, "DH2", "TRAD_COMM", aggsup)
+        self.makedsets(self.datastore.sectors.data, "DH5", "DPROD_COMM", aggsup)
+        self.maketrae(self.datastore.endowments.data, "ETRE", "ETRAE", aggsup)
+        self.makedsets(self.datastore.endowments.data, "DH6","DENDW_COMM", aggsup)
         
-        self.makemapping(self.sectors, "MCOM", "TRAD_COMM", aggsup)
-        self.makemapping(self.regions, "MREG", "REG", aggsup)
-        self.makemapping(self.endowments, "MEND", "ENDW_COMM", aggsup)
-        self.makemapping(self.sectors, "MPRD", "PROD_COMM", aggsup)
+        self.makemapping(self.datastore.sectors.data, "MCOM", "TRAD_COMM", aggsup)
+        self.makemapping(self.datastore.regions.data, "MREG", "REG", aggsup)
+        self.makemapping(self.datastore.endowments.data, "MEND", "ENDW_COMM", aggsup)
+        self.makemapping(self.datastore.sectors.data, "MPRD", "PROD_COMM", aggsup)
 
         #used by flex agg
-        self.makedsets(self.regions, "H1", "REG", dset)
-        self.makedsets(self.sectors, "H2", "TRAD_COMM", dset)
-        self.makedsets(self.endowments, "H6","ENDW_COMM", dset)
+        self.makedsets(self.datastore.regions.data, "H1", "REG", dset)
+        self.makedsets(self.datastore.sectors.data, "H2", "TRAD_COMM", dset)
+        self.makedsets(self.datastore.endowments.data, "H6","ENDW_COMM", dset)
         self.makedsets(['CGDS'], "H9", "CGDS_COMM", dset)
 
-        self.makemapping(self.sectors, "DCOM", "TRAD_COMM", aggsup)
-        self.makemapping(self.regions, "DREG", "REG", aggsup)
-        self.makemapping(self.endowments, "DEND", "ENDW_COMM", aggsup)
-        self.makemapping(self.sectors, "MARG", "MARG_COMM", dset)
+        self.makemapping(self.datastore.sectors.data, "DCOM", "TRAD_COMM", aggsup)
+        self.makemapping(self.datastore.regions.data, "DREG", "REG", aggsup)
+        self.makemapping(self.datastore.endowments.data, "DEND", "ENDW_COMM", aggsup)
+        self.makemapping(self.datastore.sectors.data, "MARG", "MARG_COMM", dset)
 
-        self.makeasets(self.sectors, "MARG", "MARG_COMM", aggsup)
+        self.makeasets(self.datastore.sectors.data, "MARG", "MARG_COMM", aggsup)
         
         return 0
 
     def makemapping(self, target, mapname_sht, mapname_lng, har_file):
 
-        data=target.model.newlist
-        data=sorted(data, key=lambda k: k[0])
+        
+        data=sorted(target, key=lambda k: k[0])
         
         #Metrics (if longname not provided)
         last_field=len(data[0])-1
@@ -252,20 +252,23 @@ class Output(qtw.QWidget):
 
         #or specify an object in the QtData model, seee select widget
         else:
-            seta = self.getaggsets(target)
+            seta = target
 
         self.setstuffer(seta, setname_sht, setname_lng, har_file)
 
     def makedsets(self, target, setname_sht, setname_lng, har_file):
         '''makes disggregatedsets'''
+        
         #Take any list
-        if type(target) is list:
+        if type(target[0]) is str:
            set = target
+           
         #or specifiy a QtData Model
         else:
-            data=target.model.newlist
+            data=target
             data=sorted(data, key=lambda k: k[0])
             set = [i[1] for i in data]
+            
 
         self.setstuffer(set, setname_sht, setname_lng, har_file)
 
