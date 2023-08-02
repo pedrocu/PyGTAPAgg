@@ -116,48 +116,48 @@
         "frs",
         "Forestry",
         "Forestry: forestry, logging and related service activities",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         14,
         "fsh",
         "Fishing",
         "Fishing: hunting, trapping and game propagation including related service activities, fishing, fish farms; service activities incidental to fishing",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         15,
         "coa",
         "Coal",
         "Coal: mining and agglomeration of hard coal, lignite and peat",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         16,
         "oil",
         "Oil",
         "Oil: extraction of crude petroleum, service activities incidental to oil and gas extraction excluding surveying (part)",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         17,
         "gas",
         "Gas",
         "Gas: extraction of natural gas, service activities incidental to oil and gas extraction excluding surveying (part)",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         18,
         "oxt",
         "Other Extraction (formerly omn Minerals nec)",
         "Other Mining Extraction (formerly omn): mining of metal ores; other mining and quarrying",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         19,
@@ -268,8 +268,8 @@
         "p_c",
         "Petroleum, coal products",
         "Petroleum & Coke: manufacture of coke and refined petroleum products",
-        "Extractive",
-        "Extractive"
+        "Extraction",
+        "Extraction"
       ],
       [
         33,
@@ -2553,6 +2553,52 @@
       "Land",
       "NatlRes"
     ],
+    "etrae": [
+      [
+        "off_mgr_pros",
+        "mobile"
+      ],
+      [
+        "tech_aspros",
+        "mobile"
+      ],
+      [
+        "clerks",
+        "mobile"
+      ],
+      [
+        "service_shop",
+        "mobile"
+      ],
+      [
+        "ag_othlowsk",
+        "mobile"
+      ],
+      [
+        "Land",
+        "1"
+      ],
+      [
+        "Capital",
+        "mobile"
+      ],
+      [
+        "NatlRes",
+        "0.001"
+      ],
+      [
+        "NatRes",
+        "0.001"
+      ],
+      [
+        "Skilled",
+        "mobile"
+      ],
+      [
+        "Unskilled",
+        "mobile"
+      ]
+    ],
     "data": [
       [
         "2",
@@ -2608,18 +2654,25 @@
         "NatlRes",
         "Natural Resources",
         "Naural Resources",
-        "NatRes"
+        "NatlRes"
+      ],
+       [
+        "9",
+        "NatRes",
+        "Natural Resources",
+        "Naural Resources",
+        "NatlRes"
       ],
       [
         "",
-        "SkLab",
+        "Skilled",
         "Skilled labor",
         "Skilled labor",
         "Skilled"
       ],
       [
         "",
-        "UnskLab",
+        "Unskilled",
         "Unskilled labor",
         "Skilled labor",
         "Unskilled"

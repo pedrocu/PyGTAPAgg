@@ -11,6 +11,7 @@ from PyQt6 import QtGui as qtg
 import DatabaseWidget as dbwidget
 import selectwidget as slwidget
 import DatabaseStore as store
+import outputwidget as outwidget
 import json
 
 
@@ -122,8 +123,10 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.addTab(self.sectors, 'Sectors')
         self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
         self.addTab(self.regions, 'Regions')
-        self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data)
+        self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, self.dataStore.endowments.etrae)
         self.addTab(self.endowments, 'Endowments')
+        self.output=outwidget.Output(dataStore=self.dataStore)
+        self.addTab(self.output, 'Output')
 
 
         #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
@@ -144,12 +147,17 @@ class GTAPAggTabs(qtw.QTabWidget):
                 self.removeTab(1)
                 self.removeTab(1)
                 self.removeTab(1)
+                self.removeTab(1)
                 self.sectors=slwidget.Select('Sectors', self.dataStore, self.dataStore.sectors.pick_start, self.dataStore.sectors.headers, self.dataStore.sectors.data)
                 self.addTab(self.sectors, 'Sectors')
                 self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
                 self.addTab(self.regions, 'Regions')
-                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data)
+                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, self.dataStore.endowments.etrae)
                 self.addTab(self.endowments, 'Endowments')
+                self.output=outwidget.Output(dataStore=self.dataStore)
+                self.addTab(self.output, 'Output')
+
+            
                 #self.tabBar().moveTab(0,1)
                 #self.sectors.picker_model.setStringList(self.dataStore.sector_pick_start)
                 #self.sectors.headers=self.dataStore.sector_header

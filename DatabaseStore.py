@@ -48,6 +48,21 @@ class TabData():
         newdict={x[1]: x for x in agg_store['data']}
         matchlist =  [x+newdict.get(x[1], ['','', '','',''])[2:] for x in sets ]
         return matchlist
+     
+class TabDataEndow(TabData):
+       def __init__(self) -> None:
+           self.etrae = None
+           super().__init__()
+        
+       def make_etrae(self, agg_store):
+           etrae = [x for x in agg_store['etrae'] if x[0] in self.pick_start]
+
+
+           return etrae
+           
+           
+           
+           
     
    
 class DataStore(GtapSets,qtw.QWidget):
@@ -66,7 +81,8 @@ class DataStore(GtapSets,qtw.QWidget):
 
         self.sectors=TabData()
         self.regions=TabData()
-        self.endowments=TabData()
+        self.endowments=TabDataEndow()
+        
         
         
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
@@ -92,6 +108,7 @@ class DataStore(GtapSets,qtw.QWidget):
            self.gtap_sectors=self.readin_gtap_sets(value, "H2")
            self.gtap_regions=self.readin_gtap_sets(value, "H1")
            self.gtap_endowments=self.readin_gtap_sets(value, "H6")
+           #self.gtap_etrae =self.readin_gtap_sets(value, "")
          
 
            self.sectors.data=self.sectors.make_data(self.gtap_sectors, self.agg_store_data['sectors'])
@@ -105,6 +122,8 @@ class DataStore(GtapSets,qtw.QWidget):
            self.endowments.data=self.endowments.make_data(self.gtap_endowments, self.agg_store_data['endowments'])
            self.endowments.pick_start=self.endowments.make_pick_start(self.agg_store_data['endowments'])
            self.endowments.headers = self.endowments.make_headers(self.agg_store_data['endowments']) 
+
+           self.endowments.etrae=self.endowments.make_etrae(self.agg_store_data['endowments'])
            
         else:
             self.gtap_sets=None
@@ -152,7 +171,7 @@ class DataStore(GtapSets,qtw.QWidget):
     def to_agg_store(self):
         self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data }, 
                              'regions' : {'picks': self.regions.pick_start , 'headers': self.regions.headers,  'data': self.regions.data },
-                             'endowments' : {'picks': self.endowments.pick_start , 'headers': self.endowments.headers,  'data': self.endowments.data }}
+                             'endowments' : {'picks': self.endowments.pick_start , 'headers': self.endowments.headers,  'data': self.endowments.data , 'etre' :self.endowments.etrae}}
 
     def to_json_file(self, filename):
         self.to_agg_store()
