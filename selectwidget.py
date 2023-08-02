@@ -301,7 +301,7 @@ class Select(qtw.QWidget):
     
     
 class ItemTableModel(qtc.QAbstractTableModel):
-    """The model for aggregation table"""
+    """The model for aggregation table - the right hand tile"""
 
     def __init__(self, tab_type, headers, data):
         super().__init__()
@@ -394,7 +394,7 @@ class ItemTableModel(qtc.QAbstractTableModel):
             return False
 
 class ListDelegate(qtw.QStyledItemDelegate):
-    '''Custom List Delegate'''
+    '''Custom List Delegate - to make the mouse right click menu'''
     def __init__(self, picker_model):
         super().__init__()
         self.picker_model=picker_model
@@ -438,9 +438,9 @@ class ListDelegate(qtw.QStyledItemDelegate):
 
 class EndowmentSelect(Select):
 
-    def __init__(self,tab_type, data_store, pick_start, headers, data):
+    def __init__(self,tab_type, data_store, pick_start, headers, data, etrae):
         super().__init__(tab_type, data_store, pick_start, headers, data)
-        self.parameter_model = EndowmentParameter(pick_start)
+        self.parameter_model = EndowmentParameter(etrae)
 
         
         self.parameter_view = qtw.QTableView()
@@ -507,23 +507,12 @@ class EndowmentSelect(Select):
             self.parameter_model.removeRow(row=0)
 
 class EndowmentParameter(ItemTableModel):
-    def __init__(self, pick_start):
-        qtc.QAbstractItemModel.__init__(self)
-        self.start(pick_start)
-        
-    def start(self, pick_start):
-        self.pick_start = pick_start
+    def __init__(self, etrae):
+        self._newlist=etrae
         self._headers= ['Abbreviation', 'ETRAE']
-        self._newlist = []
-
-        for item in self.pick_start:
-            if item == 'Skilled': ETRAE = 'mobile'
-            if item == 'Unskilled' : ETRAE = 'mobile'
-            if item == 'Land' : ETRAE = '1'
-            if item == 'Capital' : ETRAE = 'mobile'
-            if item == 'NatlRes' : ETRAE = '0.001'
-            nexitem=[item, ETRAE]
-            self._newlist.append(nexitem)
+        qtc.QAbstractItemModel.__init__(self)
+        #self.start(pick_start)
+   
     
     def data(self, index, role):
         '''reimplemented to remove tooltip role'''

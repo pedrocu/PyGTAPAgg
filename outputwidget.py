@@ -114,14 +114,11 @@ class Output(qtw.QWidget):
         if os.path.exists("output.log"):
             os.remove("output.log")
 
-        #self.buildit = AggThread('agghar.exe', iesc_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
-        #self.buildit.start()
-        
         self.buildit = AggThread('agghar.exe', gtap_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
         self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
         self.buildit.read_file.connect(lambda x: self.updatestatusread(x, thread='base_data'))
-        #self.buildit.write_file.connect(self.updatestatuswrite)
-        #self.buildit.error_file.connect(self.updatestatuserror)
+        # #self.buildit.write_file.connect(self.updatestatuswrite)
+        # #self.buildit.error_file.connect(self.updatestatuserror)
         self.buildit.start()
 
         self.param = AggThread('.\\flexagg\\aggpar.exe', '-cmf', destination_file+'\\par.cmf')
@@ -138,12 +135,32 @@ class Output(qtw.QWidget):
 
         self.vole = AggThread('.\\flexagg\\aggvole.exe', '-cmf', destination_file+'\\vole.cmf')
         self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
-        #self.vole.write_file.connect(self.updatestatuswrite)
-        #self.vole.error_file.connect(self.updatestatuserror)
+        # #self.vole.write_file.connect(self.updatestatuswrite)
+        # #self.vole.error_file.connect(self.updatestatuserror)
         self.vole.start()
+
     
     @qtc.pyqtSlot(str)
     def updatestatusread(self,status, thread):
+        
+        if thread=='base_data':
+            self.mywindow.base_data_text.setText(status)
+        if thread=='param':
+            self.mywindow.param_text.setText(status)
+        if thread=='emiss':
+            self.mywindow.emiss_text.setText(status)
+        if thread == 'vole':
+            self.mywindow.vol_text.setText(status)
+        if thread == 'gtap_view':
+            self.mywindow.gtapView_text.setText(status)
+        if thread == 'sam_view':
+            self.mywindow.gtapSam_text.setText(status) 
+
+        self.mywindow.status_value+= 1.1
+        self.mywindow.bar.setValue(self.mywindow.status_value)
+
+    @qtc.pyqtSlot(str)
+    def updatestatuswrite(self,status, thread):
         if thread=='base_data':
             self.mywindow.base_data_text.setText(status)
         if thread=='param':
@@ -158,17 +175,21 @@ class Output(qtw.QWidget):
     @qtc.pyqtSlot()
     def runpostagg(self, iesc_source, destination_file):
         
-        self.buildview = AggThread(iesc_source+'\\src\\gtpvew.exe', '-cmf', destination_file+'\\gtpvew.cmf')
-        self.buildview.finished.connect(self.buildview.quit)
-        #self.buildview.read_file.connect(self.updatestatusread)
+        self.buildview = AggThread("C:\\Users\\Pedro299\\code\\IESC\\V10a\\2IESCData10\\src\\gtpvew.exe", '-cmf', destination_file+'\\gtpvew.cmf')
+        
+        
+        self.buildview.read_file.connect(lambda x: self.updatestatusread(x, thread='gtap_view'))
         #self.buildview.write_file.connect(self.updatestatuswrite)
         #self.buildview.error_file.connect(self.updatestatuserror)
         self.buildview.start()
+        
+        self.buildview.finished.connect(self.buildview.quit)
+        
 
 
-        self.buildsam = AggThread(iesc_source+'\\src\\samview.exe', '-cmf', destination_file+'\\samview.cmf')
+        self.buildsam = AggThread("C:\\Users\\Pedro299\\code\\IESC\\V10a\\2IESCData10\\src\\gtpvew.exe", '-cmf', destination_file+'\\samview.cmf')
         self.buildsam.finished.connect(self.buildsam.quit)
-        #self.buildsam.read_file.connect(self.updatestatusread)
+        self.buildsam.read_file.connect(lambda x: self.updatestatusread(x, thread='sam_view'))
         #self.buildsam.write_file.connect(self.updatestatuswrite)
         #self.buildsam.error_file.connect(self.updatestatuserror)
         self.buildsam.start()
@@ -184,10 +205,15 @@ class Output(qtw.QWidget):
         self.makeasets(self.datastore.endowments.pick_start, "H6","ENDW_COMM", aggsup)
         self.makeasets(['CGDS'], "H9", "CGDS_COMM", aggsup)
 
+        #Need H7-ENDWS, H8-ENDWM
+        #default.prm - ETRAE, SLUG
+
         self.makedsets(self.datastore.regions.data, "DH1", "DREG", aggsup)
         self.makedsets(self.datastore.sectors.data, "DH2", "TRAD_COMM", aggsup)
         self.makedsets(self.datastore.sectors.data, "DH5", "DPROD_COMM", aggsup)
-        self.maketrae(self.datastore.endowments.data, "ETRE", "ETRAE", aggsup)
+        
+        self.maketrae(self.datastore.endowments, "ETRE", "ETRAE", aggsup)
+        
         self.makedsets(self.datastore.endowments.data, "DH6","DENDW_COMM", aggsup)
         
         self.makemapping(self.datastore.sectors.data, "MCOM", "TRAD_COMM", aggsup)
@@ -207,6 +233,10 @@ class Output(qtw.QWidget):
         self.makemapping(self.datastore.sectors.data, "MARG", "MARG_COMM", dset)
 
         self.makeasets(self.datastore.sectors.data, "MARG", "MARG_COMM", aggsup)
+
+        print('just before sets')
+
+        self.mywindow.sets_text.setText('<b>…DONE<\b>')
         
         return 0
 
@@ -221,7 +251,7 @@ class Output(qtw.QWidget):
         agg_map =  [i[last_field] for i in data]
 
         if mapname_sht == "MARG":
-            agg_map = agg_map[51:54]
+            agg_map = agg_map[51:54]    #Fix this so it pulls otp, atp, wtp
 
         number_agg = len(set(agg_map))
 
@@ -245,7 +275,7 @@ class Output(qtw.QWidget):
         '''makes aggregated sets'''
 
         #Take any list
-        if type(target) is list:
+        if type(target) is list and setname_sht != 'MARG':
            seta = target
         elif setname_sht == "MARG":
             seta=self.getaggmarg(target)
@@ -275,21 +305,26 @@ class Output(qtw.QWidget):
     def maketrae(self, target, setname_sht, setname_lng, har_file):
         '''makes ETRAE sets'''
         #Take any list
-        if type(target) is list:
+        
+
+        if type(target.etrae[0]) is str:
            set = target
         #or specifiy a QtData Model
+           
         else:
-            data=target.parameter_model.newlist
-            sort_list=self.getaggsets(target)
-            #Mmale sure the data are sorted by the picklist
+            data=target.etrae
+            sort_list=target.pick_start
+            #Make sure the data are sorted by the picklist
             data.sort(key=lambda i: sort_list.index(i[0]))
             set_1 = [0 if i[1] == 'mobile' else i[1] for i in data]
             set_1 = [float(i) for i in set_1]
+        
             set = np.array([set_1], dtype=np.float32)
             
             #Create SLUG bases on values given
             slug= [0 if i == 'mobile' else 1 for i in [i[1] for i in data]]
             self.setstuffer(slug, 'SLUG', 'Sluggish Endowments', har_file)
+        
         
         self.setstuffer(set, setname_sht, setname_lng, har_file)
      
@@ -313,59 +348,128 @@ class Output(qtw.QWidget):
         return myaset
     
     def getaggmarg(self, target):
-        data=target.model.newlist
+        data=target
         data=sorted(data, key=lambda k: k[0])
         last_field=len(data[0])-1
          
         my_a_marg =  [i[last_field] for i in data]
-        my_a_marg =  list(set(my_a_marg[51:55]))
+        my_a_marg =  list(set(my_a_marg[51:55]))      #This should be otp, wtp, atp not positions in dataset
 
         return my_a_marg
 
     @makeaggcmf 
-    def paramcmf(self, base_iesc, agg_iesc, file_name):
+    def paramcmf(self, base_gtap, agg_gtap, file_name):
         '''Make parameter cmf file'''
 
-        insert_1 = 'file  DPARAM =  {base}\\default.prm;\n'.format(base=base_iesc)
-        insert_2 = 'file  EPARAM =   {agg}\\aggsup.har;\n'.format(agg=agg_iesc)
-        insert_3 = 'file  PARAM = {agg}\\{file}.har;\n'.format(agg=agg_iesc, file=file_name)
-        insert_4 = 'file  DDATA= {base}\\basedata.har;\n'.format(base=base_iesc)
+        insert_1 = 'file  DPARAM =  {base}\\par.har;\n'.format(base=base_gtap)
+        insert_2 = 'file  EPARAM =   {agg}\\aggsup.har;\n'.format(agg=agg_gtap)
+        insert_3 = 'file  PARAM = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name)
+        insert_4 = 'file  DDATA= {base}\\basedata.har;\n'.format(base=base_gtap)
 
         return (insert_1, insert_2, insert_3, insert_4)  
 
     @makeaggcmf
-    def emisscmf(self, base_iesc, agg_iesc, file_name):
+    def emisscmf(self, base_gtap, agg_gtap, file_name):
         '''make emissions cmf'''
-        insert_1 = 'file  EMISS = {agg}\\{file}.har;\n'.format(agg=agg_iesc, file=file_name) 
-        insert_2 = 'file  DDATA= {base}\\{file}.har;\n'.format(base=base_iesc, file=file_name)
+        insert_1 = 'file  EMISS = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name) 
+        insert_2 = 'file  DDATA= {base}\\{file}.har;\n'.format(base=base_gtap, file=file_name)
 
         return (insert_1, insert_2)
 
     @makeaggcmf
-    def gtapvolcmf(self, base_iesc, agg_iesc, file_name):
+    def gtapvolcmf(self, base_gtap, agg_gtap, file_name):
         '''make energy volume cmf'''
-        insert_1 = 'file  EGYVOL = {agg}\\{file}.har;\n'.format(agg=agg_iesc, file=file_name) 
-        insert_2 = 'file  DDATA= {base}\\{file}.har;\n'.format(base=base_iesc, file=file_name)
+        insert_1 = 'file  EGYVOL = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name) 
+        insert_2 = 'file  DDATA= {base}\\{file}.har;\n'.format(base=base_gtap, file=file_name)
 
         return (insert_1, insert_2)
 
     @makeauxcmf
-    def gtapviewcmf(self, base_iesc, agg_iesc, file_name):
+    def gtapviewcmf(self, base_gtap, agg_gtap, file_name):
         '''gtap view'''
-        insert_1 = 'file GTAPVIEW = {agg}\\baseview.har;\n'.format(agg=agg_iesc)
-        insert_2 = 'file TAXRATES = {agg}\\baserate.har;\n'.format(agg=agg_iesc)
+        insert_1 = 'file GTAPVIEW = {agg}\\baseview.har;\n'.format(agg=agg_gtap)
+        insert_2 = 'file TAXRATES = {agg}\\baserate.har;\n'.format(agg=agg_gtap)
 
         return (insert_1, insert_2)
 
     @makeauxcmf
-    def gtapsamcmf(self, base_iesc, agg_iesc, file_name):
+    def gtapsamcmf(self, base_gtap, agg_gtap, file_name):
         '''gtap same'''
-        insert_1 = 'file GTAPSAM = {agg}\\GTAPsam.har;\n'.format(agg=agg_iesc)
+        insert_1 = 'file GTAPSAM = {agg}\\GTAPsam.har;\n'.format(agg=agg_gtap)
         
         return (insert_1)
     
+class AggThread(qtc.QThread):
+    aggdone    = qtc.pyqtSignal()
+    read_file  = qtc.pyqtSignal(str, str)
+    write_file = qtc.pyqtSignal(str,str)
+    error_file = qtc.pyqtSignal(str,str)
+
+    def __init__(self, *args):
+        self.args=args
+        super().__init__()
+
+    def run(self):
+        print("here are the args to run: ", self.args)
+        if os.path.exists(self.args[0]):
+            p=subprocess.Popen(self.args, 
+                            stdout=subprocess.PIPE,
+                            encoding='UTF-8')
+        else:
+            print('file not found:  ' , self.args[0])
+        print('my args: ', self.args)
+        self.read_file.emit('<b>Initilizing…<\b>', self.args[0])
+        self.write_file.emit('<b>Initilizing…<\b>', self.args[0])
+        
+
+        #Write to log and to the interface
+
+        with open('output' + '.log', 'a') as log:
+        
+            while p.poll() is None:
+                outdata=p.stdout.readline()
+                my_match=re.search(r'(.*)Reading(.*)', outdata, re.M|re.I)
+                if my_match:
+                    self.read_file.emit(my_match.group(0), self.args[0])
+                
+                my_match=re.search(r'(.*)Writing(.*)', outdata, re.M|re.I)
+                if my_match:
+                   self.write_file.emit(my_match.group(0), self.args[0])
+
+                my_match=re.search(r'(.*)Error(.*)', outdata, re.M|re.I)
+                if my_match:
+                    self.error_file.emit(my_match.group(0), self.args[0])
+
+                my_match=re.search(r'(.*)Warning(.*)', outdata, re.M|re.I)
+                if my_match:
+                    self.error_file.emit(my_match.group(0), self.args[0])
+ 
+                log.write(outdata)
+                
+        
+        self.read_file.emit('<b>…DONE<\b>', self.args[0])
+        self.write_file.emit('<b>…DONE<\b>', self.args[0])
+        
+        self.aggdone.emit()
+class AggHar(qtc.QObject):
+    aggdone=qtc.pyqtSignal()
+
+    def __init__(self, *args):
+        
+        self.args=args
+        super().__init__()
+        
+
+        p=subprocess.Popen(self.args, encoding='UTF-8')
+        p.wait()
+        
+
+        self.aggdone.emit()
+    
 class PopUpWindow(qtw.QWidget):
     def __init__(self):
+        self.status_value = 0
+
         super().__init__(None, modal=True)
 
         self.my_grid=qtw.QGridLayout()
@@ -397,8 +501,8 @@ class PopUpWindow(qtw.QWidget):
         self.vol_text=qtw.QLabel('Not executed... ')
         self.emiss_text=qtw.QLabel('Not executed... ')
 
-        self.terminate_button=qtw.QPushButton('Terminate')
-        self.close_button=qtw.QPushButton('Close')
+        self.terminate_button=qtw.QPushButton('Terminate', self)
+        self.close_button=qtw.QPushButton('Close', self)
     
         self.my_grid.addWidget(self.bar_label,0,0)
         self.my_grid.addWidget(self.bar, 1,0,1,3)
@@ -427,4 +531,9 @@ class PopUpWindow(qtw.QWidget):
         self.my_grid.addWidget(self.terminate_button,10,1)
         self.my_grid.addWidget(self.close_button, 10,2)
 
+        self.close_button.clicked.connect(lambda: self.close())
+
         self.show()
+
+    def shut_me(self):
+        self.close()
