@@ -57,16 +57,25 @@ class Output(qtw.QWidget):
         horizontal_layout1 = qtw.QHBoxLayout()
 
         vertical_layout1 = qtw.QVBoxLayout()
-        vertical_layout1.setContentsMargins(10, 20, 200, 11)
+        vertical_layout1.setContentsMargins(10, 20, 50, 11)
+
+        vertical_layout2 = qtw.QVBoxLayout()
+        vertical_layout2.setContentsMargins(10, 20, 50, 11)
+
+        vertical_layout3 = qtw.QVBoxLayout()
+        vertical_layout3.setContentsMargins(10, 20, 50, 11)
 
         vertical_layout2 = qtw.QVBoxLayout()
        
         info_form = qtw.QFormLayout()
-        self.destination_label = qtw.QLabel('N\\A')
-        info_form.addRow("Target Directory for Aggrigation Files:", self.destination_label)
+        
+        self.destination_label = qtw.QLabel('<b> N\\A <\b>')
+        info_form.addRow("<b>Target Directory for Aggrigation Files:</b>", self.destination_label)
         vertical_layout2.addLayout(info_form)
         
+        horizontal_layout1.addLayout(vertical_layout2)
         horizontal_layout1.addLayout(vertical_layout1)
+        horizontal_layout1.addLayout(vertical_layout3)
                 
         
        
@@ -74,11 +83,11 @@ class Output(qtw.QWidget):
         
         self.getdirectory=qtw.QPushButton("Set Aggregation Directory", clicked=self.gettarget)
         self.startbutton=qtw.QPushButton("Run Aggregation", clicked=(lambda : self.makeagg(self.datastore.gtap_source, self.destination_label.text() )))
-        self.newscreenbutton=qtw.QPushButton("New Screen", clicked=self.makescreen)
+        
         
         vertical_layout1.addWidget(self.getdirectory)
         vertical_layout1.addWidget(self.startbutton)
-        vertical_layout1.addWidget(self.newscreenbutton)
+        #vertical_layout1.addWidget(self.newscreenbutton)
         self.new_gtap=self.destination_label.text()
 
     #slot
@@ -156,7 +165,7 @@ class Output(qtw.QWidget):
         if thread == 'sam_view':
             self.mywindow.gtapSam_text.setText(status) 
 
-        self.mywindow.status_value+= 1.1
+        self.mywindow.status_value+= 1.2
         self.mywindow.bar.setValue(self.mywindow.status_value)
 
     @qtc.pyqtSlot(str)
