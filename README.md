@@ -1,6 +1,8 @@
 # PyGTAPAgg
 GTAP Agg Program in PyQt
 
-## Activate VENV:
-	* .\venv\Scripts\Activate
-	
+## Install
+### requirements.txt file with pip
+
+## Run
+### pyGTAPAgg.py at command line
