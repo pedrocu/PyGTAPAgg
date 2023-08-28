@@ -17,10 +17,14 @@ def getdbversize(gtap, source) -> tuple:
         gtap_num_sect=gtap_sets['H2'].array.size
         gtap_num_endow=gtap_sets['H6'].array.size
 
-        #qtc.QCoreApplication.setOrganizationName("ImpactECON")
-        #qtc.QCoreApplication.setOrganizationDomain("impactecon.com")
-        #qtc.QCoreApplication.setOrganizationName("PyGTAPAgg")
-        
+        ''' if gtap_base['DREL'].array.size == 3:
+            print("stop2")
+            #Done this way to be consistent with all versions of GTAP earlier then V11.
+            gtap_ver_num = gtap_base['DREL'].array[0] + '_' + gtap_base['DREL'].array[1] + '_' + gtap_base['DREL'].array[2]
+        else:
+            print("stop3")
+            #This is the way all the version before 11 were formatted
+            gtap_ver_num=str(gtap_base['DREL'].array[0])    '''
         
         settings.setValue('indir', gtap)
         

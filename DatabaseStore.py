@@ -60,10 +60,7 @@ class TabDataEndow(TabData):
 
            return etrae
            
-           
-           
-           
-    
+
    
 class DataStore(GtapSets,qtw.QWidget):
     update_tabs=qtc.pyqtSignal(str)
@@ -91,9 +88,9 @@ class DataStore(GtapSets,qtw.QWidget):
            
         else:
             self.gtap_source = None
-            self.sectors.data = [["", "", "", "", "", "" ]]
-            self.regions.data = [["", "", "", "", "", "" ]]
-            self.endowments.data = [["", "", "", "", ""]]
+            self.sectors.data =    [["", "", "", "", "", "" ]]
+            self.regions.data =    [["", "", "", "", "", "" ]]
+            self.endowments.data = [["", "", "", "", "", "" ]]
    
     @property
     def gtap_source(self):
@@ -136,6 +133,7 @@ class DataStore(GtapSets,qtw.QWidget):
             self.endowments.data = [['', '', '', '', '' ]]
             self.endowments.headers = ['pos', 'GTAP Code', 'GTAP Name', 'Long Name', 'Agg Group' ]
             self.endowments.pick_start = ['Skilled', 'UnSkilled', 'Capital', 'NatlRes']
+            
    
     @property
     def agg_store_file(self):
