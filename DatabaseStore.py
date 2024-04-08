@@ -67,7 +67,8 @@ class DataStore(GtapSets,qtw.QWidget):
 
     def __init__(self, agg_store_file="defaults.json"):
         super().__init__()
-
+        
+        'This is where the settings for the program are written to persist across sessions'
         qtc.QCoreApplication.setOrganizationName("ImpactECON")
         qtc.QCoreApplication.setOrganizationDomain("impactecon.com")
         qtc.QCoreApplication.setOrganizationName("PyGTAPAgg")
@@ -80,8 +81,7 @@ class DataStore(GtapSets,qtw.QWidget):
         self.regions=TabData()
         self.endowments=TabDataEndow()
         
-        
-        
+                              
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
             
             self.gtap_source=self.settings.value('indir')
@@ -133,6 +133,7 @@ class DataStore(GtapSets,qtw.QWidget):
             self.endowments.data = [['', '', '', '', '' ]]
             self.endowments.headers = ['pos', 'GTAP Code', 'GTAP Name', 'Long Name', 'Agg Group' ]
             self.endowments.pick_start = ['Skilled', 'UnSkilled', 'Capital', 'NatlRes']
+            self.endowments.etrae=[['', '']]
             
    
     @property

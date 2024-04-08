@@ -310,7 +310,8 @@ class ItemTableModel(qtc.QAbstractTableModel):
     def start(self, tab_type, headers, data):
         ''''__init__ code'''
         self._headers=headers             
-        self._newlist = data    
+        self._newlist = data
+            
         
         #data=self.load(tab_type)
         
@@ -440,6 +441,7 @@ class EndowmentSelect(Select):
 
     def __init__(self,tab_type, data_store, pick_start, headers, data, etrae):
         super().__init__(tab_type, data_store, pick_start, headers, data)
+        
         self.parameter_model = EndowmentParameter(etrae)
 
         

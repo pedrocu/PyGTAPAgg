@@ -152,7 +152,7 @@ class GTAPAggTabs(qtw.QTabWidget):
                 self.addTab(self.sectors, 'Sectors')
                 self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
                 self.addTab(self.regions, 'Regions')
-                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, self.dataStore.endowments.etrae)
+                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, [self.dataStore.endowments.etrae])
                 self.addTab(self.endowments, 'Endowments')
                 self.output=outwidget.Output(dataStore=self.dataStore)
                 self.addTab(self.output, 'Output')
