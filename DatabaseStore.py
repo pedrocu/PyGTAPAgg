@@ -18,7 +18,7 @@ class GtapSets():
         return super().__setattr__(name, value)
 
     def readin_gtap_sets(self, dir, header):
-        InFile=HarFileObj(dir+"\\sets.har")
+        InFile=HarFileObj(dir+"\\gsdset.har")
         DataHead=InFile[header]
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
         newlist = []

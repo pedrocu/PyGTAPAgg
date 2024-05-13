@@ -9,14 +9,15 @@ def getdbversize(gtap, source) -> tuple:
 
     '''takes directory for GTAP and returns a tuple with discriptive data'''
     try:
-        gtap_base=har_file.HarFileObj(gtap+source)
-        gtap_sets=har_file.HarFileObj(gtap+ '\\sets.har')
-        
-        gtap_ver_num=str(gtap_base['DREL'].array[0])
+        gtap_base=har_file.HarFileObj(gtap+'\\gsddat.har')
+        gtap_sets=har_file.HarFileObj(gtap+'\\gsdset.har')
+        gtap_ver_num=(str(gtap_base['DREL'].array[0]), gtap_base['DREL'].array[1], gtap_base['DREL'].array[2])
         gtap_num_reg=gtap_sets['H1'].array.size
         gtap_num_sect=gtap_sets['H2'].array.size
         gtap_num_endow=gtap_sets['H6'].array.size
-
+        
+        
+       
         ''' if gtap_base['DREL'].array.size == 3:
             print("stop2")
             #Done this way to be consistent with all versions of GTAP earlier then V11.
@@ -29,7 +30,7 @@ def getdbversize(gtap, source) -> tuple:
         settings.setValue('indir', gtap)
         
 
-        #print(settings.value('indir'))
+       
 
     except Exception as error:
         execute_problem=qtw.QMessageBox()

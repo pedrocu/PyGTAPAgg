@@ -80,14 +80,15 @@ class Databases(qtw.QWidget):
 
     def getdbinfo(self, dir):
         
-        gtap_info=helpers.getdbversize(dir.replace('/','\\'), '\\basedata.har')  #Can change here to work with flexagg, getdbverssize checks for valid database
+        gtap_info=helpers.getdbversize(dir.replace('/','\\'), '\\gsddata.har')  #Can change here to work with flexagg, getdbverssize checks for valid database
+        print(gtap_info)
         self.splitverinfo(gtap_info)
 
     def splitverinfo(self, gtap_info):
         '''gets info from premake (input) data and unwraps and updates main version data screen'''
         
         gtap, gtap_ver_info, gtap_num_reg, gtap_num_sect, gtap_num_endow =gtap_info
-        gtap_version = str(gtap_ver_info).split("_")
+        gtap_version = gtap_ver_info
         
         self.version_label0.setText(str(gtap))
         self.version_label1.setText(gtap_version[0])

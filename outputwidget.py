@@ -129,23 +129,23 @@ class Output(qtw.QWidget):
         #elf.buildit.error_file.connect(self.updatestatuserror)
         self.buildit.start()
 
-        self.param = AggThread('.\\flexagg\\aggpar.exe', '-cmf', destination_file+'\\par.cmf')
-        self.param.read_file.connect(lambda x: self.updatestatusread(x, thread='param'))
+        #self.param = AggThread('.\\flexagg\\aggpar.exe', '-cmf', destination_file+'\\par.cmf')
+        #self.param.read_file.connect(lambda x: self.updatestatusread(x, thread='param'))
         #self.param.write_file.connect(self.updatestatuswrite)
         #self.param.error_file.connect(self.updatestatuserror)
-        self.param.start() 
+        #self.param.start() 
 
-        self.emiss = AggThread('.\\flexagg\\aggemiss.exe', '-cmf', destination_file+'\\emiss.cmf')
-        self.emiss.read_file.connect(lambda x: self.updatestatusread(x, thread='emiss'))
+        #self.emiss = AggThread('.\\flexagg\\aggemiss.exe', '-cmf', destination_file+'\\emiss.cmf')
+        #self.emiss.read_file.connect(lambda x: self.updatestatusread(x, thread='emiss'))
         #self.emiss.write_file.connect(self.updatestatuswrite)
         #self.emiss.error_file.connect(self.updatestatuserror)
-        self.emiss.start()
+        #self.emiss.start()
 
-        self.vole = AggThread('.\\flexagg\\aggvole.exe', '-cmf', destination_file+'\\vole.cmf')
-        self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
+        #self.vole = AggThread('.\\flexagg\\aggvole.exe', '-cmf', destination_file+'\\vole.cmf')
+        #self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
         # #self.vole.write_file.connect(self.updatestatuswrite)
         # #self.vole.error_file.connect(self.updatestatuserror)
-        self.vole.start()
+        #self.vole.start()
 
     
     @qtc.pyqtSlot(str)
