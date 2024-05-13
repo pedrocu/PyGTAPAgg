@@ -5,7 +5,7 @@ from harpy import har_file, header_array
 import numpy as np
 
 def getdbversize(gtap, source) -> tuple:
-    settings = qtc.QSettings()
+    settings=qtc.QSettings("ImpactECON","PyGTAPAgg")
 
     '''takes directory for GTAP and returns a tuple with discriptive data'''
     try:

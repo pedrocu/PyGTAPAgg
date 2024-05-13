@@ -71,8 +71,9 @@ class DataStore(GtapSets,qtw.QWidget):
         'This is where the settings for the program are written to persist across sessions'
         qtc.QCoreApplication.setOrganizationName("ImpactECON")
         qtc.QCoreApplication.setOrganizationDomain("impactecon.com")
-        qtc.QCoreApplication.setOrganizationName("PyGTAPAgg")
-        self.settings=qtc.QSettings()
+        qtc.QCoreApplication.setApplicationName("PyGTAPAgg")
+        self.settings=qtc.QSettings("ImpactECON","PyGTAPAgg")
+        
            
         self.agg_store_file= agg_store_file
         self.agg_store_data=self.load_aggstore(self.agg_store_file)

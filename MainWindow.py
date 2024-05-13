@@ -27,7 +27,7 @@ class MainWindow(qtw.QMainWindow):
         self.setWindowTitle('GTAP Aggregation Program')
             ##Adjust the mainscren to take up fixed percent of desktop
         
-        self.setFixedSize(my_screen.width()*.7,my_screen.height()*.7)
+        self.setFixedSize(my_screen.width()*.6,my_screen.height()*.6)
 
         ##Main Menu
         menubar = self.menuBar()
@@ -48,12 +48,12 @@ class MainWindow(qtw.QMainWindow):
         self.gtap_central_widget = GTAPAggTabs()
         self.setCentralWidget(self.gtap_central_widget)
 
-        self.statusBar().showMessage('Welcome to PyQtAgg for GTAP')
+        self.statusBar().showMessage('Welcome to PyGTAPAgg for GTAP')
 
         self.show()
 
     def showAboutDialog(self):
-        qtw.QMessageBox.about(self, "About PyQt GTAPAgg", """PyQtAgg Aggregates the GTAP Database
+        qtw.QMessageBox.about(self, "About PyGTAPAgg", """PyGTAPAgg Aggregates the GTAP Database
                               
                               Developed by Peter Minor, ImpactECON, LLC
                               https://impactecon.com
@@ -152,7 +152,7 @@ class GTAPAggTabs(qtw.QTabWidget):
                 self.addTab(self.sectors, 'Sectors')
                 self.regions=slwidget.Select('Regions', self.dataStore, self.dataStore.regions.pick_start, self.dataStore.regions.headers, self.dataStore.regions.data)
                 self.addTab(self.regions, 'Regions')
-                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, [self.dataStore.endowments.etrae])
+                self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, self.dataStore.endowments.etrae)
                 self.addTab(self.endowments, 'Endowments')
                 self.output=outwidget.Output(dataStore=self.dataStore)
                 self.addTab(self.output, 'Output')

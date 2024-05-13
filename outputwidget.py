@@ -119,15 +119,14 @@ class Output(qtw.QWidget):
 
         if os.path.exists(destination_file+"\\basedata.har"):
             os.remove(destination_file+"\\basedata.har")
-
         if os.path.exists("output.log"):
             os.remove("output.log")
 
         self.buildit = AggThread('agghar.exe', gtap_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
         self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
         self.buildit.read_file.connect(lambda x: self.updatestatusread(x, thread='base_data'))
-        # #self.buildit.write_file.connect(self.updatestatuswrite)
-        # #self.buildit.error_file.connect(self.updatestatuserror)
+        #self.buildit.write_file.connect(self.updatestatuswrite)
+        #elf.buildit.error_file.connect(self.updatestatuserror)
         self.buildit.start()
 
         self.param = AggThread('.\\flexagg\\aggpar.exe', '-cmf', destination_file+'\\par.cmf')
@@ -370,7 +369,7 @@ class Output(qtw.QWidget):
     def paramcmf(self, base_gtap, agg_gtap, file_name):
         '''Make parameter cmf file'''
 
-        insert_1 = 'file  DPARAM =  {base}\\par.har;\n'.format(base=base_gtap)
+        insert_1 = 'file  DPARAM =  {base}\\default.prm;\n'.format(base=base_gtap)
         insert_2 = 'file  EPARAM =   {agg}\\aggsup.har;\n'.format(agg=agg_gtap)
         insert_3 = 'file  PARAM = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name)
         insert_4 = 'file  DDATA= {base}\\basedata.har;\n'.format(base=base_gtap)
