@@ -107,7 +107,10 @@ class DataStore(GtapSets,qtw.QWidget):
            self.gtap_regions=self.readin_gtap_sets(value, "H1")
            self.gtap_endowments=self.readin_gtap_sets(value, "H6")
            #self.gtap_etrae =self.readin_gtap_sets(value, "")
-         
+           self.gtap_TARS=[i[1] for i in self.readin_gtap_sets(value, "TARS")]
+           self.gtap_TARL=[i[1] for i in self.readin_gtap_sets(value, "TARL")]
+           
+            
 
            self.sectors.data=self.sectors.make_data(self.gtap_sectors, self.agg_store_data['sectors'])
            self.sectors.pick_start=self.sectors.make_pick_start(self.agg_store_data['sectors'])

@@ -215,6 +215,8 @@ class Output(qtw.QWidget):
         self.makeasets(self.datastore.sectors.pick_start, "H5", "PROD_COMM", aggsup)  #prod_comm is different from TRAD_COMM add CGDS for Trad_comm to get prod_Commm
         self.makeasets(self.datastore.endowments.pick_start, "H6","ENDW_COMM", aggsup)
         self.makeasets(['CGDS'], "H9", "CGDS_COMM", aggsup)
+        self.makeasets(self.datastore.gtap_TARS, "TARS","Tariff componenets", aggsup)
+        self.makeasets(self.datastore.gtap_TARL, "TARL","Long name tariff componenets", aggsup)
 
         #Need H7-ENDWS, H8-ENDWM
         #default.prm - ETRAE, SLUG
@@ -244,8 +246,6 @@ class Output(qtw.QWidget):
         self.makemapping(self.datastore.sectors.data, "MARG", "MARG_COMM", dset)
 
         self.makeasets(self.datastore.sectors.data, "MARG", "MARG_COMM", aggsup)
-
-        print('just before sets')
 
         self.mywindow.sets_text.setText('<b>…DONE<\b>')
         
