@@ -7,14 +7,14 @@ import numpy as np
 import subprocess 
 import os 
 import re
-
+import traceback
 def makeaggcmf(aggart):
         '''decoraotor for wrapping cmf files for final aggrigation progarm'''
         def inner(self, base_gtap, agg_gtap, file_name):
             cmf_file = open('{agg}\\{file}.cmf'.format(agg=agg_gtap, file=file_name), 'w+')
             cmf_file.write('check-on-read elements = no;\n')
-            cmf_file.write('aux files = src\\agg{file};\n'.format(file=file_name)) 
-            cmf_file.write('file DSETS = {base}\\sets.har;\n'.format(base=base_gtap))
+            cmf_file.write('aux files = agg{file};\n'.format(file=file_name)) 
+            cmf_file.write('file DSETS = {base}\\gsdset.har;\n'.format(base=base_gtap))
             cmf_file.write('file ASETS = {agg}\\aggsup.har;\n'.format(agg=agg_gtap))
             
             add_these=aggart(self, base_gtap, agg_gtap, file_name)
@@ -31,7 +31,7 @@ def makeauxcmf(aggart):
     def inner(self, base_gtap, agg_gtap, file_name):
             cmf_file = open('{agg}\\{file}.cmf'.format(agg=agg_gtap, file=file_name), 'w+')
             cmf_file.write('check-on-read elements = no;\n')
-            cmf_file.write('aux files = {base}\\src\\{file};\n'.format(base=base_gtap, file=file_name)) 
+            cmf_file.write('aux files = {base}\\{file};\n'.format(base=base_gtap, file=file_name)) 
             cmf_file.write('file GTAPDATA = {agg}\\basedata.har;\n'.format(agg=agg_gtap))
             cmf_file.write('file GTAPSETS = {agg}\\aggsup.har;\n'.format(agg=agg_gtap))
             cmf_file.write('file GTAPPARM = {agg}\\par.har;\n'.format(agg=agg_gtap))
@@ -122,8 +122,8 @@ class Output(qtw.QWidget):
         if os.path.exists("output.log"):
             os.remove("output.log")
 
-        self.buildit = AggThread('agghar.exe', gtap_source+'\\basedata.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
-        self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
+        self.buildit = AggThread(gtap_source+'\\agghar.exe', gtap_source+'\\gsddat.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
+        #self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
         self.buildit.read_file.connect(lambda x: self.updatestatusread(x, thread='base_data'))
         #self.buildit.write_file.connect(self.updatestatuswrite)
         #elf.buildit.error_file.connect(self.updatestatuserror)
@@ -253,10 +253,14 @@ class Output(qtw.QWidget):
         
         data=sorted(target, key=lambda k: k[0])
         
+        
         #Metrics (if longname not provided)
         last_field=len(data[0])-1
         
+        
         agg_map =  [i[last_field] for i in data]
+       
+        
 
         if mapname_sht == "MARG":
             agg_map = agg_map[51:54]    #Fix this so it pulls otp, atp, wtp
@@ -424,6 +428,8 @@ class AggThread(qtc.QThread):
                             stdout=subprocess.PIPE,
                             encoding='UTF-8')
         else:
+            cwd = os.getcwd()
+            print(cwd)
             print('file not found:  ' , self.args[0])
         print('my args: ', self.args)
         self.read_file.emit('<b>Initilizing…<\b>', self.args[0])

@@ -41,7 +41,7 @@ def getdbversize(gtap, source) -> tuple:
         execute_problem.setWindowModality(qtc.Qt.WindowModality.WindowModal)
         execute_problem.exec()
         iesc_dat = ['NA']*5
-        iesc_dat[1] = 'NA_NA_NA'
+        iesc_dat[1] = ('NA','NA', 'NA')
         settings.setValue('indir', None)
         return iesc_dat
 
