@@ -144,8 +144,8 @@ class Output(qtw.QWidget):
         #self.emiss.error_file.connect(self.updatestatuserror)
         self.emiss.start()
 
-        #self.vole = AggThread('.\\flexagg\\aggvole.exe', '-cmf', destination_file+'\\vole.cmf')
-        #self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
+        self.vole = AggThread(gtap_source + '\\aggvole.exe', '-cmf', destination_file+'\\vole.cmf')
+        self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
         # #self.vole.write_file.connect(self.updatestatuswrite)
         # #self.vole.error_file.connect(self.updatestatuserror)
         #self.vole.start()
@@ -394,7 +394,7 @@ class Output(qtw.QWidget):
     def gtapvolcmf(self, base_gtap, agg_gtap, file_name):
         '''make energy volume cmf'''
         insert_1 = 'file  EGYVOL = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name) 
-        insert_2 = 'file  DDATA= {base}\\{file}.har;\n'.format(base=base_gtap, file=file_name)
+        insert_2 = 'file  DDATA= {base}\\gsdvole.har;\n'.format(base=base_gtap, file=file_name)
 
         return (insert_1, insert_2)
 
