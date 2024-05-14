@@ -132,17 +132,17 @@ class Output(qtw.QWidget):
         self.buildit.start()
         
 
-        self.param = AggThread(gtap_source+"\\aggpar.exe", '-cmf', destination_file+'\\par.cmf')
+        self.param = AggThread(gtap_source + "\\aggpar.exe", '-cmf', destination_file+'\\par.cmf')
         self.param.read_file.connect(lambda x: self.updatestatusread(x, thread='param'))
         #self.param.write_file.connect(self.updatestatuswrite)
         #self.param.error_file.connect(self.updatestatuserror)
         self.param.start() 
 
-        #self.emiss = AggThread('.\\flexagg\\aggemiss.exe', '-cmf', destination_file+'\\emiss.cmf')
-        #self.emiss.read_file.connect(lambda x: self.updatestatusread(x, thread='emiss'))
+        self.emiss = AggThread(gtap_source + "\\aggemiss.exe", '-cmf', destination_file+'\\emiss.cmf')
+        self.emiss.read_file.connect(lambda x: self.updatestatusread(x, thread='emiss'))
         #self.emiss.write_file.connect(self.updatestatuswrite)
         #self.emiss.error_file.connect(self.updatestatuserror)
-        #self.emiss.start()
+        self.emiss.start()
 
         #self.vole = AggThread('.\\flexagg\\aggvole.exe', '-cmf', destination_file+'\\vole.cmf')
         #self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
@@ -263,7 +263,6 @@ class Output(qtw.QWidget):
         
         agg_map =  [i[last_field] for i in data]
        
-        
 
         if mapname_sht == "MARG":
             agg_map = agg_map[51:54]    #Fix this so it pulls otp, atp, wtp
@@ -387,7 +386,7 @@ class Output(qtw.QWidget):
     def emisscmf(self, base_gtap, agg_gtap, file_name):
         '''make emissions cmf'''
         insert_1 = 'file  EMISS = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name) 
-        insert_2 = 'file  DDATA= {base}\\{file}.har;\n'.format(base=base_gtap, file=file_name)
+        insert_2 = 'file  DDATA= {base}\\gsdemiss.har;\n'.format(base=base_gtap, file=file_name)
 
         return (insert_1, insert_2)
 
