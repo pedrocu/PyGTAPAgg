@@ -8,6 +8,7 @@ import subprocess
 import os 
 import re
 import traceback
+import time
 def makeaggcmf(aggart):
         '''decoraotor for wrapping cmf files for final aggrigation progarm'''
         def inner(self, base_gtap, agg_gtap, file_name):
@@ -123,17 +124,19 @@ class Output(qtw.QWidget):
             os.remove("output.log")
 
         self.buildit = AggThread(gtap_source+'\\agghar.exe', gtap_source+'\\gsddat.har', destination_file+'\\basedata.har', destination_file+'\\aggsup.har')
-        #self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
+        self.buildit.aggdone.connect(lambda: self.runpostagg(gtap_source, destination_file))
         self.buildit.read_file.connect(lambda x: self.updatestatusread(x, thread='base_data'))
         #self.buildit.write_file.connect(self.updatestatuswrite)
         #elf.buildit.error_file.connect(self.updatestatuserror)
+        
         self.buildit.start()
+        
 
-        #self.param = AggThread('.\\flexagg\\aggpar.exe', '-cmf', destination_file+'\\par.cmf')
-        #self.param.read_file.connect(lambda x: self.updatestatusread(x, thread='param'))
+        self.param = AggThread(gtap_source+"\\aggpar.exe", '-cmf', destination_file+'\\par.cmf')
+        self.param.read_file.connect(lambda x: self.updatestatusread(x, thread='param'))
         #self.param.write_file.connect(self.updatestatuswrite)
         #self.param.error_file.connect(self.updatestatuserror)
-        #self.param.start() 
+        self.param.start() 
 
         #self.emiss = AggThread('.\\flexagg\\aggemiss.exe', '-cmf', destination_file+'\\emiss.cmf')
         #self.emiss.read_file.connect(lambda x: self.updatestatusread(x, thread='emiss'))
@@ -181,9 +184,9 @@ class Output(qtw.QWidget):
         #self.bar.setValue(self.value)
      
     @qtc.pyqtSlot()
-    def runpostagg(self, iesc_source, destination_file):
+    def runpostagg(self, gtap_source, destination_file):
         
-        self.buildview = AggThread("C:\\Users\\Pedro299\\code\\IESC\\V10a\\2IESCData10\\src\\gtpvew.exe", '-cmf', destination_file+'\\gtpvew.cmf')
+        self.buildview = AggThread(gtap_source + "\\gtapview.exe", '-cmf', destination_file+'\\gtpvew.cmf')
         
         
         self.buildview.read_file.connect(lambda x: self.updatestatusread(x, thread='gtap_view'))
@@ -195,7 +198,7 @@ class Output(qtw.QWidget):
         
 
 
-        self.buildsam = AggThread("C:\\Users\\Pedro299\\code\\IESC\\V10a\\2IESCData10\\src\\gtpvew.exe", '-cmf', destination_file+'\\samview.cmf')
+        self.buildsam = AggThread(gtap_source+"\\samview.exe", '-cmf', destination_file+'\\samview.cmf')
         self.buildsam.finished.connect(self.buildsam.quit)
         self.buildsam.read_file.connect(lambda x: self.updatestatusread(x, thread='sam_view'))
         #self.buildsam.write_file.connect(self.updatestatuswrite)
@@ -373,10 +376,10 @@ class Output(qtw.QWidget):
     def paramcmf(self, base_gtap, agg_gtap, file_name):
         '''Make parameter cmf file'''
 
-        insert_1 = 'file  DPARAM =  {base}\\default.prm;\n'.format(base=base_gtap)
+        insert_1 = 'file  DPARAM =  {base}\\gsdpar.har;\n'.format(base=base_gtap)
         insert_2 = 'file  EPARAM =   {agg}\\aggsup.har;\n'.format(agg=agg_gtap)
         insert_3 = 'file  PARAM = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name)
-        insert_4 = 'file  DDATA= {base}\\basedata.har;\n'.format(base=base_gtap)
+        insert_4 = 'file  DDATA= {base}\\gsddat.har;\n'.format(base=base_gtap)
 
         return (insert_1, insert_2, insert_3, insert_4)  
 
