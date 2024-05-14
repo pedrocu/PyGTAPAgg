@@ -148,7 +148,8 @@ class Output(qtw.QWidget):
         self.vole.read_file.connect(lambda x: self.updatestatusread(x, thread='vole'))
         # #self.vole.write_file.connect(self.updatestatuswrite)
         # #self.vole.error_file.connect(self.updatestatuserror)
-        #self.vole.start()
+        self.vole.start()
+        
 
     
     @qtc.pyqtSlot(str)
