@@ -129,10 +129,6 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.addTab(self.output, 'Output')
 
 
-        #headers=['pos', 'GTAP Code', 'GTAP Name', 'Long Description' ,'Sort Group']
-        
-        #pick_start = ['Agriculture', 'Manufactures', 'Extractive','Services']
-
         #Connections
         self.databases.version_label0.gtap_source.connect(self.dataStore.gtapraw_source)
         self.databases.version_label0.gtap_source.connect(self.update_data_tabs)

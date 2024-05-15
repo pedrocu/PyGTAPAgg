@@ -109,10 +109,9 @@ class DataStore(GtapSets,qtw.QWidget):
            #self.gtap_etrae =self.readin_gtap_sets(value, "")
            self.gtap_TARS=[i[1] for i in self.readin_gtap_sets(value, "TARS")]
            self.gtap_TARL=[i[1][0:11] for i in self.readin_gtap_sets(value, "TARL")]  #Problem, HARPY only allows 12 charecter elements
-           print(self.gtap_TARL)
             
-
            self.sectors.data=self.sectors.make_data(self.gtap_sectors, self.agg_store_data['sectors'])
+          
            self.sectors.pick_start=self.sectors.make_pick_start(self.agg_store_data['sectors'])
            self.sectors.headers = self.sectors.make_headers(self.agg_store_data['sectors']) 
 

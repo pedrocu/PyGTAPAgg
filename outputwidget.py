@@ -219,10 +219,16 @@ class Output(qtw.QWidget):
         aggsup= har_file.HarFileObj('{destination}\\aggsup.har'.format(destination=destination_file))
         dset= har_file.HarFileObj('{destination}\\dset.har'.format(destination=destination_file))
         
-        self.makeasets(set(self.datastore.regions.data), "H1", "REG", aggsup)
-        self.makeasets(self.datastore.sectors.pick_start, "H2", "TRAD_COMM", aggsup)
-        self.makeasets(self.datastore.sectors.pick_start, "H5", "PROD_COMM", aggsup)  #prod_comm is different from TRAD_COMM add CGDS for Trad_comm to get prod_Commm
-        self.makeasets(self.datastore.endowments.pick_start, "H6","ENDW_COMM", aggsup)
+        #We want the unique lists of sect, reg, end from the data, not the list. The list can include values not inserted
+        #Get thte values from the table so as not to create conflicts latter, consistency is maintained
+        regions_x=list(set([i[5] for i in self.datastore.regions.data]))
+        sectors_x=list(set([i[5] for i in self.datastore.sectors.data]))
+        endw_x=list(set([i[4] for i in self.datastore.endowments.data]))
+
+        self.makeasets(regions_x, "H1", "REG", aggsup)
+        self.makeasets(sectors_x, "H2", "TRAD_COMM", aggsup)
+        self.makeasets(sectors_x, "H5", "PROD_COMM", aggsup)  #prod_comm is different from TRAD_COMM add CGDS for Trad_comm to get prod_Commm
+        self.makeasets(endw_x, "H6","ENDW_COMM", aggsup)
         self.makeasets(['CGDS'], "H9", "CGDS_COMM", aggsup)
         self.makeasets(self.datastore.gtap_TARS, "TARS","Tariff componenets", aggsup)
         self.makeasets(self.datastore.gtap_TARL, "TARL","Long name tariff componenets", aggsup)
@@ -296,7 +302,6 @@ class Output(qtw.QWidget):
 
     def makeasets(self, target, setname_sht, setname_lng, har_file):
         '''makes aggregated sets'''
-
         #Take any list
         if type(target) is list and setname_sht != 'MARG':
            seta = target.copy()
@@ -307,9 +312,7 @@ class Output(qtw.QWidget):
         else:
             seta = target
             
-        print(setname_sht)
-        print(seta)    
-
+        
         self.setstuffer(seta, setname_sht, setname_lng, har_file)
 
     def makedsets(self, target, setname_sht, setname_lng, har_file):
