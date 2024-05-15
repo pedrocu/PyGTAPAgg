@@ -221,9 +221,9 @@ class Output(qtw.QWidget):
         
         #We want the unique lists of sect, reg, end from the data, not the list. The list can include values not inserted
         #Get thte values from the table so as not to create conflicts latter, consistency is maintained
-        regions_x=list(set([i[5] for i in self.datastore.regions.data]))
-        sectors_x=list(set([i[5] for i in self.datastore.sectors.data]))
-        endw_x=list(set([i[4] for i in self.datastore.endowments.data]))
+        regions_x=list(set([i[5] for i in self.datastore.regions.data]))  #TBD Make these relative to the last element not 5
+        sectors_x=list(set([i[5] for i in self.datastore.sectors.data]))  #TBD Make these relative to the last element not 5
+        endw_x=list(set([i[4] for i in self.datastore.endowments.data]))  #TBD Make these relative to the last element not 4
 
         self.makeasets(regions_x, "H1", "REG", aggsup)
         self.makeasets(sectors_x, "H2", "TRAD_COMM", aggsup)
