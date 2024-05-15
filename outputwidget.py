@@ -219,7 +219,7 @@ class Output(qtw.QWidget):
         aggsup= har_file.HarFileObj('{destination}\\aggsup.har'.format(destination=destination_file))
         dset= har_file.HarFileObj('{destination}\\dset.har'.format(destination=destination_file))
         
-        self.makeasets(self.datastore.regions.pick_start, "H1", "REG", aggsup)
+        self.makeasets(set(self.datastore.regions.data), "H1", "REG", aggsup)
         self.makeasets(self.datastore.sectors.pick_start, "H2", "TRAD_COMM", aggsup)
         self.makeasets(self.datastore.sectors.pick_start, "H5", "PROD_COMM", aggsup)  #prod_comm is different from TRAD_COMM add CGDS for Trad_comm to get prod_Commm
         self.makeasets(self.datastore.endowments.pick_start, "H6","ENDW_COMM", aggsup)
