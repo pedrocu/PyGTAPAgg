@@ -7,8 +7,7 @@ import numpy as np
 import subprocess 
 import os 
 import re
-import traceback
-import time
+
 def makeaggcmf(aggart):
         '''decoraotor for wrapping cmf files for final aggrigation progarm'''
         def inner(self, base_gtap, agg_gtap, file_name):
@@ -101,8 +100,17 @@ class Output(qtw.QWidget):
         self.destination_label.setText(directory.replace('/','\\'))
         
     def makeagg(self, gtap_source, destination_file):
-        #self.iesc_source = iesc_source
-        #self.destination_file = destination_file
+        
+        if ( (os.path.exists(gtap_source) & os.path.exists(destination_file) != True)):
+            execute_problem=qtw.QMessageBox()
+            execute_problem.setWindowTitle('Not a valid destination')
+            execute_problem.setText('Choose a valid folder')
+            execute_problem.setInformativeText("You must choose a valid GTAP database .")
+            execute_problem.setDetailedText("Directory or file does not exist")
+            execute_problem.setWindowModality(qtc.Qt.WindowModality.WindowModal)
+            execute_problem.exec()
+            return
+        
 
         #TBD test these for valid directories and files
         self.mywindow=PopUpWindow()
@@ -149,7 +157,7 @@ class Output(qtw.QWidget):
         # #self.vole.write_file.connect(self.updatestatuswrite)
         # #self.vole.error_file.connect(self.updatestatuserror)
         self.vole.start()
-        
+
 
     
     @qtc.pyqtSlot(str)
@@ -291,13 +299,16 @@ class Output(qtw.QWidget):
 
         #Take any list
         if type(target) is list and setname_sht != 'MARG':
-           seta = target
+           seta = target.copy()
         elif setname_sht == "MARG":
             seta=self.getaggmarg(target)
 
         #or specify an object in the QtData model, seee select widget
         else:
             seta = target
+            
+        print(setname_sht)
+        print(seta)    
 
         self.setstuffer(seta, setname_sht, setname_lng, har_file)
 
@@ -306,7 +317,7 @@ class Output(qtw.QWidget):
         
         #Take any list
         if type(target[0]) is str:
-           set = target
+           set = target.copy()
            
         #or specifiy a QtData Model
         else:
@@ -499,7 +510,7 @@ class PopUpWindow(qtw.QWidget):
         self.bar.setMaximum(100)
 
         self.first_column_label=qtw.QLabel('<b><u>Databases</b>')
-        self.second_column_label=qtw.QLabel('<b><u>Progress</b>')
+        self.second_column_label=qtw.QLabel('<b></b>')
         self.third_column_label=qtw.QLabel('<b><u>Status</b>')
 
         self.base_data_label=qtw.QLabel('Basedata.har')
