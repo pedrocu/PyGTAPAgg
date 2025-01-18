@@ -1,7 +1,7 @@
 
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
-from harpy import har_file, header_array
+from HARPY import har_file, header_array
 import numpy as np
 
 def getdbversize(gtap, source) -> tuple:

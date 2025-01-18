@@ -26,8 +26,9 @@ class MainWindow(qtw.QMainWindow):
         # Main UI code goes here
         self.setWindowTitle('GTAP Aggregation Program')
             ##Adjust the mainscren to take up fixed percent of desktop
+            #This helps with development
         
-        self.setFixedSize(my_screen.width()*.6,my_screen.height()*.6)
+        #self.setFixedSize(my_screen.width(),my_screen.height())
 
         ##Main Menu
         menubar = self.menuBar()

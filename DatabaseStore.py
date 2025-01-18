@@ -2,7 +2,7 @@ import json
 from typing import Any
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtWidgets as qtw
-from harpy import *
+from HARPY import *
 
 class GtapSets():
 
@@ -55,6 +55,7 @@ class TabDataEndow(TabData):
            super().__init__()
         
        def make_etrae(self, agg_store):
+           print(agg_store)
            etrae = [x for x in agg_store['etrae'] if x[0] in self.pick_start]
 
 
@@ -173,7 +174,7 @@ class DataStore(GtapSets,qtw.QWidget):
     def to_agg_store(self):
         self.agg_store_data={'sectors': {'picks': self.sectors.pick_start , 'headers': self.sectors.headers,  'data': self.sectors.data }, 
                              'regions' : {'picks': self.regions.pick_start , 'headers': self.regions.headers,  'data': self.regions.data },
-                             'endowments' : {'picks': self.endowments.pick_start , 'headers': self.endowments.headers,  'data': self.endowments.data , 'etre' :self.endowments.etrae}}
+                             'endowments' : {'picks': self.endowments.pick_start , 'headers': self.endowments.headers,  'data': self.endowments.data , 'etrae' :self.endowments.etrae}}
 
     def to_json_file(self, filename):
         self.to_agg_store()

@@ -2,7 +2,7 @@ from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
 
 import GtapHelpers
-from harpy import har_file, header_array
+from HARPY import har_file, header_array
 import numpy as np
 import subprocess 
 import os 
@@ -254,11 +254,12 @@ class Output(qtw.QWidget):
         self.makedsets(self.datastore.sectors.data, "H2", "TRAD_COMM", dset)
         self.makedsets(self.datastore.endowments.data, "H6","ENDW_COMM", dset)
         self.makedsets(['CGDS'], "H9", "CGDS_COMM", dset)
+        self.makemapping(self.datastore.sectors.data, "MARG", "MARG_COMM", dset)
 
         self.makemapping(self.datastore.sectors.data, "DCOM", "TRAD_COMM", aggsup)
         self.makemapping(self.datastore.regions.data, "DREG", "REG", aggsup)
         self.makemapping(self.datastore.endowments.data, "DEND", "ENDW_COMM", aggsup)
-        self.makemapping(self.datastore.sectors.data, "MARG", "MARG_COMM", dset)
+        
 
         self.makeasets(self.datastore.sectors.data, "MARG", "MARG_COMM", aggsup)
 
@@ -280,7 +281,8 @@ class Output(qtw.QWidget):
        
 
         if mapname_sht == "MARG":
-            agg_map = agg_map[51:54]    #Fix this so it pulls otp, atp, wtp
+            agg_map = [i[-1] for i in data if i[1] in ['otp', 'atp', 'wtp'] ]   
+            print(agg_map)
 
         number_agg = len(set(agg_map))
 
@@ -381,8 +383,8 @@ class Output(qtw.QWidget):
         data=sorted(data, key=lambda k: k[0])
         last_field=len(data[0])-1
          
-        my_a_marg =  [i[last_field] for i in data]
-        my_a_marg =  list(set(my_a_marg[51:55]))      #This should be otp, wtp, atp not positions in dataset
+        my_a_marg =  list(set([i[-1] for i in data if i[1] in ['otp', 'atp', 'wtp'] ]))
+                                             #This should be otp, wtp, atp not positions in dataset
 
         return my_a_marg
 
