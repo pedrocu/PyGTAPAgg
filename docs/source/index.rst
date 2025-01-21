@@ -1,25 +1,21 @@
 .. pyGTAPAgg documentation master file, created by
-   sphinx-quickstart on Sun Apr  7 20:29:31 2024.
+   sphinx-quickstart on Mon Jan 20 16:00:37 2025.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyGTAPAgg's documentation!
-=====================================
-**pyGTAPAgg.py** is a python program implementing the PyQT GUI interface to implement GTAPAgg.  The open source code can be found at GitHub ` PyGTAPAgg <https://github/>`.
+pyGTAPAgg documentation
+=======================
 
-.. note::
+Add your content using ``reStructuredText`` syntax. See the
+`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
+documentation for details.
 
-   This project is under active development.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   forward
+   introduction
+   requirements
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

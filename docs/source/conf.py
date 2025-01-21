@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'pyGTAPAgg'
-copyright = '2024, Peter Minor'
+copyright = '2025, Peter Minor'
 author = 'Peter Minor'
-release = '0.0.1'
+release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
