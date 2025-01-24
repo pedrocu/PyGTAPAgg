@@ -1,6 +1,13 @@
 
 #!python 3.8
+"""Module creates the overall window
 
+Typical usage example:
+
+    mw = mw.MainWindow(my_screen)
+
+where: my_screen=app.primaryScreen().geometry()
+"""
 import sys
 
 
@@ -16,12 +23,29 @@ import json
 
 
 class MainWindow(qtw.QMainWindow):
+    """The Driver for the main window including tabs and menu.
+
+    A container for the tabs and top level menu.
+
+    Attributes:
+        None
+    """
+
     def __init__(self, my_screen):
         super().__init__()
                               
         self.initilizeUI(my_screen)
 
     def initilizeUI(self, my_screen):
+
+        """Sets up the main menu and the tabs
+
+           Instantiates menues
+
+       Returns:
+        void: 
+
+        """
                 
         # Main UI code goes here
         self.setWindowTitle('GTAP Aggregation Program')

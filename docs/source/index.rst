@@ -18,4 +18,13 @@ documentation for details.
    forward
    introduction
    requirements
+   MainWindow
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+   
 
