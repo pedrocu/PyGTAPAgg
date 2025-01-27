@@ -1,3 +1,11 @@
+"""Database Tab
+
+Typical usage example:
+
+    mdb = mw.MaDatabases(my_screen)
+
+"""
+
 import sys
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc 
@@ -6,6 +14,25 @@ import GtapHelpers as helpers
 
 
 class Databases(qtw.QWidget):
+    """Tab displaying the current database and related information.
+
+    All aggrigations start with a database.  The tab wil default to the last opened 
+    GTAP database.  Tab displays version number, year, number of countries, regions, and sectors.
+    The user has the option to choose another GTAP database.
+    If another GTAP database is loaded, and is verified as valid, the display data are updated.
+
+    Attributes:
+        outputagg: TBD
+        settings: saved organization and porgram name for registry info
+        version_label0:  GTAP Directory
+        version_label2:  GTAP Data Version
+        version_label3:  Base year of data
+        version_label4:  Release date
+        version_label5:  Number of regions
+        version_label6:  Number of sectors
+        version_label7:  Number of endowments.
+    """
+
     def __init__(self):
         super().__init__()
         self._outputagg=''
@@ -65,6 +92,7 @@ class Databases(qtw.QWidget):
 
     @property
     def outputagg(self):
+        """        """
         return self._outputagg
     
     @outputagg.setter
@@ -73,19 +101,55 @@ class Databases(qtw.QWidget):
 
         
     def getgtapdir(self):
-        '''gets location of GTAP database and returns version info'''
+        """Location of GTAP database and version info
+
+        Args: 
+           None
+
+        Returns:
+            GTAP version directory
+
+        Raises:
+            None
+        """
         directory = qtw.QFileDialog.getExistingDirectory()
         self.getdbinfo(directory)
         
 
     def getdbinfo(self, dir):
+        """GTAP version information retieved from current direcotry and set in attributes.
+
+        The version info is retrieved from the header and split into its components. Sets the attribure 
+        variables varsion_label0-7. This routine varies for different verisons
+        of the GTAP database as the format has changed and the data have been split into
+        seperate headers in latter version. Runs every time a new directory with a GTAP
+        directoy is set.
+
+        Args:
+            dir: GTAP data directory
+
+        Returns:
+             The class attributes are set with the values contained in the GTAP database in the 
+             current directory.
+        """
         
         gtap_info=helpers.getdbversize(dir.replace('/','\\'), '\\gsddata.har')  #Can change here to work with flexagg, getdbverssize checks for valid database
-        print(gtap_info)
         self.splitverinfo(gtap_info)
 
     def splitverinfo(self, gtap_info):
-        '''gets info from premake (input) data and unwraps and updates main version data screen'''
+        """Sets the version attributes
+        
+           Args:
+             gtap_info:  a list with version number, sectors, regions, endowments
+
+           Returns:
+              None
+              Sets the version information
+
+           Raises:
+              None 
+        
+        """
         
         gtap, gtap_ver_info, gtap_num_reg, gtap_num_sect, gtap_num_endow =gtap_info
         gtap_version = gtap_ver_info
@@ -101,9 +165,29 @@ class Databases(qtw.QWidget):
         #label.setText(directory.replace('/','\\'))
 
 class LabelGtap(qtw.QLabel):
+    """Polymorh for Label class to include signals and emiters when set.
+       
+       When labels are changed in the database, such as the GTAP version
+       The other tabs are updated to reflect the new regions, sectors
+       and endowents.
+
+       Attributes:
+            None
+
+       new_label=LabelGTAP()
+    """
     gtap_source=qtc.pyqtSignal(str)
 
     def setText(self, text):
+        """Set label text and emit change to slots
+
+           Args:
+                text: text to put into the label
+
+           Returns:
+                None
+                text in label is set
+        """
         self.gtap_source.emit(text)
         super().setText(text)    
         

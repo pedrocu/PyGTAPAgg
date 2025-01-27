@@ -1,10 +1,7 @@
-MainWindow API
+MainWindow module
 =================
 
-My MainWindow Code
-
 .. automodule:: MainWindow
-   :members: 
-   :member-order: bysource
-   
-   
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -19,6 +19,8 @@ documentation for details.
    introduction
    requirements
    MainWindow
+   DatabaseWidget
+
 
 Indices and tables
 ==================
