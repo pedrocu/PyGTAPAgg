@@ -19,11 +19,9 @@ class GtapSets():
     The GTAP sets are read in from a .har file to initialize the various tabs for
     sector, and regions.  Note, endowments never change, so we do not need to read these.
 
-      Attribuates:
-        gtap_sets_sectors:
-        gtap_regions :
-
-   
+    Attributes:
+        gtap_sets_sectors:  sectors
+        gtap_regions:  regions 
     """
     def __init__(self) -> None:
         self.gtap_sets_sectors=None
@@ -42,10 +40,10 @@ class GtapSets():
         The sectors and regions are read in from a .har file and place in the 
         class attributes for latter use.
 
-          Args:
+         Args:
            None
 
-          Returns:
+         Returns:
            Void (sector and region attributes set)
                 
         """
@@ -60,6 +58,16 @@ class GtapSets():
 
     
 class TabData():
+    """Creates an object for a tabs data elements.
+     
+    Each tab has a similar structure - picker, headers, data.  This class provides a structure
+    and methods for storing and retriving that data in a conistent way across tabs.
+
+    Attributes:
+        Pick_start:  Picker window
+        header:      The lables for sectors, regions 
+        data:        Data for the element stored in header order 
+    """
 
     def __init__(self) -> None:
         self.pick_start = None
@@ -69,13 +77,44 @@ class TabData():
         super().__init__()
 
     def make_pick_start(self, agg_store):
+        """Method gets picks from datastore.
+
+        This object standardizes the retrival and storage of the tab data from the datastore.
+
+         Args:
+            agg_store: the name of the agg store.
+
+         Returns:            
+              pick_list
+        """
+
         return agg_store['picks']
     
     def make_headers(self, agg_store):
+        """Method gets header from datastore.
+
+        This object standardizes the retrival and storage of the tab data from the datastore.
+
+         Args:
+            agg_store: the name of the agg store.
+
+         Returns:            
+              headers
+        """
         return agg_store['headers']
 
     def make_data(self, sets, agg_store):
-        '''takes sets and aggstore and does a match merge on sect abrev'''
+        """Mathc merge on sets and aggstore abrev
+
+        We want the long description with the codes.  This method zips them together.
+
+         Args:
+            agg_store: the name of the agg store.
+            sets: the sets database
+
+         Returns:            
+              matched list
+        """
         newdict={x[1]: x for x in agg_store['data']}
         matchlist =  [x+newdict.get(x[1], ['','', '','',''])[2:] for x in sets ]
         return matchlist
