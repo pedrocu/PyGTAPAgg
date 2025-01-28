@@ -17,9 +17,9 @@ documentation for details.
 
    forward
    introduction
-   requirements
    MainWindow
    DatabaseWidget
+   DatabaseStore
 
 
 Indices and tables
