@@ -92,7 +92,7 @@ class Databases(qtw.QWidget):
 
     @property
     def outputagg(self):
-        """        """
+        """TBD        """
         return self._outputagg
     
     @outputagg.setter
@@ -101,21 +101,20 @@ class Databases(qtw.QWidget):
 
         
     def getgtapdir(self):
-        """Location of GTAP database and version info
+        """Gets current GTAP diractory.
 
-        Args: 
-           None
+        Get the current GTAP directory in the dialgoue box on the database page.
 
-        Returns:
-            GTAP version directory
-
-        Raises:
+         Args:
             None
+
+         Returns:            
+              Void
         """
         directory = qtw.QFileDialog.getExistingDirectory()
         self.getdbinfo(directory)
         
-
+        
     def getdbinfo(self, dir):
         """GTAP version information retieved from current direcotry and set in attributes.
 
@@ -125,12 +124,12 @@ class Databases(qtw.QWidget):
         seperate headers in latter version. Runs every time a new directory with a GTAP
         directoy is set.
 
-        Args:
+         Args:
             dir: GTAP data directory
 
-        Returns:
-             The class attributes are set with the values contained in the GTAP database in the 
-             current directory.
+         Returns:            
+            The class attributes are set with the values contained in the GTAP database in the 
+            current directory.
         """
         
         gtap_info=helpers.getdbversize(dir.replace('/','\\'), '\\gsddata.har')  #Can change here to work with flexagg, getdbverssize checks for valid database
@@ -138,16 +137,15 @@ class Databases(qtw.QWidget):
 
     def splitverinfo(self, gtap_info):
         """Sets the version attributes
+
+        The version information is passed as a list, so it must be split into individual values.
         
            Args:
              gtap_info:  a list with version number, sectors, regions, endowments
 
            Returns:
-              None
-              Sets the version information
+              None (Sets the version information)
 
-           Raises:
-              None 
         
         """
         
@@ -171,22 +169,25 @@ class LabelGtap(qtw.QLabel):
        The other tabs are updated to reflect the new regions, sectors
        and endowents.
 
-       Attributes:
-            None
+        Attributes:
+            gtap_source: PyQT Signal
 
-       new_label=LabelGTAP()
+        new_label=LabelGTAP()
     """
     gtap_source=qtc.pyqtSignal(str)
 
     def setText(self, text):
-        """Set label text and emit change to slots
+        """Set label text and emit change to slots.
+           
+        Overide to the standard PyQT setText method to include a signal.
 
-           Args:
+            Args:
                 text: text to put into the label
 
-           Returns:
-                None
-                text in label is set
+            Returns:
+                None (text in label is set)
+
+                
         """
         self.gtap_source.emit(text)
         super().setText(text)    

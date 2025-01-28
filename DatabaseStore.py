@@ -1,3 +1,12 @@
+"""Module handles botht he session and file storage of aggrigation parameters.
+
+   All elements including database verison, sectors, regions, endowments and pick lists
+   are stored in a JSON file. The database store has the capability to read JSON files with 
+   the same paramenters.
+
+  
+"""
+
 import json
 from typing import Any
 from PyQt6 import QtCore as qtc
@@ -5,7 +14,17 @@ from PyQt6 import QtWidgets as qtw
 from HARPY import *
 
 class GtapSets():
+    """Reads in all of the gtap sets
+     
+    The GTAP sets are read in from a .har file to initialize the various tabs for
+    sector, and regions.  Note, endowments never change, so we do not need to read these.
 
+      Attribuates:
+        gtap_sets_sectors:
+        gtap_regions :
+
+   
+    """
     def __init__(self) -> None:
         self.gtap_sets_sectors=None
         self.gtap_regions=None
@@ -18,6 +37,18 @@ class GtapSets():
         return super().__setattr__(name, value)
 
     def readin_gtap_sets(self, dir, header):
+        """Read sectors and regions from har file
+
+        The sectors and regions are read in from a .har file and place in the 
+        class attributes for latter use.
+
+          Args:
+           None
+
+          Returns:
+           Void (sector and region attributes set)
+                
+        """
         InFile=HarFileObj(dir+"\\gsdset.har")
         DataHead=InFile[header]
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
