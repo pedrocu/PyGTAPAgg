@@ -1,7 +1,7 @@
 MainWindow module
 =================
 
-.. automodule:: MainWindow
+.. automodule:: PyGTAPAgg.MainWindow
    :members:
    :undoc-members:
    :show-inheritance:

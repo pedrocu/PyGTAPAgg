@@ -16,8 +16,8 @@ Extensive documentation of the modules and classes of PyGTAPAgg.
    forward
    introduction
    MainWindow
-   DatabaseWidget
    DatabaseStore
+   DatabaseWidget
 
 
 Indices and tables

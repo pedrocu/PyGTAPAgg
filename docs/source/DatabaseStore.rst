@@ -1,7 +1,7 @@
 DatabaseStore module
 ====================
 
-.. automodule:: DatabaseStore
+.. automodule:: PyGTAPAgg.DatabaseStore
    :members:
    :undoc-members:
    :show-inheritance:
