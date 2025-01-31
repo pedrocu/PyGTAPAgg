@@ -1,0 +1,2690 @@
+{
+  "sectors": {
+    "headers": [
+      "pos",
+      "GTAP Code",
+      "GTAP Name",
+      "Long Description",
+      "Sort Group",
+      "Agg Category"
+    ],
+    "picks": [
+      "Agriculture",
+      "Manufactures",
+      "Extraction",
+      "Services"
+    ],
+    "data": [
+      [
+        1,
+        "pdr",
+        "Paddy rice",
+        "Rice: seed, paddy (not husked)",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        2,
+        "wht",
+        "Wheat",
+        "Wheat: seed, other",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        3,
+        "gro",
+        "Cereal grains nec",
+        "Other Grains: maize (corn), sorghum, barley, rye, oats, millets, other cereals",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        4,
+        "v_f",
+        "Vegetables, fruit, nuts",
+        "Veg & Fruit: vegetables, fruit and nuts, edible roots and tubers, pulses",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        5,
+        "osd",
+        "Oil seeds",
+        "Oil Seeds: oil seeds and oleaginous fruit",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        6,
+        "c_b",
+        "Sugar cane, sugar beet",
+        "Cane & Beet: sugar crops",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        7,
+        "pfb",
+        "Plant-based fibers",
+        "Fibres crops",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        8,
+        "ocr",
+        "Crops nec",
+        "Other Crops: stimulant; spice and aromatic crops; forage products; plants and parts of plants used primarily in perfumery, pharmacy, or for insecticidal, fungicidal or similar purposes; beet seeds (excluding sugar beet seeds) and seeds of forage plants; natural rubber in primary forms or in plates, sheets or strip, living plants; cut flowers and flower buds; flower seeds, unmanufactured tobacco; other raw vegetable materials nec",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        9,
+        "ctl",
+        "Bovine cattle, sheep and goats, horses",
+        "Cattle: bovine animals, live, other ruminants, horses and other equines, bovine semen",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        10,
+        "oap",
+        "Animal products nec",
+        "Other Animal Products: swine; poultry; other live animals; eggs of hens or other birds in shell, fresh; reproductive materials of animals; natural honey; snails, fresh, chilled, frozen, dried, salted or in brine, except sea snails; edible products of animal origin n.e.c.; hides, skins and furskins, raw; insect waxes and spermaceti, whether or not refined or coloured",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        11,
+        "rmk",
+        "Raw milk",
+        "Raw milk",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        12,
+        "wol",
+        "Wool, silk-worm cocoons",
+        "Wool: wool, silk, and other raw animal materials used in textile",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        13,
+        "frs",
+        "Forestry",
+        "Forestry: forestry, logging and related service activities",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        14,
+        "fsh",
+        "Fishing",
+        "Fishing: hunting, trapping and game propagation including related service activities, fishing, fish farms; service activities incidental to fishing",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        15,
+        "coa",
+        "Coal",
+        "Coal: mining and agglomeration of hard coal, lignite and peat",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        16,
+        "oil",
+        "Oil",
+        "Oil: extraction of crude petroleum, service activities incidental to oil and gas extraction excluding surveying (part)",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        17,
+        "gas",
+        "Gas",
+        "Gas: extraction of natural gas, service activities incidental to oil and gas extraction excluding surveying (part)",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        18,
+        "oxt",
+        "Other Extraction (formerly omn Minerals nec)",
+        "Other Mining Extraction (formerly omn): mining of metal ores; other mining and quarrying",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        19,
+        "cmt",
+        "Bovine meat products",
+        "Cattle Meat: fresh or chilled; meat of buffalo, fresh or chilled; meat of sheep, fresh or chilled; meat of goat, fresh or chilled; meat of camels and camelids, fresh or chilled; meat of horses and other equines, fresh or chilled; other meat of mammals, fresh or chilled; meat of mammals, frozen; edible offal of mammals, fresh, chilled or frozen",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        20,
+        "omt",
+        "Meat products nec",
+        "Other Meat: meat of pigs, fresh or chilled; meat of rabbits and hares, fresh or chilled; meat of poultry, fresh or chilled; meat of poultry, frozen; edible offal of poultry, fresh, chilled or frozen; other meat and edible offal, fresh, chilled or frozen; preserves and preparations of meat, meat offal or blood; flours, meals and pellets of meat or meat offal, inedible; greaves",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        21,
+        "vol",
+        "Vegetable oils and fats",
+        "Vegetable Oils: margarine and similar preparations; cotton linters; oil-cake and other residues resulting from the extraction of vegetable fats or oils; flours and meals of oil seeds or oleaginous fruits, except those of mustard; vegetable waxes, except triglycerides; degras; residues resulting from the treatment of fatty substances or animal or vegetable waxes; animal fats",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        22,
+        "mil",
+        "Dairy products",
+        "Milk: dairy products",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        23,
+        "pcr",
+        "Processed rice",
+        "Processed Rice: semi- or wholly milled, or husked",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        24,
+        "sgr",
+        "Sugar",
+        "Sugar and molasses",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        25,
+        "ofd",
+        "Food products nec",
+        "Other Food: prepared and preserved fish, crustaceans, molluscs and other aquatic invertebrates; prepared and preserved vegetables, pulses and potatoes; prepared and preserved fruits and nuts; wheat and meslin flour; other cereal flours; groats, meal and pellets of wheat and other cereals; other cereal grain products (including corn flakes); other vegetable flours and meals; mixes and doughs for the preparation of bakers' wares; st",
+        "Agriculture",
+        "Agriculture"
+      ],
+      [
+        26,
+        "b_t",
+        "Beverages and tobacco products",
+        "Beverages and Tobacco products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        27,
+        "tex",
+        "Textiles",
+        "Manufacture of textiles",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        28,
+        "wap",
+        "Wearing apparel",
+        "Manufacture of wearing apparel",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        29,
+        "lea",
+        "Leather products",
+        "Manufacture of leather and related products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        30,
+        "lum",
+        "Wood products",
+        "Lumber: manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        31,
+        "ppp",
+        "Paper products, publishing",
+        "Paper & Paper Products: includes printing and reproduction of recorded media",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        32,
+        "p_c",
+        "Petroleum, coal products",
+        "Petroleum & Coke: manufacture of coke and refined petroleum products",
+        "Extraction",
+        "Extraction"
+      ],
+      [
+        33,
+        "chm",
+        "Chemical products",
+        "Manufacture of chemicals and chemical products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        34,
+        "bph",
+        "Basic pharmaceutical products",
+        "Manufacture of pharmaceuticals, medicinal chemical and botanical products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        35,
+        "rpp",
+        "Rubber and plastic products",
+        "Manufacture of rubber and plastics products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        36,
+        "nmm",
+        "Mineral products nec",
+        "Manufacture of other non-metallic mineral products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        37,
+        "i_s",
+        "Ferrous metals",
+        "Iron & Steel: basic production and casting",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        38,
+        "nfm",
+        "Metals nec",
+        "Non-Ferrous Metals: production and casting of copper, aluminium, zinc, lead, gold, and silver",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        39,
+        "fmp",
+        "Metal products",
+        "Manufacture of fabricated metal products, except machinery and equipment",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        40,
+        "ele",
+        "Computer, electronic and optical products",
+        "Manufacture of computer, electronic and optical products",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        41,
+        "eeq",
+        "Electrical equipment",
+        "Manufacture of electrical equipment",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        42,
+        "ome",
+        "Machinery and equipment nec",
+        "Manufacture of machinery and equipment n.e.c.",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        43,
+        "mvh",
+        "Motor vehicles and parts",
+        "Manufacture of motor vehicles, trailers and semi-trailers",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        44,
+        "otn",
+        "Transport equipment nec",
+        "Manufacture of other transport equipment",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        45,
+        "omf",
+        "Manufactures nec",
+        "Other Manufacturing: includes furniture",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        46,
+        "ely",
+        "Electricity",
+        "Electricity; steam and air conditioning supply",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        47,
+        "gdt",
+        "Gas manufacture, distribution",
+        "Gas manufacture, distribution",
+        "Manufactures",
+        "Manufactures"
+      ],
+      [
+        48,
+        "wtr",
+        "Water",
+        "Water supply; sewerage, waste management and remediation activities",
+        "Services",
+        "Services"
+      ],
+      [
+        49,
+        "cns",
+        "Construction",
+        "Construction: building houses factories offices and roads",
+        "Services",
+        "Services"
+      ],
+      [
+        50,
+        "trd",
+        "Trade",
+        "Wholesale and retail trade; repair of motor vehicles and motorcycles",
+        "Services",
+        "Services"
+      ],
+      [
+        51,
+        "afs",
+        "Accommodation, Food and service activities",
+        "Accommodation, Food and service activities",
+        "Services",
+        "Services"
+      ],
+      [
+        52,
+        "otp",
+        "Transport nec",
+        "Land transport and transport via pipelines",
+        "Services",
+        "Services"
+      ],
+      [
+        53,
+        "wtp",
+        "Water transport",
+        "Water transport",
+        "Services",
+        "Services"
+      ],
+      [
+        54,
+        "atp",
+        "Air transport",
+        "Air transport",
+        "Services",
+        "Services"
+      ],
+      [
+        55,
+        "whs",
+        "Warehousing and support activities",
+        "Warehousing and support activities",
+        "Services",
+        "Services"
+      ],
+      [
+        56,
+        "cmn",
+        "Communication",
+        "Information and communication",
+        "Services",
+        "Services"
+      ],
+      [
+        57,
+        "ofi",
+        "Financial services nec",
+        "Other Financial Intermediation: includes auxiliary activities but not insurance and pension funding",
+        "Services",
+        "Services"
+      ],
+      [
+        58,
+        "ins",
+        "Insurance (formerly isr)",
+        "Insurance (formerly isr): includes pension funding, except compulsory social security",
+        "Services",
+        "Services"
+      ],
+      [
+        59,
+        "rsa",
+        "Real estate activities",
+        "Real estate activities",
+        "Services",
+        "Services"
+      ],
+      [
+        60,
+        "obs",
+        "Business services nec",
+        "Other Business Services nec",
+        "Services",
+        "Services"
+      ],
+      [
+        61,
+        "ros",
+        "Recreational and other services",
+        "Recreation & Other Services: recreational, cultural and sporting activities, other service activities; private households with employed persons (servants)",
+        "Services",
+        "Services"
+      ],
+      [
+        62,
+        "osg",
+        "Public Administration and defense",
+        "Other Services (Government): public administration and defense; compulsory social security, activities of membership organizations n.e.c., extra-territorial organizations and bodies",
+        "Services",
+        "Services"
+      ],
+      [
+        63,
+        "edu",
+        "Education",
+        "Education",
+        "Services",
+        "Services"
+      ],
+      [
+        64,
+        "hht",
+        "Human health and social work activities",
+        "Human health and social work",
+        "Services",
+        "Services"
+      ],
+      [
+        65,
+        "dwe",
+        "Dwellings",
+        "Dwellings: ownership of dwellings (imputed rents of houses occupied by owners)",
+        "Services",
+        "Services"
+      ]
+    ]
+  },
+  "regions": {
+    "headers": [
+      "pos",
+      "GTAP Code",
+      "GTAP Name",
+      "Long Description",
+      "Sort Group",
+      "Agg Category"
+    ],
+    "picks": [
+      "NAFTA",
+      "EU28",
+      "Other"
+    ],
+    "data": [
+      [
+        "",
+        "xac",
+        "South Central Africa",
+        "Other",
+        "South Central A",
+        "Other"
+      ],
+      [
+        "",
+        "xca",
+        "Rest of Central America",
+        "Other",
+        "Rest of Central",
+        "Other"
+      ],
+      [
+        "",
+        "xcb",
+        "Rest of Caribbean",
+        "Other",
+        "Rest of Caribbe",
+        "Other"
+      ],
+      [
+        "",
+        "xcf",
+        "Rest of Central Africa",
+        "Other",
+        "Rest of Central",
+        "Other"
+      ],
+      [
+        "",
+        "xea",
+        "Rest of East Asia",
+        "Other",
+        "Rest of East As",
+        "Other"
+      ],
+      [
+        "",
+        "xec",
+        "Rest of Eastern Africa",
+        "Other",
+        "Rest of Eastern",
+        "Other"
+      ],
+      [
+        "",
+        "xee",
+        "Rest of Eastern Europe",
+        "Other",
+        "Rest of Eastern",
+        "Other"
+      ],
+      [
+        "",
+        "xef",
+        "Rest of European Free Trade Association",
+        "Other",
+        "Rest of Europea",
+        "Other"
+      ],
+      [
+        "",
+        "xer",
+        "Rest of Europe",
+        "Other",
+        "Rest of Europe",
+        "Other"
+      ],
+      [
+        "",
+        "xna",
+        "Rest of North America",
+        "Other",
+        "Rest of North A",
+        "Other"
+      ],
+      [
+        "",
+        "xnf",
+        "Rest of North Africa",
+        "Other",
+        "Rest of North A",
+        "Other"
+      ],
+      [
+        "",
+        "xoc",
+        "Rest of Oceania",
+        "Other",
+        "Rest of Oceania",
+        "Other"
+      ],
+      [
+        "",
+        "xsa",
+        "Rest of South Asia",
+        "Other",
+        "Rest of South A",
+        "Other"
+      ],
+      [
+        "",
+        "xsc",
+        "Rest of South African Customs Union",
+        "Other",
+        "Rest of South A",
+        "Other"
+      ],
+      [
+        "",
+        "xse",
+        "Rest of Southeast Asia",
+        "Other",
+        "Rest of Southea",
+        "Other"
+      ],
+      [
+        "",
+        "xsm",
+        "Rest of South America",
+        "Other",
+        "Rest of South A",
+        "Other"
+      ],
+      [
+        "",
+        "xsu",
+        "Rest of Former Soviet Union",
+        "Other",
+        "Rest of Former",
+        "Other"
+      ],
+      [
+        "",
+        "xtw",
+        "Rest of the World",
+        "Other",
+        "Rest of the Wor",
+        "Other"
+      ],
+      [
+        "",
+        "xwf",
+        "Rest of Western Africa",
+        "Other",
+        "Rest of Western",
+        "Other"
+      ],
+      [
+        "",
+        "xws",
+        "Rest of Western Asia",
+        "Other",
+        "Rest of Western",
+        "Other"
+      ],
+      [
+        "",
+        "alb",
+        "Albania",
+        "Europe & Central Asia",
+        "Albania",
+        "Other"
+      ],
+      [
+        "",
+        "are",
+        "United arab emirates",
+        "Middle East & North Africa",
+        "United arab emi",
+        "Other"
+      ],
+      [
+        "",
+        "arg",
+        "Argentina",
+        "Latin America & Caribbean",
+        "Argentina",
+        "Other"
+      ],
+      [
+        "",
+        "arm",
+        "Armenia",
+        "Europe & Central Asia",
+        "Armenia",
+        "Other"
+      ],
+      [
+        "",
+        "aus",
+        "Australia",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "nfk",
+        "Norfolk Island",
+        "Other",
+        "Norfolk Island",
+        "Other"
+      ],
+      [
+        "",
+        "aut",
+        "Austria",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "aze",
+        "Azerbaijan",
+        "Europe & Central Asia",
+        "Azerbaijan",
+        "Other"
+      ],
+      [
+        "",
+        "bel",
+        "Belgium",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "ben",
+        "Benin",
+        "Sub-Saharan Africa",
+        "Benin",
+        "Other"
+      ],
+      [
+        "",
+        "bfa",
+        "Burkina faso",
+        "Sub-Saharan Africa",
+        "Burkina faso",
+        "Other"
+      ],
+      [
+        "",
+        "bgd",
+        "Bangladesh",
+        "South Asia",
+        "Bangladesh",
+        "Other"
+      ],
+      [
+        "",
+        "bgr",
+        "Bulgaria",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "bhr",
+        "Bahrain",
+        "Middle East & North Africa",
+        "Bahrain",
+        "Other"
+      ],
+      [
+        "",
+        "blr",
+        "Belarus",
+        "Europe & Central Asia",
+        "Belarus",
+        "Other"
+      ],
+      [
+        "",
+        "bol",
+        "Bolivia",
+        "Latin America & Caribbean",
+        "Bolivia",
+        "Other"
+      ],
+      [
+        "",
+        "bra",
+        "Brazil",
+        "Latin America & Caribbean",
+        "Brazil",
+        "Other"
+      ],
+      [
+        "",
+        "brn",
+        "Brunei darussalam",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "bwa",
+        "Botswana",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "can",
+        "Canada",
+        "North America",
+        "NAFTA",
+        "NAFTA"
+      ],
+      [
+        "",
+        "che",
+        "Switzerland",
+        "Europe & Central Asia",
+        "Switzerland",
+        "Other"
+      ],
+      [
+        "",
+        "chl",
+        "Chile",
+        "Latin America & Caribbean",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "chn",
+        "China",
+        "East Asia & Pacific",
+        "China",
+        "Other"
+      ],
+      [
+        "",
+        "civ",
+        "Côte d'ivoire",
+        "Sub-Saharan Africa",
+        "Côte d'ivoire",
+        "Other"
+      ],
+      [
+        "",
+        "cmr",
+        "Cameroon",
+        "Sub-Saharan Africa",
+        "Cameroon",
+        "Other"
+      ],
+      [
+        "",
+        "col",
+        "Colombia",
+        "Latin America & Caribbean",
+        "Colombia",
+        "Other"
+      ],
+      [
+        "",
+        "cri",
+        "Costa rica",
+        "Latin America & Caribbean",
+        "Costa rica",
+        "Other"
+      ],
+      [
+        "",
+        "cyp",
+        "Cyprus",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "cze",
+        "Czech republic",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "deu",
+        "Germany",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "dnk",
+        "Denmark",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "dom",
+        "Dominican republic",
+        "Latin America & Caribbean",
+        "Dominican repub",
+        "Other"
+      ],
+      [
+        "",
+        "ecu",
+        "Ecuador",
+        "Latin America & Caribbean",
+        "Ecuador",
+        "Other"
+      ],
+      [
+        "",
+        "egy",
+        "Egypt",
+        "Middle East & North Africa",
+        "Egypt",
+        "Other"
+      ],
+      [
+        "",
+        "esp",
+        "Spain",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "est",
+        "Estonia",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "eth",
+        "Ethiopia",
+        "Sub-Saharan Africa",
+        "Ethiopia",
+        "Other"
+      ],
+      [
+        "",
+        "fin",
+        "Finland",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "fra",
+        "France",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "glp",
+        "Guadeloupe",
+        "Other",
+        "Guadeloupe",
+        "Other"
+      ],
+      [
+        "",
+        "mtq",
+        "Martinique",
+        "Other",
+        "Martinique",
+        "Other"
+      ],
+      [
+        "",
+        "reu",
+        "Reunion",
+        "Other",
+        "Reunion",
+        "Other"
+      ],
+      [
+        "",
+        "gbr",
+        "United kingdom",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "geo",
+        "Georgia",
+        "Europe & Central Asia",
+        "Georgia",
+        "Other"
+      ],
+      [
+        "",
+        "gha",
+        "Ghana",
+        "Sub-Saharan Africa",
+        "Ghana",
+        "Other"
+      ],
+      [
+        "",
+        "gin",
+        "Guinea",
+        "Sub-Saharan Africa",
+        "Guinea",
+        "Other"
+      ],
+      [
+        "",
+        "grc",
+        "Greece",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "gtm",
+        "Guatemala",
+        "Latin America & Caribbean",
+        "Guatemala",
+        "Other"
+      ],
+      [
+        "",
+        "hkg",
+        "Hong kong",
+        "East Asia & Pacific",
+        "Hong kong",
+        "Other"
+      ],
+      [
+        "",
+        "hnd",
+        "Honduras",
+        "Latin America & Caribbean",
+        "Honduras",
+        "Other"
+      ],
+      [
+        "",
+        "hrv",
+        "Croatia",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "hun",
+        "Hungary",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "idn",
+        "Indonesia",
+        "East Asia & Pacific",
+        "ASEAN",
+        "Other"
+      ],
+      [
+        "",
+        "ind",
+        "India",
+        "South Asia",
+        "India",
+        "Other"
+      ],
+      [
+        "",
+        "irl",
+        "Ireland",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "irn",
+        "Iran",
+        "Middle East & North Africa",
+        "Iran",
+        "Other"
+      ],
+      [
+        "",
+        "irq",
+        "Iraq",
+        "Middle East & North Africa",
+        "Iraq",
+        "Other"
+      ],
+      [
+        "",
+        "isr",
+        "Israel",
+        "Middle East & North Africa",
+        "Israel",
+        "Other"
+      ],
+      [
+        "",
+        "ita",
+        "Italy",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "jam",
+        "Jamaica",
+        "Latin America & Caribbean",
+        "Jamaica",
+        "Other"
+      ],
+      [
+        "",
+        "jor",
+        "Jordan",
+        "Middle East & North Africa",
+        "Jordan",
+        "Other"
+      ],
+      [
+        "",
+        "jpn",
+        "Japan",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "kaz",
+        "Kazakstan",
+        "Europe & Central Asia",
+        "Kazakstan",
+        "Other"
+      ],
+      [
+        "",
+        "ken",
+        "Kenya",
+        "Sub-Saharan Africa",
+        "Kenya",
+        "Other"
+      ],
+      [
+        "",
+        "kgz",
+        "Kyrgyzstan",
+        "Europe & Central Asia",
+        "Kyrgyzstan",
+        "Other"
+      ],
+      [
+        "",
+        "khm",
+        "Cambodia",
+        "East Asia & Pacific",
+        "ASEAN",
+        "Other"
+      ],
+      [
+        "",
+        "kor",
+        "Korea",
+        "East Asia & Pacific",
+        "Korea",
+        "Other"
+      ],
+      [
+        "",
+        "kwt",
+        "Kuwait",
+        "Middle East & North Africa",
+        "Kuwait",
+        "Other"
+      ],
+      [
+        "",
+        "lao",
+        "Lao people's democratic",
+        "East Asia & Pacific",
+        "ASEAN",
+        "Other"
+      ],
+      [
+        "",
+        "lbn",
+        "Lebanon",
+        "Middle East & North Africa",
+        "Lebanon",
+        "Other"
+      ],
+      [
+        "",
+        "lka",
+        "Sri lanka",
+        "South Asia",
+        "Sri lanka",
+        "Other"
+      ],
+      [
+        "",
+        "ltu",
+        "Lithuania",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "lux",
+        "Luxembourg",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "lva",
+        "Latvia",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "mar",
+        "Morocco",
+        "Middle East & North Africa",
+        "Morocco",
+        "Other"
+      ],
+      [
+        "",
+        "mdg",
+        "Madagascar",
+        "Sub-Saharan Africa",
+        "Madagascar",
+        "Other"
+      ],
+      [
+        "",
+        "mex",
+        "Mexico",
+        "Latin America & Caribbean",
+        "NAFTA",
+        "NAFTA"
+      ],
+      [
+        "",
+        "mlt",
+        "Malta",
+        "Middle East & North Africa",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "mng",
+        "Mongolia",
+        "East Asia & Pacific",
+        "Mongolia",
+        "Other"
+      ],
+      [
+        "",
+        "moz",
+        "Mozambique",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "mus",
+        "Mauritius",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "mwi",
+        "Malawi",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "mys",
+        "Malaysia",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "nam",
+        "Namibia",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "nga",
+        "Nigeria",
+        "Sub-Saharan Africa",
+        "Nigeria",
+        "Other"
+      ],
+      [
+        "",
+        "nic",
+        "Nicaragua",
+        "Latin America & Caribbean",
+        "Nicaragua",
+        "Other"
+      ],
+      [
+        "",
+        "nld",
+        "Netherlands",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "nor",
+        "Norway",
+        "Europe & Central Asia",
+        "Norway",
+        "Other"
+      ],
+      [
+        "",
+        "npl",
+        "Nepal",
+        "South Asia",
+        "Nepal",
+        "Other"
+      ],
+      [
+        "",
+        "nzl",
+        "New zealand",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "omn",
+        "Oman",
+        "Middle East & North Africa",
+        "Oman",
+        "Other"
+      ],
+      [
+        "",
+        "pak",
+        "Pakistan",
+        "South Asia",
+        "Pakistan",
+        "Other"
+      ],
+      [
+        "",
+        "pan",
+        "Panama",
+        "Latin America & Caribbean",
+        "Panama",
+        "Other"
+      ],
+      [
+        "",
+        "per",
+        "Peru",
+        "Latin America & Caribbean",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "phl",
+        "Philippines",
+        "East Asia & Pacific",
+        "ASEAN",
+        "Other"
+      ],
+      [
+        "",
+        "pol",
+        "Poland",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "pri",
+        "Puerto rico",
+        "Latin America & Caribbean",
+        "Puerto rico",
+        "Other"
+      ],
+      [
+        "",
+        "prt",
+        "Portugal",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "pry",
+        "Paraguay",
+        "Latin America & Caribbean",
+        "Paraguay",
+        "Other"
+      ],
+      [
+        "",
+        "pse",
+        "Palestinian territory",
+        "Middle East & North Africa",
+        "Palestinian ter",
+        "Other"
+      ],
+      [
+        "",
+        "qat",
+        "Qatar",
+        "Middle East & North Africa",
+        "Qatar",
+        "Other"
+      ],
+      [
+        "",
+        "rou",
+        "Romania",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "rus",
+        "Russian federation",
+        "Europe & Central Asia",
+        "Russian federat",
+        "Other"
+      ],
+      [
+        "",
+        "rwa",
+        "Rwanda",
+        "Sub-Saharan Africa",
+        "Rwanda",
+        "Other"
+      ],
+      [
+        "",
+        "sau",
+        "Saudi arabia",
+        "Middle East & North Africa",
+        "Saudi arabia",
+        "Other"
+      ],
+      [
+        "",
+        "sdn",
+        "Sudan",
+        "Sub-Saharan Africa",
+        "Sudan",
+        "Other"
+      ],
+      [
+        "",
+        "sen",
+        "Senegal",
+        "Sub-Saharan Africa",
+        "Senegal",
+        "Other"
+      ],
+      [
+        "",
+        "sgp",
+        "Singapore",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "slv",
+        "El salvador",
+        "Latin America & Caribbean",
+        "El salvador",
+        "Other"
+      ],
+      [
+        "",
+        "svk",
+        "Slovakia",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "svn",
+        "Slovenia",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "swe",
+        "Sweden",
+        "Europe & Central Asia",
+        "EU28",
+        "EU28"
+      ],
+      [
+        "",
+        "syr",
+        "Syrian arab republic",
+        "Middle East & North Africa",
+        "Syrian arab rep",
+        "Other"
+      ],
+      [
+        "",
+        "tgo",
+        "Togo",
+        "Sub-Saharan Africa",
+        "Togo",
+        "Other"
+      ],
+      [
+        "",
+        "tha",
+        "Thailand",
+        "East Asia & Pacific",
+        "ASEAN",
+        "Other"
+      ],
+      [
+        "",
+        "tjk",
+        "Tajikistan",
+        "Europe & Central Asia",
+        "Tajikistan",
+        "Other"
+      ],
+      [
+        "",
+        "tto",
+        "Trinidad and tobago",
+        "Latin America & Caribbean",
+        "Trinidad and to",
+        "Other"
+      ],
+      [
+        "",
+        "tun",
+        "Tunisia",
+        "Middle East & North Africa",
+        "Tunisia",
+        "Other"
+      ],
+      [
+        "",
+        "tur",
+        "Turkey",
+        "Europe & Central Asia",
+        "Turkey",
+        "Other"
+      ],
+      [
+        "",
+        "twn",
+        "Taiwan",
+        "East Asia & Pacific",
+        "Taiwan",
+        "Other"
+      ],
+      [
+        "",
+        "tza",
+        "Tanzania",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "uga",
+        "Uganda",
+        "Sub-Saharan Africa",
+        "Uganda",
+        "Other"
+      ],
+      [
+        "",
+        "ukr",
+        "Ukraine",
+        "Europe & Central Asia",
+        "Ukraine",
+        "Other"
+      ],
+      [
+        "",
+        "ury",
+        "Uruguay",
+        "Latin America & Caribbean",
+        "Uruguay",
+        "Other"
+      ],
+      [
+        "",
+        "usa",
+        "United states of americ",
+        "North America",
+        "NAFTA",
+        "NAFTA"
+      ],
+      [
+        "",
+        "ven",
+        "Venezuela",
+        "Latin America & Caribbean",
+        "Venezuela",
+        "Other"
+      ],
+      [
+        "",
+        "vnm",
+        "Viet nam",
+        "East Asia & Pacific",
+        "TPP",
+        "Other"
+      ],
+      [
+        "",
+        "ago",
+        "Angola",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "blz",
+        "Belize",
+        "Latin America & Caribbean",
+        "Belize",
+        "Other"
+      ],
+      [
+        "",
+        "cod",
+        "Congo (democratic rep.)",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "abw",
+        "Aruba",
+        "Latin America & Caribbean",
+        "Aruba",
+        "Other"
+      ],
+      [
+        "",
+        "aia",
+        "Anguilla",
+        "Other",
+        "Anguilla",
+        "Other"
+      ],
+      [
+        "",
+        "ant",
+        "Netherland antilles",
+        "Other",
+        "Netherland anti",
+        "Other"
+      ],
+      [
+        "",
+        "atg",
+        "Antigua and barbuda",
+        "Latin America & Caribbean",
+        "Antigua and bar",
+        "Other"
+      ],
+      [
+        "",
+        "bhs",
+        "Bahamas",
+        "Latin America & Caribbean",
+        "Bahamas",
+        "Other"
+      ],
+      [
+        "",
+        "brb",
+        "Barbados",
+        "Latin America & Caribbean",
+        "Barbados",
+        "Other"
+      ],
+      [
+        "",
+        "cub",
+        "Cuba",
+        "Latin America & Caribbean",
+        "Cuba",
+        "Other"
+      ],
+      [
+        "",
+        "cym",
+        "Cayman islands",
+        "Latin America & Caribbean",
+        "Cayman islands",
+        "Other"
+      ],
+      [
+        "",
+        "dma",
+        "Dominica",
+        "Latin America & Caribbean",
+        "Dominica",
+        "Other"
+      ],
+      [
+        "",
+        "grd",
+        "Grenada",
+        "Latin America & Caribbean",
+        "Grenada",
+        "Other"
+      ],
+      [
+        "",
+        "hti",
+        "Haiti",
+        "Latin America & Caribbean",
+        "Haiti",
+        "Other"
+      ],
+      [
+        "",
+        "kna",
+        "Saint kitts and nevis",
+        "Latin America & Caribbean",
+        "Saint kitts and",
+        "Other"
+      ],
+      [
+        "",
+        "lca",
+        "Saint lucia",
+        "Latin America & Caribbean",
+        "Saint lucia",
+        "Other"
+      ],
+      [
+        "",
+        "msr",
+        "Montserrat",
+        "Other",
+        "Montserrat",
+        "Other"
+      ],
+      [
+        "",
+        "tca",
+        "Turks and caicos island",
+        "Latin America & Caribbean",
+        "Turks and caico",
+        "Other"
+      ],
+      [
+        "",
+        "vct",
+        "Saint vincent and the g",
+        "Latin America & Caribbean",
+        "Saint vincent a",
+        "Other"
+      ],
+      [
+        "",
+        "vgb",
+        "Virgin islands (british",
+        "Other",
+        "Virgin islands",
+        "Other"
+      ],
+      [
+        "",
+        "vir",
+        "Virgin islands (u.s.)",
+        "Latin America & Caribbean",
+        "Virgin islands",
+        "Other"
+      ],
+      [
+        "",
+        "caf",
+        "Central african republi",
+        "Sub-Saharan Africa",
+        "Central african",
+        "Other"
+      ],
+      [
+        "",
+        "cog",
+        "Congo",
+        "Sub-Saharan Africa",
+        "Congo",
+        "Other"
+      ],
+      [
+        "",
+        "gab",
+        "Gabon",
+        "Sub-Saharan Africa",
+        "Gabon",
+        "Other"
+      ],
+      [
+        "",
+        "gnq",
+        "Equatorial guinea",
+        "Sub-Saharan Africa",
+        "Equatorial guin",
+        "Other"
+      ],
+      [
+        "",
+        "stp",
+        "Sao tome and principe",
+        "Sub-Saharan Africa",
+        "Sao tome and pr",
+        "Other"
+      ],
+      [
+        "",
+        "tcd",
+        "Chad",
+        "Sub-Saharan Africa",
+        "Chad",
+        "Other"
+      ],
+      [
+        "",
+        "mac",
+        "Macau",
+        "East Asia & Pacific",
+        "Macau",
+        "Other"
+      ],
+      [
+        "",
+        "prk",
+        "Korea, dem. people's re",
+        "East Asia & Pacific",
+        "Korea, dem. peo",
+        "Other"
+      ],
+      [
+        "",
+        "bdi",
+        "Burundi",
+        "Sub-Saharan Africa",
+        "Burundi",
+        "Other"
+      ],
+      [
+        "",
+        "com",
+        "Comoros",
+        "Sub-Saharan Africa",
+        "Comoros",
+        "Other"
+      ],
+      [
+        "",
+        "dji",
+        "Djibouti",
+        "Middle East & North Africa",
+        "Djibouti",
+        "Other"
+      ],
+      [
+        "",
+        "eri",
+        "Eritrea",
+        "Sub-Saharan Africa",
+        "Eritrea",
+        "Other"
+      ],
+      [
+        "",
+        "myt",
+        "Mayotte",
+        "Other",
+        "Mayotte",
+        "Other"
+      ],
+      [
+        "",
+        "som",
+        "Somalia",
+        "Sub-Saharan Africa",
+        "Somalia",
+        "Other"
+      ],
+      [
+        "",
+        "syc",
+        "Seychelles",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "mda",
+        "Moldova, rep.of",
+        "Europe & Central Asia",
+        "Moldova, rep.of",
+        "Other"
+      ],
+      [
+        "",
+        "isl",
+        "Iceland",
+        "Europe & Central Asia",
+        "Iceland",
+        "Other"
+      ],
+      [
+        "",
+        "lie",
+        "Liechtenstein",
+        "Europe & Central Asia",
+        "Liechtenstein",
+        "Other"
+      ],
+      [
+        "",
+        "and",
+        "Andorra",
+        "Europe & Central Asia",
+        "Andorra",
+        "Other"
+      ],
+      [
+        "",
+        "bih",
+        "Bosnia and herzegovina",
+        "Europe & Central Asia",
+        "Bosnia and herz",
+        "Other"
+      ],
+      [
+        "",
+        "fro",
+        "Faroe islands",
+        "Europe & Central Asia",
+        "Faroe islands",
+        "Other"
+      ],
+      [
+        "",
+        "gib",
+        "Gibraltar",
+        "Other",
+        "Gibraltar",
+        "Other"
+      ],
+      [
+        "",
+        "mco",
+        "Monaco",
+        "Europe & Central Asia",
+        "Monaco",
+        "Other"
+      ],
+      [
+        "",
+        "mkd",
+        "Macedonia",
+        "Europe & Central Asia",
+        "Macedonia",
+        "Other"
+      ],
+      [
+        "",
+        "scg",
+        "Serbia and Montenegro",
+        "Other",
+        "Serbia and Mont",
+        "Other"
+      ],
+      [
+        "",
+        "srb",
+        "Serbia",
+        "Other",
+        "Serbia",
+        "Other"
+      ],
+      [
+        "",
+        "smr",
+        "San marino",
+        "Europe & Central Asia",
+        "San marino",
+        "Other"
+      ],
+      [
+        "",
+        "bmu",
+        "Bermuda",
+        "North America",
+        "Bermuda",
+        "Other"
+      ],
+      [
+        "",
+        "grl",
+        "Greenland",
+        "Europe & Central Asia",
+        "Greenland",
+        "Other"
+      ],
+      [
+        "",
+        "spm",
+        "St. pierre and miquelon",
+        "Other",
+        "St. pierre and",
+        "Other"
+      ],
+      [
+        "",
+        "dza",
+        "Algeria",
+        "Middle East & North Africa",
+        "Algeria",
+        "Other"
+      ],
+      [
+        "",
+        "esh",
+        "Western sahara",
+        "Other",
+        "Western sahara",
+        "Other"
+      ],
+      [
+        "",
+        "lby",
+        "Libyan arab jamahiriya",
+        "Middle East & North Africa",
+        "Libyan arab jam",
+        "Other"
+      ],
+      [
+        "",
+        "asm",
+        "American samoa",
+        "East Asia & Pacific",
+        "American samoa",
+        "Other"
+      ],
+      [
+        "",
+        "cok",
+        "Cook islands",
+        "Other",
+        "Cook islands",
+        "Other"
+      ],
+      [
+        "",
+        "fji",
+        "Fiji",
+        "East Asia & Pacific",
+        "Fiji",
+        "Other"
+      ],
+      [
+        "",
+        "fsm",
+        "Micronesia, fed. st.",
+        "East Asia & Pacific",
+        "Micronesia, fed",
+        "Other"
+      ],
+      [
+        "",
+        "gum",
+        "Guam",
+        "East Asia & Pacific",
+        "Guam",
+        "Other"
+      ],
+      [
+        "",
+        "kir",
+        "Kiribati",
+        "East Asia & Pacific",
+        "Kiribati",
+        "Other"
+      ],
+      [
+        "",
+        "mhl",
+        "Marshall islands",
+        "East Asia & Pacific",
+        "Marshall island",
+        "Other"
+      ],
+      [
+        "",
+        "mnp",
+        "Northern mariana island",
+        "East Asia & Pacific",
+        "Northern marian",
+        "Other"
+      ],
+      [
+        "",
+        "ncl",
+        "New caledonia",
+        "East Asia & Pacific",
+        "New caledonia",
+        "Other"
+      ],
+      [
+        "",
+        "niu",
+        "Niue",
+        "Other",
+        "Niue",
+        "Other"
+      ],
+      [
+        "",
+        "nru",
+        "Nauru",
+        "Other",
+        "Nauru",
+        "Other"
+      ],
+      [
+        "",
+        "plw",
+        "Palau",
+        "East Asia & Pacific",
+        "Palau",
+        "Other"
+      ],
+      [
+        "",
+        "png",
+        "Papua new guinea",
+        "East Asia & Pacific",
+        "Papua new guine",
+        "Other"
+      ],
+      [
+        "",
+        "pyf",
+        "French polynesia",
+        "East Asia & Pacific",
+        "French polynesi",
+        "Other"
+      ],
+      [
+        "",
+        "slb",
+        "Solomon islands",
+        "East Asia & Pacific",
+        "Solomon islands",
+        "Other"
+      ],
+      [
+        "",
+        "tkl",
+        "Tokelau",
+        "Other",
+        "Tokelau",
+        "Other"
+      ],
+      [
+        "",
+        "ton",
+        "Tonga",
+        "East Asia & Pacific",
+        "Tonga",
+        "Other"
+      ],
+      [
+        "",
+        "tuv",
+        "Tuvalu",
+        "East Asia & Pacific",
+        "Tuvalu",
+        "Other"
+      ],
+      [
+        "",
+        "vut",
+        "Vanuatu",
+        "East Asia & Pacific",
+        "Vanuatu",
+        "Other"
+      ],
+      [
+        "",
+        "wlf",
+        "Wallis and futuna islan",
+        "Other",
+        "Wallis and futu",
+        "Other"
+      ],
+      [
+        "",
+        "wsm",
+        "Samoa",
+        "East Asia & Pacific",
+        "Samoa",
+        "Other"
+      ],
+      [
+        "",
+        "afg",
+        "Afghanistan",
+        "South Asia",
+        "Afghanistan",
+        "Other"
+      ],
+      [
+        "",
+        "btn",
+        "Bhutan",
+        "South Asia",
+        "Bhutan",
+        "Other"
+      ],
+      [
+        "",
+        "mdv",
+        "Maldives",
+        "South Asia",
+        "Maldives",
+        "Other"
+      ],
+      [
+        "",
+        "lso",
+        "Lesotho",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "swz",
+        "Swaziland",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "mmr",
+        "Myanmar",
+        "East Asia & Pacific",
+        "Myanmar",
+        "Other"
+      ],
+      [
+        "",
+        "tls",
+        "East timor",
+        "East Asia & Pacific",
+        "East timor",
+        "Other"
+      ],
+      [
+        "",
+        "flk",
+        "Falkland islands",
+        "Other",
+        "Falkland island",
+        "Other"
+      ],
+      [
+        "",
+        "guf",
+        "French guiana",
+        "Other",
+        "French guiana",
+        "Other"
+      ],
+      [
+        "",
+        "guy",
+        "Guyana",
+        "Latin America & Caribbean",
+        "Guyana",
+        "Other"
+      ],
+      [
+        "",
+        "sur",
+        "Suriname",
+        "Latin America & Caribbean",
+        "Suriname",
+        "Other"
+      ],
+      [
+        "",
+        "tkm",
+        "Turkmenistan",
+        "Europe & Central Asia",
+        "Turkmenistan",
+        "Other"
+      ],
+      [
+        "",
+        "uzb",
+        "Uzbekistan",
+        "Europe & Central Asia",
+        "Uzbekistan",
+        "Other"
+      ],
+      [
+        "",
+        "ata",
+        "Rest of Worl",
+        "Other",
+        "Rest of Worl",
+        "Other"
+      ],
+      [
+        "",
+        "cpv",
+        "Cape verde",
+        "Sub-Saharan Africa",
+        "Cape verde",
+        "Other"
+      ],
+      [
+        "",
+        "gmb",
+        "Gambia",
+        "Sub-Saharan Africa",
+        "Gambia",
+        "Other"
+      ],
+      [
+        "",
+        "gnb",
+        "Guinea-bissau",
+        "Sub-Saharan Africa",
+        "Guinea-bissau",
+        "Other"
+      ],
+      [
+        "",
+        "lbr",
+        "Liberia",
+        "Sub-Saharan Africa",
+        "Liberia",
+        "Other"
+      ],
+      [
+        "",
+        "mli",
+        "Mali",
+        "Sub-Saharan Africa",
+        "Mali",
+        "Other"
+      ],
+      [
+        "",
+        "mrt",
+        "Mauritania",
+        "Sub-Saharan Africa",
+        "Mauritania",
+        "Other"
+      ],
+      [
+        "",
+        "ner",
+        "Niger",
+        "Sub-Saharan Africa",
+        "Niger",
+        "Other"
+      ],
+      [
+        "",
+        "shn",
+        "Saint Helena",
+        "Other",
+        "Saint Helena",
+        "Other"
+      ],
+      [
+        "",
+        "sle",
+        "Sierra leone",
+        "Sub-Saharan Africa",
+        "Sierra leone",
+        "Other"
+      ],
+      [
+        "",
+        "yem",
+        "Yemen",
+        "Middle East & North Africa",
+        "Yemen",
+        "Other"
+      ],
+      [
+        "",
+        "zaf",
+        "South africa",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "zmb",
+        "Zambia",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ],
+      [
+        "",
+        "zwe",
+        "Zimbabwe",
+        "Sub-Saharan Africa",
+        "SADC",
+        "Other"
+      ]
+    ]
+  },
+  "endowments": {
+    "headers": [
+      "pos",
+      "GTAP Code",
+      "Short Name",
+      "Long Description",
+      "Agg Category"
+    ],
+    "picks": [
+      "Skilled",
+      "Unskilled",
+      "Capital",
+      "Land",
+      "NatlRes"
+    ],
+    "etrae": [
+      [
+        "off_mgr_pros",
+        "mobile"
+      ],
+      [
+        "tech_aspros",
+        "mobile"
+      ],
+      [
+        "clerks",
+        "mobile"
+      ],
+      [
+        "service_shop",
+        "mobile"
+      ],
+      [
+        "ag_othlowsk",
+        "mobile"
+      ],
+      [
+        "Land",
+        "1"
+      ],
+      [
+        "Capital",
+        "mobile"
+      ],
+      [
+        "NatlRes",
+        "0.001"
+      ],
+      [
+        "NatRes",
+        "0.001"
+      ],
+      [
+        "Skilled",
+        "mobile"
+      ],
+      [
+        "Unskilled",
+        "mobile"
+      ]
+    ],
+    "data": [
+      [
+        "2",
+        "off_mgr_pros",
+        "Managers and professionals",
+        "Managers, senior officials and Legislators (Major Groups 1), and professionals (Major Group 2)",
+        "Skilled"
+      ],
+      [
+        "3",
+        "tech_aspros",
+        "Associate professionals and Technicians",
+        "Technicians and associate professionals. ICT, health, teachers, engineers, specialized administration, arts, entertainment, design and sport.  (Major Group 3)",
+        "Skilled"
+      ],
+      [
+        "4",
+        "clerks",
+        "Clerks",
+        "Clerical support workers (Major Group 4)",
+        "Unskilled"
+      ],
+      [
+        "5",
+        "service_shop",
+        "Service workers",
+        "Service workers and shop and market sales (Major Group 5)",
+        "Unskilled"
+      ],
+      [
+        "6",
+        "ag_othlowsk",
+        "Trade and agricultural workers",
+        "Skilled agricultural and fishery workers (Major Group 6), craft and related trade workers (Major Group 7), plant and machine operators and assemblers (Major Group 8), and elementary occupations (Major Group 9)",
+        "Unskilled"
+      ],
+      [
+        "1",
+        "Land",
+        "Land",
+        "Land",
+        "Land"
+      ],
+      [
+        "7",
+        "Capital",
+        "Capital",
+        "Capital",
+        "Capital"
+      ],
+      [
+        "9",
+        "NatlRes",
+        "Natural Resources",
+        "Naural Resources",
+        "NatlRes"
+      ],
+       [
+        "9",
+        "NatRes",
+        "Natural Resources",
+        "Naural Resources",
+        "NatlRes"
+      ],
+      [
+        "",
+        "Skilled",
+        "Skilled labor",
+        "Skilled labor",
+        "Skilled"
+      ],
+      [
+        "",
+        "Unskilled",
+        "Unskilled labor",
+        "Skilled labor",
+        "Unskilled"
+      ]
+    ]
+  }
+}
