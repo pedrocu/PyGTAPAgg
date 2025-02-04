@@ -1,4 +1,4 @@
-"""Module handles botht he session and file storage of aggrigation parameters.
+"""Module handles both the session and file storage of aggrigation parameters.
 
    All elements including database verison, sectors, regions, endowments and pick lists
    are stored in a JSON file. The database store has the capability to read JSON files with 
@@ -37,14 +37,14 @@ class GtapSets():
     def readin_gtap_sets(self, dir, header):
         """Read sectors and regions from har file
 
-        The sectors and regions are read in from a .har file and place in the 
+        The sectors and regions are read in from a .har file and placed in the 
         class attributes for latter use.
 
          Args:
-           None
+           Dir:     Directory of the sets file
+           header:  The particular set we wiseh to extra from the har file
 
-         Returns:
-           Void (sector and region attributes set)
+         Returns: sector and region list in the format [(1, 'USA')] 
                 
         """
         InFile=HarFileObj(dir+"\\gsdset.har")
@@ -52,13 +52,14 @@ class GtapSets():
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
         newlist = []
         for pos, var in enumerate(npDataArray):
-            newlist.append([pos+1, var])
+            newlist.append((pos+1, var))
         return newlist
+
     
 
     
 class TabData():
-    """Creates an object for a tabs data elements.
+    """An object for tab data elements.
      
     Each tab has a similar structure - picker, headers, data.  This class provides a structure
     and methods for storing and retriving that data in a conistent way across tabs.
@@ -104,7 +105,7 @@ class TabData():
         return agg_store['headers']
 
     def make_data(self, sets, agg_store):
-        """Mathc merge on sets and aggstore abrev
+        """Match merge on sets and aggstore abrev
 
         We want the long description with the codes.  This method zips them together.
 
@@ -134,9 +135,27 @@ class TabDataEndow(TabData):
 
    
 class DataStore(GtapSets,qtw.QWidget):
+    """ Maintains all the state of data for all the tabs
+
+        State of data as well as methods for reading and writing data to files.
+
+        Attributes:
+            agg_store_file :
+            add_store_data :
+            sectors :
+            regions : 
+            endowments :
+            gtap_source
+
+    """
+
+
     update_tabs=qtc.pyqtSignal(str)
 
     def __init__(self, agg_store_file=".\data\defaults.json"):
+        """
+        
+        """
         super().__init__()
         
         'This is where the settings for the program are written to persist across sessions'
@@ -237,6 +256,43 @@ class DataStore(GtapSets,qtw.QWidget):
         self.gtap_source=value
   
     def load_aggstore(self, file_name):
+        """Loads a json file with header, picks and data
+        
+        A JSON file with the format:
+
+        Sectors {}
+        headers: [
+            pos,
+            GTAP Code,
+            GTAP Name,
+            Long Description,
+            Sort Group,
+            Agg Category]
+       picks: [
+            Agriculture,
+            Manufactures,
+            Extraction,
+            Services    ]
+        data: [   [
+        1,
+        pdr,
+        Paddy rice,
+        Rice: seed, paddy (not husked),
+        Agriculture,
+        Agriculture  ... ], }
+
+        Regions {}
+        
+        Args: 
+            file_name :  file file name with path
+
+        Returns:
+            A dictionary with key value pairs.  Key: sectors, regions, endowments
+
+        Raises:   
+        
+        """
+
         with open(file_name) as f:
            aggstore=json.load(f)
            return aggstore
