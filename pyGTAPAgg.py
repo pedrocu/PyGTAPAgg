@@ -1,10 +1,10 @@
 #!python 3.8
 
-
+import sys
 from PyQt6 import QtWidgets as qtw
 from PyGTAPAgg import MainWindow as mw 
-import sys
-from PyGTAPAgg import MainWindow as mw
+
+
 
 
 if __name__ == '__main__':
