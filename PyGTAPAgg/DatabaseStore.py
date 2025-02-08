@@ -52,7 +52,7 @@ class GtapSets():
         npDataArray = [x.strip(' ') for x in DataHead.array.tolist()]  #Need to strip out spaces - HARPY needs fix
         newlist = []
         for pos, var in enumerate(npDataArray):
-            newlist.append((pos+1, var))
+            newlist.append([pos+1, var])
         return newlist
 
     
@@ -110,9 +110,9 @@ class TabData():
         We want the long description with the codes.  This method zips them together.
 
          Args:
-            agg_store: the name of the agg store.
-            sets: the sets database
-
+            agg_store: the name of the agg store.  Agg Store is the JSON file read into a dict.
+                       see JSON format below in load_aggstore() 
+            sets: The set to be merged [(1,'pdr'), (2, 'wht')...]
          Returns:            
               matched list
         """
@@ -126,7 +126,7 @@ class TabDataEndow(TabData):
            super().__init__()
         
        def make_etrae(self, agg_store):
-           print(agg_store)
+           
            etrae = [x for x in agg_store['etrae'] if x[0] in self.pick_start]
 
 
@@ -279,7 +279,7 @@ class DataStore(GtapSets,qtw.QWidget):
         Paddy rice,
         Rice: seed, paddy (not husked),
         Agriculture,
-        Agriculture  ... ], }
+        Agriculture], ...]}
 
         Regions {}
         
