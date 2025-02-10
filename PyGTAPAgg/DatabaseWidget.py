@@ -51,7 +51,7 @@ class Databases(qtw.QWidget):
 
         #left side buttons      
         self.setLayout(horizontal_layout) 
-        choose_GTAP_button = qtw.QPushButton("Choose GTAP Database", clicked=self.getgtapdir)
+        self.choose_GTAP_button = qtw.QPushButton("Choose GTAP Database", clicked=self.getgtapdir)
                
         info_head = qtw.QLabel("<h1>Database Currently Selected:</h1>")
         self.version_label0 = LabelGtap("NA")
@@ -63,7 +63,7 @@ class Databases(qtw.QWidget):
         self.version_label6 = qtw.QLabel('NA')
         self.version_label7 = qtw.QLabel('NA')
   
-        vertical_layout1.addWidget(choose_GTAP_button)
+        vertical_layout1.addWidget(self.choose_GTAP_button)
         vertical_layout1.addWidget(qtw.QWidget())
         info_form.addRow(info_head)
 
@@ -101,18 +101,23 @@ class Databases(qtw.QWidget):
         self._outputagg=x
 
         
-    def getgtapdir(self):
+    def getgtapdir(self, test_dir):
         """Gets current GTAP diractory.
 
         Get the current GTAP directory in the dialgoue box on the database page.
 
-         Args:
-            None
+         Args: 
+            Dir: This is a testing option, since the QFileDialog is not accessable from the testing (system dialgoue.)
 
          Returns:            
               Void
         """
-        directory = qtw.QFileDialog.getExistingDirectory()
+
+        if test_dir == False:  #This is for testing only.  QFileDialog is a system menu and not accessable to the tet suite.
+            directory = qtw.QFileDialog.getExistingDirectory()
+        else: 
+            directory = test_dir
+
         self.getdbinfo(directory)
         
         
