@@ -11,7 +11,7 @@ def getdbversize(gtap, source) -> tuple:
     try:
         gtap_base=har_file.HarFileObj(gtap+'\\gsddat.har')
         gtap_sets=har_file.HarFileObj(gtap+'\\gsdset.har')
-        gtap_ver_num=(str(gtap_base['DREL'].array[0]), gtap_base['DREL'].array[1], gtap_base['DREL'].array[2])
+        gtap_ver_num=(str(gtap_base['DREL'].array[0]).strip(), str(gtap_base['DREL'].array[1]).strip(), str(gtap_base['DREL'].array[2]).strip())
         gtap_num_reg=gtap_sets['H1'].array.size
         gtap_num_sect=gtap_sets['H2'].array.size
         gtap_num_endow=gtap_sets['H6'].array.size
