@@ -15,19 +15,32 @@ from PyGTAPAgg import MainWindow as MainWindow
 
 app = qtw.QApplication(sys.argv)
 
-class TestSetTab(unittest.TestCase):
+class TestdbTab(unittest.TestCase):
 
     def setUp(self):
          my_screen=app.primaryScreen().geometry()
          self.form = MainWindow.MainWindow(my_screen)
     
-    def test_tet(self):
-        self.assertEqual(3,3, 'Not equal')
+    def test_1_default_labels(self):
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label1.text(), 'NA', "Default Databse Text not as expected")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label2.text(), 'NA', "Default Databse Text not as expected")
 
-    def test_empty(self):
-        self.assertEqual(self.form.gtap_central_widget.databases.version_label1.text(), 'NA', "default Databse Text not as expected")
+    def test_2_choose_db_lables_read(self):
+        self.form.gtap_central_widget.databases.getgtapdir("C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\tests\\data")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label0.text(), "C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\tests\\data", "Wrong Direcotry displayed")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label2.text(), "v11p3", "Wrong version, experected v11p3")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label3.text(), "Y2017", "Year of Data")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label4.text(), "Jun_2022", "Release Date")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label5.text(), "158", "Wrong number of regions")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label6.text(), "65", "Wrong number of sectors")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label7.text(), "8", "Wrong number of endowments")
+
+
+    
+   # def test_3labels(self):
+   #     self.assertEqual(self.form.gtap_central_widget.databases.version_label1.text(), 'NA', "Default Databse Text not as expected")
+   #     self.assertEqual(self.form.gtap_central_widget.databases.version_label2.text(), 'NA', "Default Databse Text not as expected")
         
-
 
     def tearDown(self):
         return super().tearDown()
