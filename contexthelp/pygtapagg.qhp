@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QtHelpProject version="1.0">
+    <virtualFolder>pygtapagg</virtualFolder>
+    <namespace>pygtapagg.com</namespace>
+    <filterSection>
+        <keywords>
+            <keyword name="forward" id="forward" ref="forward.html"/>
+            <keyword name="introduction" id="introduction" ref="introduction.html"/>
+            
+        </keywords>
+        <files>
+            <file>../docs/build/html/forward.html</file>
+            <file>../docs/build/html/introduction.html</file>
+            
+        </files>
+    </filterSection>
+</QtHelpProject>
