@@ -7,10 +7,12 @@
 """
 import sys
 import json
+import os
 
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc 
 from PyQt6 import QtGui as qtg
+from PyQt6 import QtHelp as qth
 
 from PyGTAPAgg import DatabaseWidget as dbwidget
 from PyGTAPAgg import selectwidget as slwidget
@@ -73,6 +75,7 @@ class MainWindow(qtw.QMainWindow):
 
         #Help Menu
         about_action = help_menu.addAction('About', self.showAboutDialog)
+        help_action = help_menu.addAction("Help", self.createHelpWindow)
 
         ##Central Window
         self.gtap_central_widget = GTAPAggTabs()
@@ -101,6 +104,47 @@ class MainWindow(qtw.QMainWindow):
                               https://impactecon.com
                               Developed in PyQt for Python""")
         
+    def createHelpWindow(self):
+        """Shows the help index with documentation
+
+        Start the help index, which is a QtDock widget with a QtText Window as the operative object.
+        The helpengine is linked and the binary files are read in. 
+        This is inplace of the QtAssistant, which is a seperate standalone app.
+        It was decided having an intergrated help engine was better then an external progarm from a future
+        development strategy and an application distribution perspective.
+
+         Args:
+            None
+
+         Returns:
+             Void        
+        """ 
+        CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+        self.helpEngine = qth.QHelpEngine("C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\contexthelp\\pygtapagg.qhc")
+        self.helpEngine.setupData()
+
+        tWidget = qtw.QTabWidget()
+        tWidget.setMaximumWidth(200)
+        tWidget.addTab(self.helpEngine.contentWidget(), "Contents")
+        tWidget.addTab(self.helpEngine.indexWidget(), "Index")
+
+        textViewer = HelpBrowser(self.helpEngine)
+        #textViewer.setSource(qtc.QUrl("qthelp://help.pygtapagg.com/docs/index.html"))
+
+        self.helpEngine.setUsesFilterEngine(True)
+        self.helpEngine.contentWidget().linkActivated.connect(textViewer.setSource)
+        self.helpEngine.indexWidget().linkActivated.connect(textViewer.setSource)
+
+        horizSplitter = qtw.QSplitter(qtc.Qt.Orientation.Horizontal)
+        horizSplitter.insertWidget(0, tWidget)
+        horizSplitter.insertWidget(1, textViewer)
+        horizSplitter.hide()
+
+        self.helpWindow = qtw.QDockWidget(self.tr("Help"), self)
+        self.helpWindow.setWidget(horizSplitter)
+        #self.helpWindow.hide()
+        self.addDockWidget(qtc.Qt.DockWidgetArea.BottomDockWidgetArea, self.helpWindow)
         
     def exitThisApp(self):
         """Exits ths app when called
@@ -276,14 +320,17 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.output=outwidget.Output(dataStore=self.dataStore)
         self.addTab(self.output, 'Output')
 
-            
-                #self.tabBar().moveTab(0,1)
-                #self.sectors.picker_model.setStringList(self.dataStore.sector_pick_start)
-                #self.sectors.headers=self.dataStore.sector_header
-                #self.sectors
-                #self.sectors.model=slwidget.ItemTableModel("Sectors", self.dataStore.sector_header, self.dataStore.sector_all)
-                #self.sectors.tableview.setModel(self.sectors.model)
-                #self.sectors.updatedata()
+class HelpBrowser(qtw.QTextBrowser):
+    def __init__(self, helpEngine, parent=None):
+        super().__init__(parent)
+        self.helpEngine = helpEngine
+
+    def loadResource(self, _type, name):
+        if name.scheme() == "qthelp":
+            return self.helpEngine.fileData(name)
+        else:
+            return super().loadResource(_type, name)
+
 
 
 
