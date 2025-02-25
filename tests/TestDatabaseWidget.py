@@ -34,13 +34,7 @@ class TestdbTab(unittest.TestCase):
         self.assertEqual(self.form.gtap_central_widget.databases.version_label5.text(), "158", "Wrong number of regions")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label6.text(), "65", "Wrong number of sectors")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label7.text(), "8", "Wrong number of endowments")
-
-
-    
-   # def test_3labels(self):
-   #     self.assertEqual(self.form.gtap_central_widget.databases.version_label1.text(), 'NA', "Default Databse Text not as expected")
-   #     self.assertEqual(self.form.gtap_central_widget.databases.version_label2.text(), 'NA', "Default Databse Text not as expected")
-        
+      
 
     def tearDown(self):
         return super().tearDown()
