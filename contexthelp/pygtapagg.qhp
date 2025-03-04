@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <QtHelpProject version="1.0">
-    <virtualFolder>pygtapagg</virtualFolder>
-    <namespace>pygtapagg.com</namespace>
+    <virtualFolder>doc</virtualFolder>
+    <namespace>help.pygtapagg.com</namespace>
     <filterSection>
         <keywords>
             <keyword name="forward" id="forward" ref="forward.html"/>
@@ -9,6 +9,7 @@
             
         </keywords>
         <files>
+            <file>../docs/build/html/index.html</file>
             <file>../docs/build/html/forward.html</file>
             <file>../docs/build/html/introduction.html</file>
             
