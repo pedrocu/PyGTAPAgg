@@ -4,7 +4,7 @@
    are stored in a JSON file. The database store has the capability to read JSON files with 
    the same paramenters.
    
-   Just some tect to test github actions.
+   Just some tect to test github actions. Another Test.
   
 """
 
