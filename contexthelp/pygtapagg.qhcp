@@ -3,8 +3,8 @@
     <docFiles>
         <generate>
             <file>
-                <input>PyGTAPAgg.qhp</input>
-                <output>PyGTAPAgg.qch</output>
+                <input>pygtapagg.qhp</input>
+                <output>pygtapagg.qch</output>
             </file>
         </generate>
         <register>
