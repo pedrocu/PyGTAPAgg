@@ -7,10 +7,6 @@ from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
 
 from PyGTAPAgg import MainWindow as MainWindow
-#from PyGTAPAgg import DatabaseWidget as dbwidget
-#from PyGTAPAgg import selectwidget as slwidget
-#from PyGTAPAgg import DatabaseStore as store
-#from PyGTAPAgg import outputwidget as outwidget
 
 
 app = qtw.QApplication(sys.argv)
