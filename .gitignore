@@ -6,6 +6,16 @@ __pycache__/
 # C extensions
 *.so
 
+#sandboxes
+**/helpsandbox/
+
+#HTML
+*.html
+
+#sphinx
+**/docs/build/
+*.js
+
 # Distribution / packaging
 .Python
 #build/
