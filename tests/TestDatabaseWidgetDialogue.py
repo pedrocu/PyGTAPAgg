@@ -13,6 +13,10 @@ app = qtw.QApplication(sys.argv)
 
 class TestdbTab(unittest.TestCase):
 
+    def setUp(self):
+         my_screen=app.primaryScreen().geometry()
+         self.form = MainWindow.MainWindow(my_screen)
+
     def test_2_choose_db_lables_read(self):
         self.form.gtap_central_widget.databases.getgtapdir("C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\tests\\data")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label0.text(), "C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\tests\\data", "Wrong Direcotry displayed")
@@ -22,7 +26,6 @@ class TestdbTab(unittest.TestCase):
         self.assertEqual(self.form.gtap_central_widget.databases.version_label5.text(), "158", "Wrong number of regions")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label6.text(), "65", "Wrong number of sectors")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label7.text(), "8", "Wrong number of endowments")
-      
 
     def tearDown(self):
         return super().tearDown()
