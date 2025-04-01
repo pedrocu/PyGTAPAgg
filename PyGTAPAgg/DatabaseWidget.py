@@ -113,7 +113,7 @@ class Databases(qtw.QWidget):
               Void
         """
 
-        if test_dir == False:  #This is for testing only.  QFileDialog is a system menu and not accessable to the tet suite.
+        if test_dir == False:  #This is for testing only.  QFileDialog is a system menu and not accessable to the test suite.
             directory = qtw.QFileDialog.getExistingDirectory()
         else: 
             directory = test_dir
