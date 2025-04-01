@@ -55,9 +55,6 @@ class GtapSets():
         for pos, var in enumerate(npDataArray):
             newlist.append([pos+1, var])
         return newlist
-
-    
-
     
 class TabData():
     """An object for tab data elements.
@@ -122,27 +119,51 @@ class TabData():
         return matchlist
      
 class TabDataEndow(TabData):
-       def __init__(self) -> None:
+    """An object for endowment tab data elements.
+     
+    Each tab has a similar structure - picker, headers, data.  This class provides a structure
+    and methods for storing and retriving that data in a conistent way across tabs.  
+    The enowment tab has one addtional value, etrae.  
+    This class enherits the basic tab data and adds the etrae variable
+
+    Attributes:
+        Pick_start:  Picker window
+        header:      The lables for sectors, regions 
+        data:        Data for the element stored in header order 
+        etrae:       Values of etrae
+    """
+
+    def __init__(self) -> None:
            self.etrae = None
            super().__init__()
         
-       def make_etrae(self, agg_store):
+    def make_etrae(self, agg_store):
+        """Match merge on sets and aggstore abrev
+
+        We want the long description with the codes.  This method zips them together.
+
+         Args:
+            agg_store: the name of the agg store.  Agg Store is the JSON file read into a dict.
+                       see JSON format below in load_aggstore() 
+            
+         Returns:            
+              matched etrae
+        """
            
-           etrae = [x for x in agg_store['etrae'] if x[0] in self.pick_start]
+        etrae = [x for x in agg_store['etrae'] if x[0] in self.pick_start]
 
 
-           return etrae
+        return etrae
            
 
-   
 class DataStore(GtapSets,qtw.QWidget):
-    """ Maintains all the state of data for all the tabs
+    """ Maintains the state of data for all the tabs
 
         State of data as well as methods for reading and writing data to files.
 
         Attributes:
             agg_store_file :
-            add_store_data :
+            agg_store_data :
             sectors :
             regions : 
             endowments :
@@ -168,6 +189,8 @@ class DataStore(GtapSets,qtw.QWidget):
            
         self.agg_store_file= agg_store_file
         self.agg_store_data=self.load_aggstore(self.agg_store_file)
+        
+
 
         self.sectors=TabData()
         self.regions=TabData()
@@ -175,14 +198,18 @@ class DataStore(GtapSets,qtw.QWidget):
         
                               
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
-            
+            #This trips if there was a prior database open, otherwise it is a blank database
             self.gtap_source=self.settings.value('indir')
+            print('SHOULD NOT BE BLANK')
+            print(self.settings.value('indir'))
+            print(self.gtap_source)
            
         else:
+            print('SHOULD BE BLANK')
             self.gtap_source = None
-            self.sectors.data =    [["", "", "", "", "", "" ]]
-            self.regions.data =    [["", "", "", "", "", "" ]]
-            self.endowments.data = [["", "", "", "", "", "" ]]
+            self.sectors.data =    [["", "", "", "", ""]]
+            self.regions.data =    [["", "", "", "", ""]]
+            self.endowments.data = [["", "", "", "", ""]]
    
     @property
     def gtap_source(self):
