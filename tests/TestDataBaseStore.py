@@ -80,13 +80,9 @@ class TestDatabaseStoreTabDefault(unittest.TestCase):
     def test_h6_check_tab_default_blank(self):
         self.sectors_test_headers=[["", "", "", "", "" ]]
         self.assertEqual(self.sectors_test_headers, self.setcheck.sectors.data, "JSON Start region headers did not match")
-        
-
-
+ 
     def tearDown(self):
         return super().tearDown()
-        
-
-
+     
 if __name__ == '__main__':
     unittest.main()
