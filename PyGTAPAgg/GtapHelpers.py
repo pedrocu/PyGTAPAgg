@@ -16,8 +16,6 @@ def getdbversize(gtap, source) -> tuple:
         gtap_num_sect=gtap_sets['H2'].array.size
         gtap_num_endow=gtap_sets['H6'].array.size
         
-        
-       
         ''' if gtap_base['DREL'].array.size == 3:
             print("stop2")
             #Done this way to be consistent with all versions of GTAP earlier then V11.
@@ -28,10 +26,7 @@ def getdbversize(gtap, source) -> tuple:
             gtap_ver_num=str(gtap_base['DREL'].array[0])    '''
         
         settings.setValue('indir', gtap)
-        
-
        
-
     except Exception as error:
         execute_problem=qtw.QMessageBox()
         execute_problem.setWindowTitle('Not a valid GTAP Database')
