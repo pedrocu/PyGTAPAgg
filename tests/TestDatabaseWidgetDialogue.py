@@ -1,10 +1,9 @@
 import unittest
 import sys
-from PyQt6.QtTest import QTest
+
 import PyQt6.QtWidgets as qtw
 from PyQt6 import QtWidgets as qtw
-from PyQt6 import QtCore as qtc 
-from PyQt6 import QtGui as qtg
+
 
 from PyGTAPAgg import MainWindow as MainWindow
 
@@ -18,8 +17,8 @@ class TestdbTab(unittest.TestCase):
          self.form = MainWindow.MainWindow(my_screen)
 
     def test_2_choose_db_lables_read(self):
-        self.form.gtap_central_widget.databases.getgtapdir("C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\tests\\data")
-        self.assertEqual(self.form.gtap_central_widget.databases.version_label0.text(), "C:\\Users\\PeteM\\Documents\\Projects\\PyGTAPAgg\\tests\\data", "Wrong Direcotry displayed")
+        self.form.gtap_central_widget.databases.getgtapdir(r".\\tests\\data")
+        self.assertEqual(self.form.gtap_central_widget.databases.version_label0.text(), r".\\tests\\data", "Wrong Direcotry displayed")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label2.text(), "v11p3", "Wrong version, experected v11p3")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label3.text(), "Y2017", "Year of Data")
         self.assertEqual(self.form.gtap_central_widget.databases.version_label4.text(), "Jun_2022", "Release Date")

@@ -200,7 +200,7 @@ class DataStore(GtapSets,qtw.QWidget):
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
             #This trips if there was a prior database open, otherwise it is a blank database
             self.gtap_source=self.settings.value('indir')
-            print('SHOULD NOT BE BLANK')
+            
             print(self.settings.value('indir'))
             print(self.gtap_source)
            
