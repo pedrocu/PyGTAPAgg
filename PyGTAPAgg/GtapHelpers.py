@@ -5,9 +5,27 @@ from modules.HARPY import har_file, header_array
 import numpy as np
 
 def getdbversize(gtap, source) -> tuple:
+
+    """
+    Takes a directory for the GTAP database and returns descriptive data as a tuple.
+
+    Args:
+        gtap (str): The directory path to the GTAP database.
+        source (str): The source of the GTAP database.
+
+    Returns:
+        tuple: A tuple containing:
+            - gtap (str): The input directory path.
+            - gtap_ver_num (tuple): The version number of the GTAP database.
+            - gtap_num_reg (int): The number of regions in the GTAP database.
+            - gtap_num_sect (int): The number of sectors in the GTAP database.
+            - gtap_num_endow (int): The number of endowments in the GTAP database.
+
+    Raises:
+        Exception: If the provided directory is not a valid GTAP database, a QMessageBox is shown and a default tuple is returned.
+    """
     settings=qtc.QSettings("ImpactECON","PyGTAPAgg")
 
-    '''takes directory for GTAP and returns a tuple with discriptive data'''
     try:
         gtap_base=har_file.HarFileObj(gtap+'\\gsddat.har')
         gtap_sets=har_file.HarFileObj(gtap+'\\gsdset.har')
@@ -15,16 +33,7 @@ def getdbversize(gtap, source) -> tuple:
         gtap_num_reg=gtap_sets['H1'].array.size
         gtap_num_sect=gtap_sets['H2'].array.size
         gtap_num_endow=gtap_sets['H6'].array.size
-        
-        ''' if gtap_base['DREL'].array.size == 3:
-            print("stop2")
-            #Done this way to be consistent with all versions of GTAP earlier then V11.
-            gtap_ver_num = gtap_base['DREL'].array[0] + '_' + gtap_base['DREL'].array[1] + '_' + gtap_base['DREL'].array[2]
-        else:
-            print("stop3")
-            #This is the way all the version before 11 were formatted
-            gtap_ver_num=str(gtap_base['DREL'].array[0])    '''
-        
+                        
         settings.setValue('indir', gtap)
        
     except Exception as error:
@@ -46,6 +55,16 @@ def getdbversize(gtap, source) -> tuple:
 
 
 def getvalues(self, selectionlist)-> list:
+    """
+    Extracts and returns display values from a selection list.
+
+    Args:
+        self: The object instance containing the picker model.
+        selectionlist (list): A list of selected items.
+
+    Returns:
+        list: A list of display values corresponding to the selected items.
+    """
     values = []
     for item in selectionlist:
         values.append(self._picker_model.data(item, qtc.Qt.ItemDataRole.DisplayRole))
