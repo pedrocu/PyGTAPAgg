@@ -9,7 +9,14 @@ import os
 import re
 
 def makeaggcmf(aggart):
-        '''decoraotor for wrapping cmf files for final aggrigation progarm'''
+        """Decorator for wrapping CMF files for final aggregation programs.
+
+    Args:
+        aggart (function): The function to decorate.
+
+    Returns:
+        function: A wrapper function that creates and writes CMF files.
+    """
         def inner(self, base_gtap, agg_gtap, file_name):
             cmf_file = open('{agg}\\{file}.cmf'.format(agg=agg_gtap, file=file_name), 'w+')
             cmf_file.write('check-on-read elements = no;\n')
@@ -27,7 +34,14 @@ def makeaggcmf(aggart):
         return inner
 
 def makeauxcmf(aggart):
-    '''decoraotor for wrapping cmf files for auxilary progarm'''
+    """Decorator for wrapping CMF files for auxiliary programs.
+
+    Args:
+        aggart (function): The function to decorate.
+
+    Returns:
+        function: A wrapper function that creates and writes CMF files.
+    """
     def inner(self, base_gtap, agg_gtap, file_name):
             cmf_file = open('{agg}\\{file}.cmf'.format(agg=agg_gtap, file=file_name), 'w+')
             cmf_file.write('check-on-read elements = no;\n')
@@ -47,8 +61,19 @@ def makeauxcmf(aggart):
 
 
 class Output(qtw.QWidget):
+
+    """Main widget class for the GUI.
+
+    Provides functionality for setting directories, running aggregation tasks, 
+    and displaying the progress.
+    """
     
     def __init__(self, **kargs):
+        """Initializes the Output widget.
+
+            Args:
+            **kargs: Arbitrary keyword arguments, including `dataStore`.
+        """
 
         self.datastore=kargs.get('dataStore')
         
@@ -92,14 +117,37 @@ class Output(qtw.QWidget):
 
     #slot
     def makescreen(self):
+        """Creates and initializes a new popup window.
+
+        This method initializes a `PopUpWindow` instance and assigns it to the
+        `mywindow` attribute. It is typically used to display additional information
+        or user interfaces as a popup.
+        """
         self.mywindow=PopUpWindow()
         
 
     def gettarget(self):
+        """Opens a directory selection dialog and updates the target destination.
+
+        This method displays a QFileDialog to allow the user to select a directory.
+        The selected directory is then formatted and set as the text for the 
+        `destination_label` attribute.
+
+        Updates:
+            self.destination_label (QLabel): Displays the selected directory path, 
+            formatted to use backslashes instead of forward slashes.
+        """
+        
         directory = qtw.QFileDialog.getExistingDirectory()
         self.destination_label.setText(directory.replace('/','\\'))
         
     def makeagg(self, gtap_source, destination_file):
+        """Runs the aggregation process and manages execution of sub-tasks.
+
+        Args:
+            gtap_source (str): Source directory for GTAP files.
+            destination_file (str): Target directory for aggregation files.
+        """
         
         if ( (os.path.exists(gtap_source) & os.path.exists(destination_file) != True)):
             execute_problem=qtw.QMessageBox()
@@ -162,7 +210,12 @@ class Output(qtw.QWidget):
     
     @qtc.pyqtSlot(str)
     def updatestatusread(self,status, thread):
-        
+        """Updates the progress status for reading operations.
+
+        Args:
+            status (str): The status message to display.
+            thread (str): The thread name associated with the status.
+        """
         if thread=='base_data':
             self.mywindow.base_data_text.setText(status)
         if thread=='param':
@@ -181,6 +234,12 @@ class Output(qtw.QWidget):
 
     @qtc.pyqtSlot(str)
     def updatestatuswrite(self,status, thread):
+        """Updates the progress status for writing operations.
+
+        Args:
+            status (str): The status message to display.
+            thread (str): The thread name associated with the status.
+        """
         if thread=='base_data':
             self.mywindow.base_data_text.setText(status)
         if thread=='param':
@@ -194,6 +253,12 @@ class Output(qtw.QWidget):
      
     @qtc.pyqtSlot()
     def runpostagg(self, gtap_source, destination_file):
+        """Executes post-aggregation tasks.
+
+        Args:
+            gtap_source (str): Source directory for GTAP files.
+            destination_file (str): Target directory for aggregation files.
+        """
         
         self.buildview = AggThread(gtap_source + "\\gtapview.exe", '-cmf', destination_file+'\\gtpvew.cmf')
         
@@ -215,6 +280,18 @@ class Output(qtw.QWidget):
         self.buildsam.start()
         
     def buildhar(self, destination_file):
+        """Builds the HAR files required for aggregation.
+
+        This method creates several HAR files based on the aggregated data,
+        such as regions, sectors, and endowments. These files are used as inputs
+        for the aggregation process.
+
+        Args:
+            destination_file (str): The directory where the HAR files will be created.
+
+        Returns:
+            int: Returns 0 upon successful execution.
+        """
 
         aggsup= har_file.HarFileObj('{destination}\\aggsup.har'.format(destination=destination_file))
         dset= har_file.HarFileObj('{destination}\\dset.har'.format(destination=destination_file))
@@ -268,11 +345,20 @@ class Output(qtw.QWidget):
         return 0
 
     def makemapping(self, target, mapname_sht, mapname_lng, har_file):
+        """Creates mapping data for aggregation.
 
+        This method generates mapping information to relate items in the dataset
+        (e.g., regions, sectors, endowments) to their aggregated counterparts.
+
+        Args:
+            target (list): The list of items to map.
+            mapname_sht (str): Short name for the mapping variable.
+            mapname_lng (str): Long name for the mapping variable.
+            har_file (HarFileObj): The HAR file object where the mapping will be written.
+        """
         
         data=sorted(target, key=lambda k: k[0])
-        
-        
+               
         #Metrics (if longname not provided)
         last_field=len(data[0])-1
         
@@ -303,7 +389,17 @@ class Output(qtw.QWidget):
     
 
     def makeasets(self, target, setname_sht, setname_lng, har_file):
-        '''makes aggregated sets'''
+        """Creates aggregated sets and stores them in the HAR file.
+
+        Aggregated sets are used to define groups of related items, such as regions,
+        sectors, or endowments, for the purpose of aggregation.
+
+        Args:
+            target (list): The list of items to aggregate.
+            setname_sht (str): The short name for the set variable.
+            setname_lng (str): The long name for the set variable.
+            har_file (HarFileObj): The HAR file object where the set will be written.
+        """
         #Take any list
         if type(target) is list and setname_sht != 'MARG':
            seta = target.copy()
@@ -318,7 +414,17 @@ class Output(qtw.QWidget):
         self.setstuffer(seta, setname_sht, setname_lng, har_file)
 
     def makedsets(self, target, setname_sht, setname_lng, har_file):
-        '''makes disggregatedsets'''
+        """Creates disaggregated sets and stores them in the HAR file.
+
+        Disaggregated sets are used to define individual items, such as specific
+        regions, sectors, or endowments, that are part of a larger aggregated group.
+
+        Args:
+            target (list): The list of items to disaggregate.
+            setname_sht (str): The short name for the set variable.
+            setname_lng (str): The long name for the set variable.
+            har_file (HarFileObj): The HAR file object where the set will be written.
+        """
         
         #Take any list
         if type(target[0]) is str:
@@ -334,7 +440,16 @@ class Output(qtw.QWidget):
         self.setstuffer(set, setname_sht, setname_lng, har_file)
 
     def maketrae(self, target, setname_sht, setname_lng, har_file):
-        '''makes ETRAE sets'''
+        """Creates ETRAE sets for aggregation and stores them in the HAR file.
+
+        ETRAE sets are used to define relationships between endowments for specific purposes.
+
+        Args:
+            target (object): The endowment data from the datastore.
+            setname_sht (str): The short name for the ETRAE variable.
+            setname_lng (str): The long name for the ETRAE variable.
+            har_file (HarFileObj): The HAR file object where the set will be written.
+        """
         #Take any list
         
 
@@ -360,7 +475,17 @@ class Output(qtw.QWidget):
         self.setstuffer(set, setname_sht, setname_lng, har_file)
      
     def setstuffer(self, set, setname_sht, setname_lng, har_file):
-        'helper supports make sets'
+        """Helper method to create and store sets in the HAR file.
+
+        This method is a utility function that creates a set from the provided data
+        and writes it into a HAR file.
+
+        Args:
+            seta (list or array): The data to be added to the set.
+            setname_sht (str): The short name for the set variable.
+            setname_lng (str): The long name for the set variable.
+            har_file (HarFileObj): The HAR file object where the set will be written.
+        """
         if setname_sht in ("DH5", "H5"):
             set.append("CGDS")
         
@@ -371,7 +496,17 @@ class Output(qtw.QWidget):
         har_file.writeToDisk()
 
     def getaggsets(self, target):
-        'helper gets data from the qtextlistmodel'
+        """Retrieves aggregated data from the Qt model.
+
+        This method extracts the aggregated data from the Qt model and organizes it
+        into a structured format for use in aggregation tasks.
+
+        Args:
+            target (QtModel): The Qt model containing the aggregation data.
+
+        Returns:
+            list: A list of unique aggregated items extracted from the model.
+        """
         myaset=[]
         for i in range(0,target.picker_model.rowCount()):
             item_index=target.picker_model.index(i)
@@ -379,6 +514,17 @@ class Output(qtw.QWidget):
         return myaset
     
     def getaggmarg(self, target):
+        """Retrieves MARG aggregated data.
+
+        This method extracts MARG (Marginal) data, which is a specific subset of
+        aggregated data used for certain aggregation tasks.
+
+        Args:
+            target (list): The input list containing the data for extraction.
+
+        Returns:
+            list: A list of unique aggregated MARG items extracted from the input data.
+        """
         data=target
         data=sorted(data, key=lambda k: k[0])
         last_field=len(data[0])-1
@@ -390,7 +536,23 @@ class Output(qtw.QWidget):
 
     @makeaggcmf 
     def paramcmf(self, base_gtap, agg_gtap, file_name):
-        '''Make parameter cmf file'''
+        """Generates the parameter CMF (Command Macro File) for aggregation.
+
+        This method creates the necessary file references for the aggregation process
+        and returns them as formatted strings.
+
+        Args:
+            base_gtap (str): The base GTAP directory containing the source HAR files.
+            agg_gtap (str): The aggregation GTAP directory where the aggregated HAR files are stored.
+            file_name (str): The name of the parameter file to be created.
+
+        Returns:
+            tuple: A tuple containing the formatted strings for each file reference:
+                - DPARAM: Reference to the base parameter file.
+                - EPARAM: Reference to the aggregation supplementary file.
+                - PARAM: Reference to the parameter file being created.
+                - DDATA: Reference to the base data file.
+        """
 
         insert_1 = 'file  DPARAM =  {base}\\gsdpar.har;\n'.format(base=base_gtap)
         insert_2 = 'file  EPARAM =   {agg}\\aggsup.har;\n'.format(agg=agg_gtap)
@@ -401,7 +563,21 @@ class Output(qtw.QWidget):
 
     @makeaggcmf
     def emisscmf(self, base_gtap, agg_gtap, file_name):
-        '''make emissions cmf'''
+        """Generates the emissions CMF (Command Macro File) for aggregation.
+
+        This method creates the necessary file references for the emissions data
+        aggregation process and returns them as formatted strings.
+
+        Args:
+            base_gtap (str): The base GTAP directory containing the source HAR files.
+            agg_gtap (str): The aggregation GTAP directory where the aggregated HAR files are stored.
+            file_name (str): The name of the emissions file to be created.
+
+        Returns:
+            tuple: A tuple containing the formatted strings for each file reference:
+                - EMISS: Reference to the aggregated emissions file.
+                - DDATA: Reference to the base emissions data file.
+        """
         insert_1 = 'file  EMISS = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name) 
         insert_2 = 'file  DDATA= {base}\\gsdemiss.har;\n'.format(base=base_gtap, file=file_name)
 
@@ -409,7 +585,21 @@ class Output(qtw.QWidget):
 
     @makeaggcmf
     def gtapvolcmf(self, base_gtap, agg_gtap, file_name):
-        '''make energy volume cmf'''
+        """Generates the energy volume CMF (Command Macro File) for aggregation.
+
+        This method creates the necessary file references for the energy volume 
+        data aggregation process and returns them as formatted strings.
+
+        Args:
+            base_gtap (str): The base GTAP directory containing the source HAR files.
+            agg_gtap (str): The aggregation GTAP directory where the aggregated HAR files are stored.
+            file_name (str): The name of the energy volume file to be created.
+
+        Returns:
+            tuple: A tuple containing the formatted strings for each file reference:
+                - EGYVOL: Reference to the aggregated energy volume file.
+                - DDATA: Reference to the base energy volume data file.
+        """
         insert_1 = 'file  EGYVOL = {agg}\\{file}.har;\n'.format(agg=agg_gtap, file=file_name) 
         insert_2 = 'file  DDATA= {base}\\gsdvole.har;\n'.format(base=base_gtap, file=file_name)
 
@@ -417,7 +607,21 @@ class Output(qtw.QWidget):
 
     @makeauxcmf
     def gtapviewcmf(self, base_gtap, agg_gtap, file_name):
-        '''gtap view'''
+        """Generates the GTAP View CMF (Command Macro File) for aggregation.
+
+        This method creates the necessary file references for the GTAP View 
+        aggregation process and returns them as formatted strings.
+
+        Args:
+            base_gtap (str): The base GTAP directory containing the source HAR files.
+            agg_gtap (str): The aggregation GTAP directory where the aggregated HAR files are stored.
+            file_name (str): The name of the GTAP View file to be created.
+
+        Returns:
+            tuple: A tuple containing the formatted strings for each file reference:
+                - GTAPVIEW: Reference to the base view file.
+                - TAXRATES: Reference to the base tax rates file.
+        """
         insert_1 = 'file GTAPVIEW = {agg}\\baseview.har;\n'.format(agg=agg_gtap)
         insert_2 = 'file TAXRATES = {agg}\\baserate.har;\n'.format(agg=agg_gtap)
 
@@ -425,22 +629,80 @@ class Output(qtw.QWidget):
 
     @makeauxcmf
     def gtapsamcmf(self, base_gtap, agg_gtap, file_name):
-        '''gtap same'''
+        """Generates the GTAP SAM CMF (Command Macro File) for aggregation.
+
+        This method creates the necessary file reference for the GTAP SAM 
+        (Social Accounting Matrix) aggregation process and returns it as a 
+        formatted string.
+
+        Args:
+            base_gtap (str): The base GTAP directory containing the source HAR files.
+            agg_gtap (str): The aggregation GTAP directory where the aggregated HAR files are stored.
+            file_name (str): The name of the GTAP SAM file to be created.
+
+        Returns:
+            tuple: A tuple containing the formatted string for the GTAP SAM file reference:
+                - GTAPSAM: Reference to the aggregated GTAP SAM file.
+        """
         insert_1 = 'file GTAPSAM = {agg}\\GTAPsam.har;\n'.format(agg=agg_gtap)
         
         return (insert_1)
     
 class AggThread(qtc.QThread):
+    """Executes aggregation processes in a separate thread.
+
+    This class is responsible for handling long-running aggregation tasks 
+    asynchronously in a separate thread, preventing the main application 
+    from freezing during execution. It supports emitting signals for real-time 
+    updates and results from the aggregation process.
+
+    Attributes:
+        read_file (pyqtSignal): Signal emitted to provide updates on the progress 
+            of the aggregation process. This typically contains status messages 
+            or logs generated during execution.
+        args (list): List of arguments to be passed to the subprocess for the 
+            aggregation task.
+    """
     aggdone    = qtc.pyqtSignal()
     read_file  = qtc.pyqtSignal(str, str)
     write_file = qtc.pyqtSignal(str,str)
     error_file = qtc.pyqtSignal(str,str)
 
     def __init__(self, *args):
+
+        """Initializes the AggThread object.
+
+        Args:
+            *args: Arguments for the aggregation subprocess. These typically 
+                include the path to the aggregation program and any necessary 
+                parameters or input files.
+        """
         self.args=args
         super().__init__()
 
     def run(self):
+        """Executes the aggregation subprocess and emits a signal upon completion.
+
+        This method starts the subprocess using the provided arguments during
+        initialization, waits for the process to complete, and then emits the
+        `aggdone` signal to notify that the aggregation process has finished.
+
+        Raises:
+            Note this is not done as an exception, it should be recast as one.
+            subprocess.SubprocessError: If an error occurs during the execution of the
+                subprocess.
+
+                 try:
+            # Start the subprocess
+            p = subprocess.Popen(self.args, encoding='UTF-8')
+            p.wait()  # Wait for the subprocess to complete
+
+            # Emit the signal indicating that the aggregation is done
+            self.aggdone.emit()
+            except subprocess.SubprocessError as e:
+            print(f"Error during subprocess execution: {e}")
+            raise
+        """
         print("here are the args to run: ", self.args)
         if os.path.exists(self.args[0]):
             p=subprocess.Popen(self.args, 
@@ -485,22 +747,52 @@ class AggThread(qtc.QThread):
         
         self.aggdone.emit()
 class AggHar(qtc.QObject):
+    """Executes aggregation processes for HAR files using a subprocess.
+
+    This class runs aggregation tasks synchronously in a separate process and
+    emits a signal upon completion. It is primarily used to execute external
+    aggregation programs or scripts.
+
+    Attributes:
+        aggdone (pyqtSignal): Signal emitted when the aggregation process is completed.
+        args (list): List of arguments to be passed to the subprocess.
+    """
     aggdone=qtc.pyqtSignal()
 
     def __init__(self, *args):
-        
+        """Initializes the AggHar object and executes the subprocess.
+
+        Args:
+            *args: Arguments to be passed to the subprocess for execution. These
+                typically include the path to the aggregation program and any
+                necessary parameters or input files.
+        """
         self.args=args
         super().__init__()
-        
 
         p=subprocess.Popen(self.args, encoding='UTF-8')
         p.wait()
         
-
         self.aggdone.emit()
     
 class PopUpWindow(qtw.QWidget):
+    """Popup window class for displaying progress and status of aggregation tasks.
+
+    This class provides a user interface with a progress bar and labels to show
+    the status of various components during the aggregation process. It also
+    includes buttons to terminate or close the popup.
+
+    Attributes:
+        status_value (int): The current progress value for the progress bar.
+        my_grid (QGridLayout): The layout manager for the popup window.
+        bar (QProgressBar): The progress bar widget.
+        bar_label (QLabel): The label for the progress bar.
+        terminate_button (QPushButton): The button to terminate aggregation tasks.
+        close_button (QPushButton): The button to close the popup window.
+    """
+
     def __init__(self):
+        """Initializes the popup window with a progress bar and status labels."""
         self.status_value = 0
 
         super().__init__(None, modal=True)
@@ -569,4 +861,5 @@ class PopUpWindow(qtw.QWidget):
         self.show()
 
     def shut_me(self):
+        """Closes the popup window."""
         self.close()
