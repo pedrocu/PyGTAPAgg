@@ -18,6 +18,8 @@ Extensive documentation of the modules and classes of PyGTAPAgg.
    MainWindow
    DatabaseStore
    DatabaseWidget
+   outputwidget
+   GtapHelpers
 
 
 Indices and tables
