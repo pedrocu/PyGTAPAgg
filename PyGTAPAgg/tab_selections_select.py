@@ -4,9 +4,9 @@ from PyQt6 import QtGui as qtg
 import json
 
 from PyGTAPAgg import GtapHelpers as helpers
-from tab_selections_itemtablemodel import ItemTableModel
-from tab_selections_listdelegate import ListDelegate
-from tab_selections_endowmentparameter import EndowmentParameter
+from PyGTAPAgg.tab_selections_itemtablemodel import ItemTableModel
+from PyGTAPAgg.tab_selections_listdelegate import ListDelegate
+from PyGTAPAgg.tab_selections_endowmentparameter import EndowmentParameter
 
 class Select(qtw.QWidget):
     """Select sectors, regions, endowment
