@@ -1,6 +1,6 @@
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
-from tab_selections_itemtablemodel import ItemTableModel
+from PyGTAPAgg.tab_selections_itemtablemodel import ItemTableModel
 
 class EndowmentParameter(ItemTableModel):
     def __init__(self, etrae):
