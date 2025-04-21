@@ -15,11 +15,14 @@ from PyQt6 import QtGui as qtg
 from PyQt6 import QtHelp as qth
 
 from PyGTAPAgg import DatabaseWidget as dbwidget
-from PyGTAPAgg import selectwidget as slwidget
+
 from PyGTAPAgg import DatabaseStore as store
 from PyGTAPAgg import outputwidget as outwidget
 
-
+from PyGTAPAgg import tab_selections_select as slwidget
+import PyGTAPAgg.tab_selections_itemtablemodel
+import PyGTAPAgg.tab_selections_listdelegate 
+import PyGTAPAgg.tab_selections_endowmentparameter 
 class MainWindow(qtw.QMainWindow):
     """The Driver for the main window including tabs and menu.
 
@@ -245,9 +248,6 @@ class GTAPAggTabs(qtw.QTabWidget):
 
          Returns:
              Void
-
-         
-        
         """
         #setup parameters
         self.setMovable=True
@@ -303,8 +303,6 @@ class GTAPAggTabs(qtw.QTabWidget):
 
          Returns:
              Void
-
-         
         
         """
         self.removeTab(1)
