@@ -9,9 +9,39 @@ from PyGTAPAgg.tab_selections_listdelegate import ListDelegate
 from PyGTAPAgg.tab_selections_endowmentparameter import EndowmentParameter
 
 class Select(qtw.QWidget):
-    """Select sectors, regions, endowment
-       Args: 
-    """ 
+    """
+    Widget for selecting and managing lists of sectors, regions, or endowments.
+
+    Provides an interface for users to:
+      - Add, remove, or clear items from a selection list (picker).
+      - Edit selections and propagate changes to an associated table.
+      - Use context menus and delegates for flexible editing.
+
+    Args:
+        tab_type (str): The type of aggregation (e.g., 'Sectors', 'Regions', etc.).
+        data_store (Any): Data store object for persistence or data access.
+        pick_start (list[str]): Initial list of items for the picker.
+        headers (list[str]): Column headers for the main table.
+        data (list[list[Any]]): Data for the main table.
+
+    Attributes:
+        _tab_type (str): Type of aggregation.
+        _data_store (Any): Data store reference.
+        _pick_start (list[str]): Initial picker items.
+        _headers (list[str]): Table headers.
+        _data (list[list[Any]]): Table data.
+        _model (ItemTableModel): Model for the main table.
+        _picker_model (qtc.QStringListModel): Model for picker list.
+        tableview (qtw.QTableView): Main table view.
+        picker_view (qtw.QListView): Picker list view.
+        before_edit (str): Stores item value before editing.
+        delegate (ListDelegate): Delegate for custom editing.
+        one_to_one_button (qtw.QPushButton): Button to set one-to-one mapping.
+        add_button (qtw.QPushButton): Button to add new item.
+        remove_button (qtw.QPushButton): Button to remove selected item(s).
+        clear_button (qtw.QPushButton): Button to clear all items.
+        select_box (qtw.QGroupBox): Group box containing the main table.
+    """
     def __init__(self, tab_type, data_store, pick_start, headers, data):
 
         super().__init__()
@@ -115,12 +145,22 @@ class Select(qtw.QWidget):
         self.tableview.customContextMenuRequested.connect(self.openMenu)
                 
     def prioritem(self, index):
-        '''gets item before edit so it can be used for changing table data'''
+        """
+        Store the item value before editing for later reference.
+
+        Args:
+            index (QModelIndex): Index of the item to be edited.
+        """
         
         self.before_edit=self._picker_model.data(index, qtc.Qt.ItemDataRole.DisplayRole)
         
     def openMenu(self, position):
-        '''The list of items to pick from with right click - context menu'''
+        """
+        Open a context menu for selecting items via right-click.
+
+        Args:
+            position (QPoint): Position where the menu is requested.
+        """
         
         self.editor = qtw.QListView()
         self.editor.setWindowFlags(qtc.Qt.WindowType.WindowStaysOnTopHint)
@@ -135,7 +175,12 @@ class Select(qtw.QWidget):
         self.editor.show()
         
     def changemyselection(self, item):
-        '''based on item selected with right click context menu fills the selection'''
+        """
+        Update the selection in the table based on context menu choice.
+
+        Args:
+            item (QModelIndex): Selected item from the context menu.
+        """
         #list item retrieve text
         text=self._picker_model.data(item,0)        
        
@@ -150,14 +195,18 @@ class Select(qtw.QWidget):
         self.editor.close()
   
     def onetone(self):
-        '''changes regions/sectors/endowments to one-to-one'''
+        """
+        Set all entries in the table to a one-to-one mapping with their abbreviations.
+        """
         for i in range(0, self._model.rowCount(None)):
             abbrev_index=self._model.index(i,1)
             item_index=self._model.index(i,self._model.columnCount(None)-1)
             self._model.setData(item_index,self._model.data(abbrev_index, qtc.Qt.ItemDataRole.DisplayRole),qtc.Qt.ItemDataRole.EditRole )
     
     def newitem(self):
-        '''dialgoue to add new item to list'''
+        """
+        Open a dialog to add a new item to the picker list.
+        """
 
         self.dialog_add = qtw.QWidget(modal=False)
         self.dialog_add.setWindowFlags(qtc.Qt.WindowType.WindowStaysOnTopHint)
@@ -185,7 +234,9 @@ class Select(qtw.QWidget):
         self.dialog_add.show()
 
     def additem(self):
-        '''logic to add item to edit list see newitem() for dialgoue'''
+        """
+        Add the new item from the dialog to the picker list and update the model.
+        """
         num_rows=self._picker_model.rowCount()
         self.line_edit_text = [self.line_edit.text()]
 
@@ -202,7 +253,12 @@ class Select(qtw.QWidget):
         self._picker_model.setData(self.newthing, self.line_edit.text(), qtc.Qt.ItemDataRole.EditRole)
     
     def edititem(self, index):     
-        '''when a item is changed in the list, it is changed in the table'''
+        """
+        Propagate changes in the picker list to the associated table.
+
+        Args:
+            index (QModelIndex): Index of the edited item.
+        """
         
         for i in range(0, self._model.rowCount(None)):
             item_index=self._model.index(i,self._model.columnCount(None)-1)
@@ -210,7 +266,9 @@ class Select(qtw.QWidget):
                 self._model.setData(item_index,self._picker_model.data(index, qtc.Qt.ItemDataRole.DisplayRole),qtc.Qt.ItemDataRole.EditRole )
 
     def remove(self):
-        '''remove item in list and from associated table/s'''
+        """
+        Remove selected items from the picker list and clear them in the table.
+        """
         self.selection=self.picker_view.selectionModel()
         self.selected_indexes=self.selection.selectedIndexes()
         self.selected_indexes = sorted(self.selected_indexes, key=lambda k: k.row(), reverse=True) 
@@ -236,7 +294,9 @@ class Select(qtw.QWidget):
         'see EndowSelect for subclass on endowments'
 
     def clearall(self):
-        '''clears the picker list and associted table entries'''
+        """
+        Clear all items from the picker list and associated table entries.
+        """
         num_rows=self._picker_model.rowCount()
 
         self._picker_model.removeRows(0,num_rows)
@@ -245,11 +305,35 @@ class Select(qtw.QWidget):
             self._model.setData(item_index,'',qtc.Qt.ItemDataRole.EditRole )
 
     def checkdup(self):
-        '''checks for duplicates before adding or changing picklist'''
+        """
+        Check for duplicates before adding or changing the picker list.
+
+        Returns:
+            int: 0 if no duplicates found (stub).
+        """
         #TBD
         return 0
     
 class EndowmentSelect(Select):
+    """
+    Specialized Select widget for endowments, with additional parameter management.
+
+    Extends:
+        Select
+
+    Args:
+        tab_type (str): The type of aggregation.
+        data_store (Any): Data store object.
+        pick_start (list[str]): Initial picker items.
+        headers (list[str]): Table headers.
+        data (list[list[Any]]): Table data.
+        etrae (list[list[Any]]): Endowment parameters.
+
+    Attributes:
+        parameter_model (EndowmentParameter): Model for endowment parameters.
+        parameter_view (qtw.QTableView): Table view for parameters.
+        param_box (qtw.QGroupBox): Group box for parameter table.
+    """
 
     def __init__(self,tab_type, data_store, pick_start, headers, data, etrae):
         super().__init__(tab_type, data_store, pick_start, headers, data)
@@ -274,12 +358,17 @@ class EndowmentSelect(Select):
         self.parameter_view.setStyleSheet(style_sheet)
 
     def additem(self):
+        """
+        Add a new item to both the picker list and the parameter model.
+        """
         super().additem()
         self.line_edit_text.append('')
         self.parameter_model.insertRows(values=self.line_edit_text)
     
     def remove(self):
-        '''remove item in main table and parameter list'''
+        """
+        Remove selected items from both the main table and the parameter list.
+        """
         super().remove()
         for item in self.values:
             for counter, endow in enumerate(self.parameter_model._newlist):
@@ -288,7 +377,9 @@ class EndowmentSelect(Select):
                     self.parameter_model.removeRow(row=to_remove_index)
 
     def onetone(self):
-        '''one to one in main table and parameter list'''
+        """
+        Synchronize one-to-one mapping between main table and parameter list.
+        """
         super().onetone()
         all_main = set()
         all_para = set()
@@ -316,6 +407,9 @@ class EndowmentSelect(Select):
             self.parameter_model.insertRows(values=self.line_edit_text)
 
     def clearall(self):
+        """
+        Clear all items from both the picker list and the parameter list.
+        """
         super().clearall()
         for counter in range(0,self.parameter_model.rowCount(None)):
             self.parameter_model.removeRow(row=0)
