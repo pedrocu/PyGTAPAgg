@@ -229,7 +229,7 @@ class Output(qtw.QWidget):
         if thread == 'sam_view':
             self.mywindow.gtapSam_text.setText(status) 
 
-        self.mywindow.status_value+= 1.2
+        self.mywindow.status_value+= 1
         self.mywindow.bar.setValue(self.mywindow.status_value)
 
     @qtc.pyqtSlot(str)
