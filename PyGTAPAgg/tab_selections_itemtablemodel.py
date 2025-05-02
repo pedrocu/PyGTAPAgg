@@ -96,12 +96,12 @@ class ItemTableModel(qtc.QAbstractTableModel):
         Returns:
             int: Number of rows.
         """
-        return len(self._newlist)
+        return len(self._newlist or [])
 
     #Required for QTableModel
     def columnCount(self, parent):
         #print('number of colums ', len(self._headers))
-        return len(self._headers)
+        return len(self._headers or [])
     
     #Required for QTAbleModel
     def data(self, index, role):
@@ -152,11 +152,12 @@ class ItemTableModel(qtc.QAbstractTableModel):
             column (int): The column index to sort by.
             order (Qt.SortOrder): The sort order (ascending/descending).
         """
-        self.layoutAboutToBeChanged.emit()  # needs to be emitted before a sort
-        self._newlist = sorted(self._newlist, key=lambda k: k[column]) 
-        if order == qtc.Qt.SortOrder.DescendingOrder:
-            self._newlist.reverse()
-        self.layoutChanged.emit()  # needs to be emitted after a sort
+        if self._newlist !=None:
+            self.layoutAboutToBeChanged.emit()  # needs to be emitted before a sort
+            self._newlist = sorted(self._newlist, key=lambda k: k[column]) 
+            if order == qtc.Qt.SortOrder.DescendingOrder:
+                self._newlist.reverse()
+            self.layoutChanged.emit()  # needs to be emitted after a sort
 
     # Methods for Read/Write
 
