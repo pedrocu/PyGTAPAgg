@@ -17,7 +17,7 @@ from PyQt6 import QtHelp as qth
 from PyGTAPAgg import DatabaseWidget as dbwidget
 
 from PyGTAPAgg import DatabaseStore as store
-from PyGTAPAgg import outputwidget as outwidget
+from PyGTAPAgg.OutputWidget import Output
 
 from PyGTAPAgg import tab_selections_select as slwidget
 
@@ -265,7 +265,7 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.addTab(self.regions, 'Regions')
         self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, self.dataStore.endowments.etrae)             
         self.addTab(self.endowments, 'Endowments')
-        self.output=outwidget.Output(dataStore=self.dataStore)
+        self.output=Output(dataStore=self.dataStore)
         self.addTab(self.output, 'Output')
 
 
@@ -313,7 +313,7 @@ class GTAPAggTabs(qtw.QTabWidget):
         self.addTab(self.regions, 'Regions')
         self.endowments=slwidget.EndowmentSelect('Endowments', self.dataStore, self.dataStore.endowments.pick_start, self.dataStore.endowments.headers, self.dataStore.endowments.data, self.dataStore.endowments.etrae)
         self.addTab(self.endowments, 'Endowments')
-        self.output=outwidget.Output(dataStore=self.dataStore)
+        self.output=Output(dataStore=self.dataStore)
         self.addTab(self.output, 'Output')
 
 class HelpBrowser(qtw.QTextBrowser):
