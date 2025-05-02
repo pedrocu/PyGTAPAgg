@@ -13,6 +13,7 @@ from typing import Any
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtWidgets as qtw
 from modules.HARPY import *
+import os
 
 class GtapSets():
     """Reads in all of the gtap sets
@@ -198,18 +199,18 @@ class DataStore(GtapSets,qtw.QWidget):
         
                               
         if self.settings.contains('indir') and self.settings.value('indir') is not None:
-            #This trips if there was a prior database open, otherwise it is a blank database
-            self.gtap_source=self.settings.value('indir')
+            if os.path.isdir(self.settings.value('indir')):
+                #This trips if there was a prior database open, otherwise it is a blank database
+                print('Here is the default dir:', self.settings.value( 'indir'))
+                self.gtap_source=self.settings.value('indir')
             
-            print(self.settings.value('indir'))
-            print(self.gtap_source)
-           
-        else:
-            print('SHOULD BE BLANK')
-            self.gtap_source = None
-            self.sectors.data =    [["", "", "", "", ""]]
-            self.regions.data =    [["", "", "", "", ""]]
-            self.endowments.data = [["", "", "", "", ""]]
+            
+            else:
+                print('SHOULD BE BLANK')
+                self.gtap_source = None
+                self.sectors.data =    [["", "", "", "", ""]]
+                self.regions.data =    [["", "", "", "", ""]]
+                self.endowments.data = [["", "", "", "", ""]]
    
     @property
     def gtap_source(self):
